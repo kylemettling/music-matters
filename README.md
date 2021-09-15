@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# Baseball Pitch Guesser
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+While enjoying your favorite baseball games, this app immerses you into the role of the pitcher on the mound.
 
-## Available Scripts
+You get to decide where the next pitch will go. Are you and the pitcher on the same page?
 
-In the project directory, you can run:
+Fastballs high and in, or breaking pitches low and away for the hitter to chase?
 
-### `npm start`
+[Live](https://baseball-pitch-guesser.herokuapp.com/) on Heroku
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![alt tag](screen.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## How It's Made:
 
-### `npm test`
+**Tech used:** HTML, CSS, JavaScript, Node, Express, MongoDB
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+With a Node backend to drive the experience, this app is then structured to use MongoDB for storing necessary data and mixes in a minor amount of client-side JavaScript. Utilizing the [SportRadar API](https://developer.sportradar.com/), this app receives and processes realtime pitch-by-pitch data and presents contextual information to the user. The user is placed into the shoes of the pitcher and submits a next pitch location guess. The server collects the next pitch data and presents how the close the user's guess was to the actual next pitch.
 
-### `npm run build`
+## Optimizations
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Realtime statistic API calls have been reduced from initial implementation to stay under call limits. Game schedule API call happens when the first user navigates to the app on any given day and is stored for all users.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Lessons Learned:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Taking on the challenge to build an app using play-by-play data and _gamifying_ the experience of watching a baseball game was a great opportunity. This project brought about a lot of lessons including but not limited to -- working with large JSON files, Express routing with custom API formation and controlling EJS rendering from user input. In the future, I feel this app is well suited to be transitioned into React. Stay tuned...
 
-### `npm run eject`
+## TODOs:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Requests for player (done!), team and ballpark images
+- Requests for current player stats (match ups)
+- Requests for current pitcher's pitch repertoire
+- Reworking of UI, card approach (in progress)
+- OVERHAUL to React/Node.js
+- Progress API depth for in progress sessions -> fewer calls to limited realtime API
+- Dynamic player card colors (by team)
+- Handle unusual pitch type outcomes
+- Handle better pitch-by-pitch controller with models
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Keep Exploring:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Take a look at these other examples that I have in my portfolio:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**Weather App (React):** https://github.com/kylemettling/weather-app
 
-## Learn More
+**"NunGram":** https://github.com/kylemettling/theNunGram
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Tic-Tac-Toe:** https://github.com/kylemettling/tic-tac-toe-js
