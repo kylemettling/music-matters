@@ -1,5 +1,6 @@
 // import "./search.css";
 import { Fragment, useState } from "react";
+import SavedSongs from "../components/savedSongs";
 import axios from "axios";
 
 export default function Profile() {
@@ -10,6 +11,7 @@ export default function Profile() {
       <div className="profile-container">
         <div>Profile Placehold</div>
         <div>Saved Songs</div>
+        <SavedSongs />
       </div>
     </Fragment>
   );
