@@ -7,30 +7,37 @@ export default function Search({ setResults }) {
   // const [searchRequest, setSearchRequest] = useState("");
 
   const API_KEY = process.env.REACT_APP_API_KEY;
+  const API_HOST = process.env.REACT_APP_API_HOST;
 
-  console.log(API_KEY);
+  // console.log(API_KEY);
 
   async function getResults(e) {
-    // setArtistRequest()
-    console.log(
-      `https://api.deezer.com/search?q=artist:${encodeURI(artistRequest)}`
-    );
-    // e.preventDefault();
-    // try {
-    const result = await axios.get(
-      `https://api.deezer.com/search?q=artist:${encodeURI(artistRequest)}`,
-      {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      }
-    );
-    // const data = await result;
-    console.log(result);
-    setResults(result.type);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    const options = {
+      method: "GET",
+      url: "https://shazam.p.rapidapi.com/search",
+      params: {
+        term: "kiss the rain",
+        locale: "en-US",
+        offset: "0",
+        limit: "5",
+      },
+      headers: {
+        "x-rapidapi-host": `${API_HOST}`,
+        "x-rapidapi-key": `${API_KEY}`,
+      },
+    };
+    try {
+      const result = await axios.request(options);
+      console.log(result);
+    } catch (err) {
+      console.error(err);
+    }
+    // .then(function (response) {
+    //   console.log(response.data);
+    // })
+    // .catch(function (error) {
+    //   console.error(error);
+    // });
   }
 
   return (

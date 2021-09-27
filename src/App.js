@@ -17,8 +17,8 @@ function App() {
   return (
     <Fragment>
       <Header />
-      {/* <Search setResults={setResults} />
-      <Results data={results} /> */}
+      <Search setResults={setResults} />
+      <Results data={results} />
       <Profile />
     </Fragment>
   );

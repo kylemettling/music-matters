@@ -1,15 +1,16 @@
 // import "./search.css";
 import { Fragment, useState } from "react";
-import SavedSongs from "../components/savedSongs";
+import Song from "../components/song";
 import axios from "axios";
 
-export default function Profile() {
+export default function SavedSongs() {
   //   const [artistRequest, setArtistRequest] = useState("");
 
   return (
     <Fragment>
       <div className="profile-container">
-        <SavedSongs />
+        <div>Saved Songs</div>
+        <Song />
       </div>
     </Fragment>
   );
