@@ -2,7 +2,7 @@
 // import "./header.css";
 import React, { useState } from "react";
 
-export default function Results({ data }) {
+export default function Results({ set }) {
   //   const API_KEY = process.env.REACT_APP_API_KEY;
 
   //   console.log(API_KEY);

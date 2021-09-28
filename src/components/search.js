@@ -1,9 +1,12 @@
 import "./search.css";
 import { Fragment, useState } from "react";
 import axios from "axios";
+import resultParser from "../services/resultParser";
 
 export default function Search({ setResults }) {
   const [artistRequest, setArtistRequest] = useState("");
+  const [searchData, setSearchData] = useState("No search");
+  const [searchResult, setSearchResult] = useState('')
   // const [searchRequest, setSearchRequest] = useState("");
 
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -27,8 +30,11 @@ export default function Search({ setResults }) {
       },
     };
     try {
-      const result = await axios.request(options);
-      console.log(result);
+      const search = await axios.request(options);
+      // console.log(search);
+      resultParser(search);
+      // const data = await search;
+      // setSearchData(data);
     } catch (err) {
       console.error(err);
     }
@@ -56,7 +62,8 @@ export default function Search({ setResults }) {
         >
           Search
         </button>
-        {/* <span>{artistRequest}</span> */}
+        <span>Song Data: {searchData}</span>
+        <Results setResults{}/>
       </div>
     </Fragment>
   );
