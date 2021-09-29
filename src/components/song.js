@@ -1,6 +1,5 @@
 // import "./search.css";
-import { Fragment, useState } from "react";
-import axios from "axios";
+import { Fragment } from "react";
 
 export default function Song() {
   //   const [artistRequest, setArtistRequest] = useState("");

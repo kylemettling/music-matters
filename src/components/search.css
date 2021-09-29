@@ -1,5 +1,27 @@
 .searchCon {
   padding-top: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+.searchInput {
+  margin-top: 4%;
+  width: 300px;
+}
+
+.searchButton {
+  font-weight: bold;
+  width: 70px;
+}
+.searchInput,
+.searchButton {
+  height: 35px;
+}
+.resultCon {
+  margin-top: 2%;
+  /* padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center; */
 }

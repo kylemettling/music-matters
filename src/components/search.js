@@ -1,25 +1,26 @@
 import "./search.css";
 import { Fragment, useState } from "react";
 import axios from "axios";
-import resultParser from "../services/resultParser";
+import Results from "./results";
 
-export default function Search({ setResults }) {
+export default function Search() {
   const [artistRequest, setArtistRequest] = useState("");
-  const [searchData, setSearchData] = useState("No search");
-  const [searchResult, setSearchResult] = useState('')
-  // const [searchRequest, setSearchRequest] = useState("");
+
+  // for custom seraching
+  // const [searchData, setSearchData] = useState("No search");
+
+  const [result, setResult] = useState("");
 
   const API_KEY = process.env.REACT_APP_API_KEY;
   const API_HOST = process.env.REACT_APP_API_HOST;
 
-  // console.log(API_KEY);
-
   async function getResults(e) {
+    // console.log("test", artistRequest);
     const options = {
       method: "GET",
       url: "https://shazam.p.rapidapi.com/search",
       params: {
-        term: "kiss the rain",
+        term: "man in a suitcase",
         locale: "en-US",
         offset: "0",
         limit: "5",
@@ -31,39 +32,33 @@ export default function Search({ setResults }) {
     };
     try {
       const search = await axios.request(options);
-      // console.log(search);
-      resultParser(search);
-      // const data = await search;
-      // setSearchData(data);
+      console.log(search);
+      setResult(search);
     } catch (err) {
       console.error(err);
     }
-    // .then(function (response) {
-    //   console.log(response.data);
-    // })
-    // .catch(function (error) {
-    //   console.error(error);
-    // });
   }
 
   return (
     <Fragment>
       <div className="searchCon">
-        <input
-          className="searchInput"
-          type="text"
-          value={artistRequest}
-          onChange={(e) => setArtistRequest(e.target.value)}
-        />
-        <button
-          className="searchButton"
-          type="submit"
-          onClick={(e) => getResults(e)}
-        >
-          Search
-        </button>
-        <span>Song Data: {searchData}</span>
-        <Results setResults{}/>
+        <h2>What song are you playing?</h2>
+        <div className="search">
+          <input
+            className="searchInput"
+            type="text"
+            value={artistRequest}
+            onChange={(e) => setArtistRequest(e.target.value)}
+          />
+          <button
+            className="searchButton"
+            type="submit"
+            onClick={(e) => getResults(e)}
+          >
+            Fetch!
+          </button>
+        </div>
+        <Results setResult={setResult} />
       </div>
     </Fragment>
   );
