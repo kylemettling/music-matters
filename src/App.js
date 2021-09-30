@@ -9,7 +9,7 @@ function App() {
       <Header />
       <Search />
       {/* <Results data={result} /> */}
-      <Profile />
+      {/* <Profile /> */}
     </Fragment>
   );
 }

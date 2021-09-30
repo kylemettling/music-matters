@@ -1,21 +1,22 @@
-// import logo from "../logo.svg";
-// import "./header.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Results({ searchData }) {
-  //   const API_KEY = process.env.REACT_APP_API_KEY;
-  // searchData = JSON.stringify(searchData.data) || searchData;
-  // console.log(searchData);
+  // const [data, setSearchData] = useState("");
+  // const processData = async (dump) => {
+  //   for (const i in dump) {
+  //     console.log(i);
+  //   }
+  // };
 
-  // const [results, setResult] = useState("No Artists");
-  //   let data;
-  //   const data = [2, 2];
+  // console.log(searchData);
+  // useEffect(() => {
+  //   setSearchData(processData(searchData));
+  // }, [searchData]);
 
   return (
     <React.Fragment>
-      <div className="resultCon">
-        <span>{searchData || "No search made."}</span>
-      </div>
+      <div className="resultCon">hmm{searchData}</div>
+      {/* <div className="resultCon">{!searchData || data}</div> */}
     </React.Fragment>
   );
 }

@@ -1,26 +1,32 @@
 import "./search.css";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import Results from "./results";
 
 export default function Search() {
-  const [artistRequest, setArtistRequest] = useState("");
-
+  const [artistRequest, setArtistRequest] = useState("synchronicity");
   // for custom seraching
   // const [searchData, setSearchData] = useState("No search");
 
-  const [result, setResult] = useState("");
+  const [result, setSearchResult] = useState({ hits: [] });
 
+  useEffect(() => {
+    // processSearch();
+  });
+
+  // const processSearch = async (e) => {
+  //   const data = await getResults(e);
+
+  // };
   const API_KEY = process.env.REACT_APP_API_KEY;
   const API_HOST = process.env.REACT_APP_API_HOST;
 
   async function getResults(e) {
-    // console.log("test", artistRequest);
     const options = {
       method: "GET",
       url: "https://shazam.p.rapidapi.com/search",
       params: {
-        term: "man in a suitcase",
+        term: artistRequest,
         locale: "en-US",
         offset: "0",
         limit: "5",
@@ -32,8 +38,9 @@ export default function Search() {
     };
     try {
       const search = await axios.request(options);
-      console.log(search);
-      setResult(search);
+      console.log(search.data["tracks"]["hits"]);
+      setSearchResult(search.data["tracks"]["hits"]);
+      // setSearchResult("huh?");
     } catch (err) {
       console.error(err);
     }
@@ -53,12 +60,12 @@ export default function Search() {
           <button
             className="searchButton"
             type="submit"
-            onClick={(e) => getResults(e)}
+            onClick={(e) => setSearchResult(getResults(e))}
           >
             Fetch!
           </button>
         </div>
-        <Results setResult={setResult} />
+        <Results setSearchResult={result} />
       </div>
     </Fragment>
   );
