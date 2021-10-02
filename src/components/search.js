@@ -8,7 +8,8 @@ export default function Search() {
   // for custom seraching
   // const [searchData, setSearchData] = useState("No search");
 
-  const [result, setResult] = useState({ hits: [] });
+  const [result, setResult] = useState("");
+  const [searchToggle, setSearchToggle] = useState(false);
 
   useEffect(() => {
     // processResults(result);
@@ -21,12 +22,9 @@ export default function Search() {
   const API_KEY = process.env.REACT_APP_API_KEY;
   const API_HOST = process.env.REACT_APP_API_HOST;
 
-  function processResults() {
-    // console.log(result);
-    // for (const track of result["data"]["tracks"]["hits"]) {
-    //   console.log(track);
-    // }
-    // console.log(`hmm ${result["data"]["tracks"]["hits"]}`);
+  function processResults(e) {
+    setResult(getResults(e));
+    setSearchToggle(true);
   }
 
   async function getResults(e) {
@@ -47,7 +45,7 @@ export default function Search() {
     try {
       const search = await axios.request(options);
 
-      const idk = processResults(search);
+      // const idk = processResults(search);
       setResult(search);
     } catch (err) {
       console.error(err);
@@ -68,12 +66,16 @@ export default function Search() {
           <button
             className="searchButton"
             type="submit"
-            onClick={(e) => setResult(getResults(e))}
+            onClick={(e) => processResults(e)}
           >
             Fetch!
           </button>
         </div>
-        <Results resultList={result} searchName={artistRequest} />
+        <Results
+          resultList={result}
+          searchName={artistRequest}
+          isActive={searchToggle}
+        />
       </div>
     </Fragment>
   );
