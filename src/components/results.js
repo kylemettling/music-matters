@@ -1,36 +1,30 @@
 import React, { useEffect, useState } from "react";
+import { Tracks } from "./Track";
 
-export default function Results({ resultList, searchName, isActive }) {
-  // const [data, setData] = useState("huh");
-  // const results = [];
-  // const processData = async () => {
-  //   if (resultList) {
-  //     for (const i in resultList.data) {
-  //       results[i] = resultList.data[i];
-  //     }
-  //   }
-  // };
+export default function Results({ resultList, searchName, searchToggle }) {
+  const [tracks, setTracks] = useState([]);
+  const [artists, setArtists] = useState([]);
 
-  // setSearchData(searchData);
-  // console.log(searchData);
-  // useEffect(() => {
-  //   console.log(resultList["data"]);
-  //   resultList && resultList["data"].map((item, idx) => console.log(item, idx));
-  // });
+  useEffect(() => {
+    if (searchToggle) {
+      const data = resultList["data"];
+      console.log(data);
+      const resArtists = [data["artists"]["hits"]];
+      const resTracks = [...data["tracks"]["hits"]];
+      console.log(
+        "🚀 ~ file: results.js ~ line 14 ~ useEffect ~ resTracks",
+        resTracks
+      );
 
-  // render() {
-  //   tracks =
-  // }
+      setTracks(resTracks);
+    }
+  }, [searchToggle, resultList]);
 
   return (
     <React.Fragment>
-      {/* <div className="resultCon">
-        hmm
-        {resultList &&
-          resultList["data"].map((item, idx) => <div key={idx}>{item}</div>)}
-      </div> */}
-      <div>{isActive ? "ok" : "no"}</div>
-      {/* <div className="resultCon">{!searchData || data}</div> */}
+      <div className="resultCon">
+        <ul>{tracks && <Tracks tracks={tracks} />}</ul>
+      </div>
     </React.Fragment>
   );
 }

@@ -13,6 +13,8 @@
 .searchButton {
   font-weight: bold;
   width: 70px;
+  color: white;
+  background: darkblue;
 }
 .searchInput,
 .searchButton {

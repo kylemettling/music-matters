@@ -8,12 +8,10 @@ export default function Search() {
   // for custom seraching
   // const [searchData, setSearchData] = useState("No search");
 
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState(false);
   const [searchToggle, setSearchToggle] = useState(false);
 
-  useEffect(() => {
-    // processResults(result);
-  }, [result]);
+  // useEffect(() => {}, [result]);
 
   // const processSearch = async (e) => {
   //   const data = await getResults(e);
@@ -21,11 +19,6 @@ export default function Search() {
   // };
   const API_KEY = process.env.REACT_APP_API_KEY;
   const API_HOST = process.env.REACT_APP_API_HOST;
-
-  function processResults(e) {
-    setResult(getResults(e));
-    setSearchToggle(true);
-  }
 
   async function getResults(e) {
     const options = {
@@ -44,9 +37,8 @@ export default function Search() {
     };
     try {
       const search = await axios.request(options);
-
-      // const idk = processResults(search);
       setResult(search);
+      setSearchToggle(true);
     } catch (err) {
       console.error(err);
     }
@@ -66,7 +58,8 @@ export default function Search() {
           <button
             className="searchButton"
             type="submit"
-            onClick={(e) => processResults(e)}
+            onClick={(e) => getResults(e)}
+            // onClick={(e) => processResults(e)}
           >
             Fetch!
           </button>
@@ -74,7 +67,7 @@ export default function Search() {
         <Results
           resultList={result}
           searchName={artistRequest}
-          isActive={searchToggle}
+          searchToggle={searchToggle}
         />
       </div>
     </Fragment>
