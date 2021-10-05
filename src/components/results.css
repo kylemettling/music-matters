@@ -1,0 +1,11 @@
+.resultItem {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: flex-start;
+}
+.resultCon img {
+  /* height: 150px; */
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+}

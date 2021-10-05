@@ -20,7 +20,29 @@ export default function Search() {
   const API_KEY = process.env.REACT_APP_API_KEY;
   const API_HOST = process.env.REACT_APP_API_HOST;
 
+  async function getSongDetails(song) {
+    var options = {
+      method: "GET",
+      url: "https://shazam.p.rapidapi.com/songs/get-details",
+      params: { key: "40333609", locale: "en-US" },
+      headers: {
+        "x-rapidapi-host": `${API_HOST}`,
+        "x-rapidapi-key": `${API_KEY}`,
+      },
+    };
+
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }
+
   async function getResults(e) {
+    console.log(API_KEY);
     const options = {
       method: "GET",
       url: "https://shazam.p.rapidapi.com/search",
@@ -58,6 +80,7 @@ export default function Search() {
           <button
             className="searchButton"
             type="submit"
+            // onClick={(e) => getSongDetails(e)}
             onClick={(e) => getResults(e)}
             // onClick={(e) => processResults(e)}
           >
