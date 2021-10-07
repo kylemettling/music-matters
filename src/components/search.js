@@ -42,7 +42,7 @@ export default function Search() {
   }
 
   async function getResults(e) {
-    console.log(API_KEY);
+    console.log(artistRequest);
     const options = {
       method: "GET",
       url: "https://shazam.p.rapidapi.com/search",
@@ -59,6 +59,7 @@ export default function Search() {
     };
     try {
       const search = await axios.request(options);
+      console.log(search);
       setResult(search);
       setSearchToggle(true);
     } catch (err) {
