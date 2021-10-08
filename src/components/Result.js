@@ -15,13 +15,16 @@ export function Result({ results, type }) {
 			<ul className='item-con'>
 				{results &&
 					results.map((hit) => (
-						<li className='result-item'>
+						<li className='result-item' key={hit.key || hit.key}>
 							<div className='name-con'>
-								<h3 className='result-title' key={hit.id || hit.key}>
-									<Link to={`/details/${hit.id}`}>{hit.title || hit.name}</Link>
+								<h3 className='result-title'>
+									<Link to={`/details/${hit.key}`}>
+										{hit.title || hit.name}
+										{/* {hit.key} */}
+									</Link>
 								</h3>
 								<h4 className='result-subtitle'>
-									<Link to={`/details/${hit.id}`}>
+									<Link to={`/details/${hit.key}`}>
 										{hit.subtitle || hit.name}
 									</Link>
 								</h4>
