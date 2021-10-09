@@ -5,26 +5,21 @@ import { Link } from 'react-router-dom'
 // import { Track } from './Track'
 
 export function Result({ results, type }) {
-	// useEffect(() => {
-	// 	console.log(results)
-	// }, [results])
-
 	return (
 		<div>
 			<span>{type}</span>
 			<ul className='item-con'>
 				{results &&
 					results.map((hit) => (
-						<li className='result-item' key={hit.key || hit.key}>
+						<li className='result-item' key={hit.key || hit.id}>
 							<div className='name-con'>
 								<h3 className='result-title'>
-									<Link to={`/details/${hit.key}`}>
+									<Link to={`/${type}/${hit.key || hit.id}`}>
 										{hit.title || hit.name}
-										{/* {hit.key} */}
 									</Link>
 								</h3>
 								<h4 className='result-subtitle'>
-									<Link to={`/details/${hit.key}`}>
+									<Link to={`/${type}/${hit.key || hit.id}`}>
 										{hit.subtitle || hit.name}
 									</Link>
 								</h4>

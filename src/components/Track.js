@@ -1,18 +1,30 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useParams } from 'react-router'
+import { shazam, spotify } from './config/Connection'
 
 export function Track() {
 	const { id } = useParams()
 	const [track, setTrack] = useState({})
 	const getTrack = async () => {
-		try {
-			const res = await axios.get()
-			// const newTrack =
-			setTrack(res)
-		} catch (e) {
-			console.log(e)
+		const options = {
+			method: 'GET',
+			url: shazam.urls.trackDetail,
+			params: { key: id, locale: 'en-US' },
+			headers: {
+				'x-rapidapi-host': shazam.host,
+				'x-rapidapi-key': shazam.key,
+			},
 		}
+		axios
+			.request(options)
+			.then(function (response) {
+				console.log(response.data)
+				setTrack(response.data)
+			})
+			.catch(function (error) {
+				console.error(error)
+			})
 	}
 	return (
 		<div>

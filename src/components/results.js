@@ -21,8 +21,8 @@ export default function Results({ resultList, searchName, searchToggle }) {
 	return (
 		<React.Fragment>
 			<div className='resultCon'>
-				<Result results={tracks} type='Tracks' />
-				<Result results={artists} type='Artists' />
+				<Result results={tracks} type='track' />
+				<Result results={artists} type='artist' />
 			</div>
 		</React.Fragment>
 	)

@@ -11,7 +11,10 @@ function App() {
 		<Fragment>
 			<Router>
 				<Switch>
-					<Route path='/detail/:id'>
+					<Route path='/track/:id'>
+						<Track />
+					</Route>
+					<Route path='/artist/:id'>
 						<Track />
 					</Route>
 					<Route path='/'>
