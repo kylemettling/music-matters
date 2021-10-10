@@ -7,7 +7,7 @@ import { shazam, spotify } from './config/Connection'
 export default function Search() {
 	const [artistRequest, setArtistRequest] = useState('synchronicity')
 
-	const [result, setResult] = useState(false)
+	const [result, setResult] = useState([])
 	const [searchToggle, setSearchToggle] = useState(false)
 
 	// async function getSongDetails(song) {
@@ -32,7 +32,7 @@ export default function Search() {
 	// }
 
 	async function getResults(e) {
-		console.log(artistRequest)
+		// console.log(artistRequest)
 		const options = {
 			method: 'GET',
 			url: shazam.urls.search,
@@ -47,7 +47,7 @@ export default function Search() {
 				'x-rapidapi-key': `${shazam.key}`,
 			},
 		}
-		console.log(options)
+		// console.log(options)
 		// const options = {
 		// 	method: 'GET',
 		// 	url: 'https://songstats.p.rapidapi.com/tracks/info',
@@ -65,7 +65,7 @@ export default function Search() {
 		axios
 			.request(options)
 			.then(function (response) {
-				console.log(response.data)
+				// console.log(response.data)
 			})
 			.catch(function (error) {
 				console.error(error)

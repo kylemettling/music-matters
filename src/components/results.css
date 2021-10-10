@@ -33,6 +33,13 @@
 .result-item:nth-child(even) {
 	border-top: 2px solid green;
 }
+
+.resultCon > div:nth-child(1) > ul > div:nth-child(1) > span {
+	display: initial;
+}
+.item-type {
+	display: none;
+}
 .results-tracks,
 .results-artists {
 }

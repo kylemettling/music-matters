@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { shazam, spotify } from './config/Connection'
 
@@ -26,6 +26,11 @@ export function Track() {
 				console.error(error)
 			})
 	}
+
+	useEffect(() => {
+		getTrack()
+	}, [id])
+
 	return (
 		<div>
 			<div>{id}</div>
