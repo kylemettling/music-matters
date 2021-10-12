@@ -12,9 +12,11 @@ function App() {
 			<Router>
 				<Switch>
 					<Route path='/track/:id'>
+						<Header />
 						<Track />
 					</Route>
 					<Route path='/artist/:id'>
+						<Header />
 						<Track />
 					</Route>
 					<Route path='/'>

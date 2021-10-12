@@ -18,6 +18,7 @@ export function Result({ results, type, searchToggle }) {
 					results.map((hit) => (
 						<div className='item'>
 							<span
+								key={hit.key}
 								className={type === 'track' ? 'track-label' : 'artist-label'}
 							>
 								{type === 'track' ? 'Tracks' : 'Artists'}

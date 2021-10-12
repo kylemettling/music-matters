@@ -9,17 +9,10 @@
 .result-item {
 	width: 100%;
 	display: flex;
-	/* flex-direction: row; */
-	/* justify-items: center; */
 	justify-content: space-between;
 	align-items: center;
-	/* gap: 25px; */
-	/* overflow: hidden; */
 	padding: 8px;
-	/* margin-bottom: 50px; */
-	/* align-items: flex-start; */
-	/* border-bottom: 2px solid green;
-	border-top: 2px solid green; */
+	padding-left: 1%;
 }
 .result-item:first-child {
 	border-radius: 5px 5px 0 0;
@@ -34,10 +27,14 @@
 	border-top: 2px solid green;
 }
 
-.resultCon > div:nth-child(1) > ul > div:nth-child(1) > span {
+/* .resultCon > div:nth-child(1) > ul > div:nth-child(1) > span { */
+.item:nth-child(1) > span {
 	display: initial;
+	font-weight: bold;
+	padding: 2%;
 }
-.item-type {
+.track-label,
+.artist-label {
 	display: none;
 }
 .results-tracks,

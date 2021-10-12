@@ -1,0 +1,4 @@
+.track-album-details {
+	display: flex;
+	flex-direction: column;
+}
