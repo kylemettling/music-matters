@@ -25,6 +25,10 @@ function App() {
 					</Route>
 				</Switch>
 			</Router>
+			<style>
+				@import
+				url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Yantramanav:wght@100&display=swap');
+			</style>
 		</Fragment>
 	)
 }

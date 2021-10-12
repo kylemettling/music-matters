@@ -35,13 +35,33 @@ export function Track() {
 	if (!track.title) return null
 
 	return (
-		<div>
-			<div>{id}</div>
-			<div>{JSON.stringify(track)}</div>
-			<div className='track-album-details'>
-				<span>Artist: {track.subtitle}</span>
-				<span>Album: {track.sections[0].metadata[0].text}</span>
-				<span>Album: {track.url}</span>
+		<div className='track-main'>
+			{/* <div>{JSON.stringify(track)}</div> */}
+			<div className='track-card-cover'>
+				<div
+					className='track-card'
+					style={{ backgroundImage: `url(${track.images.background})` }}
+				>
+					<div className='track-track-details'>
+						<h2>{track.title}</h2>
+						<h3>{track.subtitle}</h3>
+						{/* <span>Album: {track.url}</span> */}
+					</div>
+					<div className='track-album-details'>
+						<div>
+							<img
+								className='album-cover'
+								src={
+									track.images.coverart
+										? track.images.coverart
+										: 'https://is5-ssl.mzstatic.com/image/thumb/Features115/v4/cc/62/0c/cc620ccb-c10d-c538-ce73-06cf185b3303/mzl.ynbraxen.jpg/800x800cc.jpg'
+								}
+								alt={[track.title] + ' cover'}
+							></img>
+						</div>
+						<h3>{track.sections[0].metadata[0].text}</h3>
+					</div>
+				</div>
 			</div>
 		</div>
 	)

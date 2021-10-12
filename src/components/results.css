@@ -3,6 +3,7 @@
 	width: 400px;
 	display: flex;
 	flex-direction: column;
+	list-style-type: none;
 	/* justify-content: space-between; */
 	box-shadow: 2px 2px 20px black;
 }
@@ -27,11 +28,20 @@
 	border-top: 2px solid green;
 }
 
-/* .resultCon > div:nth-child(1) > ul > div:nth-child(1) > span { */
-.item:nth-child(1) > span {
+.item-con > li:nth-child(1) > div > span
+
+/* .item:nth-child(1) > span */ {
 	display: initial;
 	font-weight: bold;
 	padding: 2%;
+}
+.thedivs {
+	width: 200px;
+	height: 200px;
+	background-color: lightblue;
+}
+.one {
+	background-color: #252526;
 }
 .track-label,
 .artist-label {
