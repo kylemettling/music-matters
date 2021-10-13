@@ -27,25 +27,65 @@ body {
 	/* display: flex; */
 	/* align-self: flex-end; */
 }
+
+.track-track-details,
+.track-album-details {
+	z-index: 1;
+}
+.track-text {
+	background-color: rgba(0, 0, 0, 0.55);
+	/* border-radius: 5px; */
+	padding: 2px;
+	overflow: hidden;
+	/* overflow: hidden; */
+}
+
 .track-card {
 	display: flex;
-	width: 500px;
-	height: 500px;
+	width: 600px;
+	height: 600px;
+	/* height: 100%; */
+	/* width: 100%; */
 	/* flex-direction: column; */
 	background-size: cover;
 	justify-content: space-between;
-	padding: 2%;
+	padding: 1%;
 }
 .track-card-cover {
 	position: absolute;
 	background-size: cover;
-	width: 500px;
-	height: 500px;
-	/* overflow: hidden; */
-	background-color: rgba(238, 238, 238, 0.5);
+	width: 600px;
+	height: 600px;
+	background-color: rgba(0, 0, 0, 0.15);
+	z-index: 1;
 }
 .track-main {
-	margin: 5%;
+	margin-top: 5%;
 	display: flex;
 	justify-content: center;
+	/* width: 100vw; */
+	/* height: 100vh; */
 }
+.track-album-details h3 {
+	/* border-radius: 8px; */
+	/* margin-top: 5px; */
+	z-index: 1;
+	overflow: hidden;
+}
+.subtitle {
+	padding-top: 4px;
+}
+span.album-text {
+	border-radius: 5px 0px 5px 5px;
+}
+div.track-text {
+	border-radius: 5px 5px 0px 0px;
+	padding: 10px;
+}
+h2 > .track-text {
+	border-radius: 5px 5px 5px 0px;
+}
+h3 > .track-text {
+	border-radius: 0px 0px 5px 5px;
+}
+/* #root > div.track-main > div.track-card > div.track-album-details > h3 > span; */
