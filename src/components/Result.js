@@ -41,8 +41,8 @@ export function Result({ results, type, searchToggle }) {
 									<img
 										className='result-cover'
 										src={
-											hit.images?.background
-												? hit.images?.background ||
+											hit.images?.coverarthq
+												? hit.images?.coverarthq ||
 												  hit.artists?.images.background
 												: hit.avatar
 												? hit.avatar

@@ -76,16 +76,24 @@ body {
 	padding-top: 4px;
 }
 span.album-text {
-	border-radius: 5px 0px 5px 5px;
+	/* border-radius: 5px 0px 5px 5px; */
+	/* border-radius: 5px 5px 0px 0px; */
 }
 div.track-text {
 	border-radius: 5px 5px 0px 0px;
 	padding: 10px;
 }
 h2 > .track-text {
-	border-radius: 5px 5px 5px 0px;
+	border-radius: 5px 5px 0px 0px;
 }
-h3 > .track-text {
+h3 > .track-text.track {
 	border-radius: 0px 0px 5px 5px;
 }
-/* #root > div.track-main > div.track-card > div.track-album-details > h3 > span; */
+.album-text {
+	background-color: rgba(0, 0, 0, 0.55);
+	/* border-radius: 5px; */
+	padding: 2px;
+	border-radius: 0px 0px 5px 5px;
+	overflow: hidden;
+	/* overflow: hidden; */
+}

@@ -47,7 +47,7 @@ export function Track() {
 						<span className='track-text'>{track.title}</span>
 					</h2>
 					<h3 className='subtitle'>
-						<span className='track-text'>{track.subtitle}</span>
+						<span className='track-text track'>{track.subtitle}</span>
 					</h3>
 					{/* <span>Album: {track.url}</span> */}
 				</div>
@@ -63,7 +63,7 @@ export function Track() {
 							alt={[track.title] + ' cover'}
 						></img>
 					</div>
-					<h3 className='track-text'>
+					<h3 className=''>
 						<span className='album-text'>
 							{track.sections[0].metadata[0].text}
 						</span>
