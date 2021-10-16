@@ -4,23 +4,22 @@ import Profile from './components/profile'
 import Search from './components/search'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { Track } from './components/Track.js'
+import { Artist } from './components/Artist.js'
 import './App.css'
 
 function App() {
 	return (
 		<Fragment>
 			<Router>
+				<Header />
 				<Switch>
 					<Route path='/track/:id'>
-						<Header />
 						<Track />
 					</Route>
 					<Route path='/artist/:id'>
-						<Header />
 						<Track />
 					</Route>
 					<Route path='/'>
-						<Header />
 						<Search />
 					</Route>
 				</Switch>
