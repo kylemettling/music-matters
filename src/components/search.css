@@ -1,25 +1,30 @@
 .searchCon {
-  padding-top: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	padding-top: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 .searchInput {
-  margin-top: 4%;
-  width: 300px;
+	margin-top: 4%;
+	width: 300px;
 }
 
 .searchButton {
-  font-weight: bold;
-  width: 70px;
-  color: white;
-  background: darkblue;
+	font-weight: bold;
+	font-size: 16px;
+	width: 70px;
+	color: black;
+	background: #39e991;
 }
 .searchInput,
 .searchButton {
-  height: 35px;
+	height: 35px;
 }
 .resultCon {
-  margin-top: 2%;
+	margin-top: 2%;
+}
+
+.searchSelect {
+	height: 35px;
 }

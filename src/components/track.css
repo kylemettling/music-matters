@@ -4,11 +4,11 @@ body {
 }
 .test {
 	display: flex;
-	width: 300px;
+	/* width: 300px; */
 	justify-content: center;
 }
-.test > {
-	width: 400px;
+.test p {
+	/* width: 600px; */
 }
 .track-album-details {
 	display: flex;
@@ -33,11 +33,11 @@ body {
 }
 
 .track-card {
-	display: flex;
+	/* display: flex; */
+	display: none;
 	width: 600px;
 	height: 600px;
 	background-size: cover;
-	/* flex-wrap: nowrap; */
 	justify-content: space-between;
 	padding: 1.5%;
 }
