@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { Track } from './components/Track.js'
 import { Artist } from './components/Artist.js'
 import './App.css'
+import { SpotifyToken } from './components/SpotifyToken.js'
 
 function App() {
 	return (
@@ -17,9 +18,10 @@ function App() {
 						<Track />
 					</Route>
 					<Route path='/artist/:id'>
-						<Track />
+						<Artist />
 					</Route>
 					<Route path='/'>
+						{/* <SpotifyToken /> */}
 						<Search />
 					</Route>
 				</Switch>

@@ -1,17 +1,17 @@
 import axios from 'axios'
-import './track.css'
+import './artist.css'
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { shazam, spotify } from './config/Connection'
-// import { useTrack } from './hooks/useTrack'
+// import { useartist } from './hooks/useartist'
 
-export function Track() {
+export function Artist() {
 	const { id } = useParams()
-	const [track, setTrack] = useState('')
-	async function getTrack() {
+	const [artist, setartist] = useState('')
+	async function getartist() {
 		const options = {
 			method: 'GET',
-			url: shazam.urls.trackDetail,
+			url: shazam.urls.artistDetail,
 			params: { key: id, locale: 'en-US' },
 			headers: {
 				'x-rapidapi-host': shazam.host,
@@ -21,7 +21,7 @@ export function Track() {
 		try {
 			const search = await axios.request(options)
 			console.log(search)
-			setTrack(search.data)
+			setartist(search.data)
 		} catch (err) {
 			console.error(err)
 		}
@@ -29,51 +29,51 @@ export function Track() {
 	}
 
 	useEffect(() => {
-		getTrack()
+		getartist()
 	}, [id])
 
-	if (!track.title) return null
+	if (!artist.title) return null
 
 	return (
-		<div className='track-main'>
-			{/* <div>{JSON.stringify(track)}</div> */}
-			<div className='track-card-cover'>
+		<div className='artist-main'>
+			{/* <div>{JSON.stringify(artist)}</div> */}
+			<div className='artist-card-cover'>
 				<div
-					className='track-card'
-					style={{ backgroundImage: `url(${track.images.background})` }}
+					className='artist-card'
+					style={{ backgroundImage: `url(${artist.images.background})` }}
 				>
-					<div className='track-track-details'>
+					<div className='artist-artist-details'>
 						<h2>
-							<div className='track-text-con'>
-								<span className='track-text bump-text-track'>
-									{track.title}
+							<div className='artist-text-con'>
+								<span className='artist-text bump-text-artist'>
+									{artist.title}
 								</span>
 							</div>
 						</h2>
-						<div className='track-text-con'>
+						<div className='artist-text-con'>
 							<h3 className='subtitle'>
-								<span className='track-text track bump-text'>
-									{track.subtitle}
+								<span className='artist-text artist bump-text'>
+									{artist.subtitle}
 								</span>
 							</h3>
 						</div>
-						{/* <span>Album: {track.url}</span> */}
+						{/* <span>Album: {artist.url}</span> */}
 					</div>
-					<div className='track-album-details'>
-						<div className='track-text'>
+					<div className='artist-album-details'>
+						<div className='artist-text'>
 							<img
 								className='album-cover'
 								src={
-									track.images.coverart
-										? track.images.coverart
+									artist.images.coverart
+										? artist.images.coverart
 										: 'https://is5-ssl.mzstatic.com/image/thumb/Features115/v4/cc/62/0c/cc620ccb-c10d-c538-ce73-06cf185b3303/mzl.ynbraxen.jpg/800x800cc.jpg'
 								}
-								alt={[track.title] + ' cover'}
+								alt={[artist.title] + ' cover'}
 							></img>
 						</div>
 						<div className='album-text-con'>
 							<h3>
-								<span className=''>{track.sections[0].metadata[0].text}</span>
+								<span className=''>{artist.sections[0].metadata[0].text}</span>
 							</h3>
 						</div>
 					</div>
