@@ -7,10 +7,10 @@ import { shazam, spotify } from './config/Connection'
 export default function Search() {
 	const [artistRequest, setArtistRequest] = useState('synchronicity')
 
-	const [result, setResult] = useState([])
+	const [searchResult, setSearchResult] = useState([])
 	const [searchToggle, setSearchToggle] = useState(false)
 	const [spotifySearchData, setSpotifySearchData] = useState('no data')
-	const [spotifyToken, setSpotifyToken] = useState('')
+	const [spotifyToken, setSpotifyToken] = useState(undefined)
 	const [optionState, setOptionState] = useState('track')
 	// const [spotifyToken, setSpotifyToken] = useState("");
 	const [searchQuery, setSearchQuery] = useState('Synchronicity II')
@@ -39,28 +39,35 @@ export default function Search() {
 	// 		})
 	// }
 	async function getSpotifyToken() {
-		try {
-			const res = await axios('https://accounts.spotify.com/api/token', {
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-					Authorization: 'Basic ' + btoa(clientId + ':' + clientSecret),
-				},
-				data: 'grant_type=client_credentials',
-				method: 'POST',
-			})
-			setSpotifyToken(res.data.access_token)
-			// getSpotifySearchData()
-		} catch (err) {
-			console.log(err)
+		if (!spotifyToken) {
+			try {
+				const res = await axios('https://accounts.spotify.com/api/token', {
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+						Authorization: 'Basic ' + btoa(clientId + ':' + clientSecret),
+					},
+					data: 'grant_type=client_credentials',
+					method: 'POST',
+				})
+				localStorage.setItem('spotifyToken', res.data.access_token)
+				setSpotifyToken(res.data.access_token)
+				// getSpotifySearchData()
+			} catch (err) {
+				console.log(err)
+			}
 		}
 	}
 	async function getSpotifySearchData() {
+		//  {
+		getSpotifyToken()
+		// 	console.log('TOKEN TIME!', spotifyToken)
+		// }
 		// console.log("token", spotifyToken);
 		try {
 			// const title = "Synchronicity II";
 			// const artistData = "The Police";
 			// ${artistRequest ? artistRequest + '%20artist:' : ''}
-			console.log(searchQuery, optionState)
+			console.log(spotifyToken, searchQuery, optionState)
 			const res = await axios(
 				`https://api.spotify.com/v1/search?q=${searchQuery}&type=${optionState}`,
 				{
@@ -70,7 +77,9 @@ export default function Search() {
 					method: 'GET',
 				}
 			)
-			setSpotifySearchData(res.data)
+			// setSpotifySearchData(res.data)
+			setSearchResult(res.data)
+			setSearchToggle(true)
 		} catch (err) {
 			console.log(err)
 		}
@@ -85,6 +94,9 @@ export default function Search() {
 		// }
 	}
 
+	// function getStoredToken() {
+	//   const
+	// }
 	// async function getResults(e) {
 	// console.log(artistRequest)
 
@@ -121,10 +133,13 @@ export default function Search() {
 	// };
 
 	useEffect(() => {
-		getSpotifyToken()
+		// getStoredToken()
+
+		setSpotifyToken(localStorage.getItem('spotifyToken'))
 		setOptionState(optionState)
+		// console.log('TOKEN ON LOAD:', spotifyToken, optionState)
 		// console.log(spotifyToken)
-	}, [optionState])
+	})
 
 	return (
 		<Fragment>
@@ -158,7 +173,7 @@ export default function Search() {
 					</button>
 				</div>
 				<Results
-					resultList={result}
+					resultList={searchResult}
 					// searchName={artistRequest}
 					searchToggle={searchToggle}
 				/>
