@@ -11,6 +11,8 @@ export function Result({ results, type, searchToggle }) {
 		setData(true)
 	}, [results, data, searchToggle])
 
+	function togglePlay() {}
+
 	return (
 		<div>
 			<ul className='item-con'>
@@ -28,28 +30,46 @@ export function Result({ results, type, searchToggle }) {
 								<div className='result-item'>
 									<div className='name-con'>
 										<h3 className='result-title'>
-											<Link to={`/${type}/${hit.key || hit.id}`}>
+											<Link
+												to={`/${type}/${hit.key || hit.id}`}
+												track-href={hit.href}
+											>
 												{hit.title || hit.name}
 											</Link>
 										</h3>
 										<h4 className='result-subtitle'>
-											<Link to={`/${type}/${hit.key || hit.id}`}>
-												{hit.subtitle || hit.name}
+											<Link to={`/artist/${hit.key || hit.artists[0].id}`}>
+												{hit.artists[0].name}
 											</Link>
 										</h4>
+									</div>{' '}
+									<div>
+										<span className='duration'>{hit.duration_ms}</span>
+										<button className='trackPreview' onClick={togglePlay}>
+											{hit.preview_url}
+										</button>
 									</div>
-									<img
-										className='result-cover'
-										src={
-											hit.images?.coverarthq
-												? hit.images?.coverarthq ||
-												  hit.artists?.images.background
-												: hit.avatar
-												? hit.avatar
-												: 'https://is5-ssl.mzstatic.com/image/thumb/Features115/v4/cc/62/0c/cc620ccb-c10d-c538-ce73-06cf185b3303/mzl.ynbraxen.jpg/800x800cc.jpg'
-										}
-										alt={[hit.title || hit?.name] + ' cover'}
-									></img>
+									<Link to={`/album/${hit.key || hit.album.id}`}>
+										{/* {hit.artists[0].name} */}
+										<img
+											className='result-cover'
+											// Shazam image resolver
+											// src={
+											// 	hit.images?.coverarthq
+											// 		? hit.images?.coverarthq ||
+											// 		  hit.artists?.images.background
+											// 		: hit.avatar
+											// 		? hit.avatar
+											// 		: 'https://is5-ssl.mzstatic.com/image/thumb/Features115/v4/cc/62/0c/cc620ccb-c10d-c538-ce73-06cf185b3303/mzl.ynbraxen.jpg/800x800cc.jpg'
+											// }
+
+											src={
+												hit.album.images[0].url ||
+												'https://is5-ssl.mzstatic.com/image/thumb/Features115/v4/cc/62/0c/cc620ccb-c10d-c538-ce73-06cf185b3303/mzl.ynbraxen.jpg/800x800cc.jpg'
+											}
+											alt={[hit.title || hit?.name] + ' cover'}
+										/>
+									</Link>
 								</div>
 								{/* </li> */}
 							</div>

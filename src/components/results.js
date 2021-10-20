@@ -9,7 +9,7 @@ export default function Results({ resultList, searchName, searchToggle }) {
 	useEffect(() => {
 		if (searchToggle) {
 			// const data = resultList['data']
-			const data = resultList['tracks'].items
+			const data = resultList['tracks']?.items || []
 			setTracks(data)
 			console.log('search data:', tracks)
 			// const resTracks = [...data['tracks']['hits']].map(({ track: res }) => res)
