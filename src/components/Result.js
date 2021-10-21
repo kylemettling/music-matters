@@ -44,10 +44,8 @@ export function Result({ results, type, searchToggle }) {
 										</h4>
 									</div>{' '}
 									<div>
-										<span className='duration'>{hit.duration_ms}</span>
-										<button className='trackPreview' onClick={togglePlay}>
-											{hit.preview_url}
-										</button>
+										{/* <span className='minutes'> </span>
+										<span className='seconds'> </span> */}
 									</div>
 									<Link to={`/album/${hit.key || hit.album.id}`}>
 										{/* {hit.artists[0].name} */}
@@ -70,6 +68,16 @@ export function Result({ results, type, searchToggle }) {
 											alt={[hit.title || hit?.name] + ' cover'}
 										/>
 									</Link>
+								</div>
+								<div className='detail-con'>
+									<span className='detail-release'>
+										{hit.album.release_date.split('-')[0]}
+									</span>
+									<span>
+										{/* {new Date(hit.duration_ms).getTime()} */}
+										{new Date(hit.duration_ms).getMinutes()}m
+										{new Date(hit.duration_ms).getSeconds()}s
+									</span>
 								</div>
 								{/* </li> */}
 							</div>

@@ -49,9 +49,15 @@ export default function Search() {
 					data: 'grant_type=client_credentials',
 					method: 'POST',
 				})
+				// getSpotifySearchData()
+
+				if (!res) {
+					localStorage.removeItem('spotifyToken')
+					getSpotifyToken()
+				}
+
 				localStorage.setItem('spotifyToken', res.data.access_token)
 				setSpotifyToken(res.data.access_token)
-				// getSpotifySearchData()
 			} catch (err) {
 				console.log(err)
 			}
@@ -63,26 +69,41 @@ export default function Search() {
 		// 	console.log('TOKEN TIME!', spotifyToken)
 		// }
 		// console.log("token", spotifyToken);
-		try {
-			// const title = "Synchronicity II";
-			// const artistData = "The Police";
-			// ${artistRequest ? artistRequest + '%20artist:' : ''}
-			console.log(spotifyToken, searchQuery, optionState)
-			const res = await axios(
-				`https://api.spotify.com/v1/search?q=${searchQuery}&type=${optionState}`,
-				{
-					headers: {
-						Authorization: 'Bearer ' + spotifyToken,
-					},
-					method: 'GET',
-				}
-			)
-			// setSpotifySearchData(res.data)
-			setSearchResult(res.data)
-			setSearchToggle(true)
-		} catch (err) {
+		// const title = "Synchronicity II";
+		// const artistData = "The Police";
+		// ${artistRequest ? artistRequest + '%20artist:' : ''}
+		console.log(spotifyToken, searchQuery, optionState)
+		// try {
+		const res = await axios(
+			`https://api.spotify.com/v1/search?q=${searchQuery}&type=${optionState}`,
+			{
+				headers: {
+					Authorization: 'Bearer ' + spotifyToken,
+				},
+				method: 'GET',
+			}
+		).catch((err) => {
 			console.log(err)
-		}
+		})
+
+		// getSpotifyToken()
+
+		// .then((data) => {
+		// 	if (!data) {
+		// 		localStorage.removeItem('spotifyToken')
+		// 		getSpotifyToken()
+		// 	}
+		// })
+
+		// setSpotifySearchData(res.data)
+		setSearchResult(res.data)
+		setSearchToggle(true)
+
+		// } catch (err) {
+		// console.log(res)
+
+		// console.log(err)
+		// }
 
 		// try {
 		//   const search = await axios.request(options);
@@ -135,11 +156,12 @@ export default function Search() {
 	useEffect(() => {
 		// getStoredToken()
 
-		setSpotifyToken(localStorage.getItem('spotifyToken'))
+		setSpotifyToken(localStorage.getItem('spotifyToken') || getSpotifyToken())
+		console.log(spotifyToken)
 		setOptionState(optionState)
 		// console.log('TOKEN ON LOAD:', spotifyToken, optionState)
 		// console.log(spotifyToken)
-	})
+	}, [spotifyToken, optionState])
 
 	return (
 		<Fragment>

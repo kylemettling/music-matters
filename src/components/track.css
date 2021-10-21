@@ -23,6 +23,7 @@ body {
 }
 .track-track-details {
 	display: flex;
+	/* width: 90%; */
 	flex-direction: column;
 	font-size: 22px;
 }
@@ -31,7 +32,13 @@ body {
 .track-album-details {
 	/* z-index: 1; */
 }
-
+.detail-con {
+	display: flex;
+	font-weight: bold;
+	justify-content: left;
+	gap: 20px;
+	padding-bottom: 4px;
+}
 .track-card {
 	/* display: flex; */
 	display: none;
@@ -48,6 +55,9 @@ body {
 	height: 600px;
 	/* background-color: rgba(0, 0, 0, 0.55); */
 	/* z-index: 1; */
+}
+.detail-release {
+	margin-left: 15px;
 }
 .track-main {
 	margin-top: 5%;
