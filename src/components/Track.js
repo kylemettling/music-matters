@@ -10,7 +10,7 @@ export function Track() {
 	const [track, setTrack] = useState('')
 	const [trackFeatures, setTrackFeatures] = useState({})
 	const [artistDetails, setArtistDetails] = useState({})
-	const [artistImageURL, setArtistImageURL] = useState('')
+	// const [artistImageURL, setArtistImageURL] = useState('')
 	const {
 		location: {
 			state: { token },
@@ -27,9 +27,12 @@ export function Track() {
 		}
 		const search = await axios.request(options)
 		const trackData = await search.data
-		// console.log(trackData)
+		console.log(trackData)
 		setTrack(trackData)
-		getTrackFeatures()
+		// if (track) {
+		// getTrackFeatures()
+		// }
+		// getTrackFeatures()
 		// setArtistImageURL(trackData.artists[0].href)
 	}
 
@@ -45,7 +48,7 @@ export function Track() {
 		const search = await axios.request(options).catch((err) => console.log(err))
 		const featureData = await search.data
 		setTrackFeatures(featureData)
-		console.log('Artist detail ready:', track.artists)
+		console.log('Artist detail ready:', track)
 		// try {
 		// 	const search = await axios.request(options)
 		// 	const featureData = await search.data
@@ -55,7 +58,7 @@ export function Track() {
 		// 	console.error(err)
 		// }
 
-		getArtistDetails()
+		// getArtistDetails()
 	}
 
 	async function getArtistDetails() {
@@ -65,7 +68,7 @@ export function Track() {
 		const options = {
 			method: 'GET',
 			// url: artistImageURL,
-			url: track.artists[0].href,
+			url: track.artists[0].href || track.artists.href,
 			headers: {
 				Authorization: 'Bearer ' + token,
 			},
@@ -86,29 +89,52 @@ export function Track() {
 		// }
 	}
 
+	const ArtistImage = () => {
+		return (
+			<div>
+				<img
+					style={{ height: '400px' }}
+					src={
+						artistDetails &&
+						(artistDetails.images[0]?.url ||
+							'https://is5-ssl.mzstatic.com/image/thumb/Features115/v4/cc/62/0c/cc620ccb-c10d-c538-ce73-06cf185b3303/mzl.ynbraxen.jpg/800x800cc.jpg')
+					}
+					alt='artist'
+				/>
+			</div>
+		)
+	}
+
 	useEffect(() => {
 		// if (id) {
 		// 	getTrack()
 		// }
 		// Promise.all([getTrack(), getTrackFeatures(), getArtistDetails()])
-		getTrack()
-		// if (track) {
-		// 	getTrackFeatures()
+		// if (id) {
+		// 	getTrack().then(getTrackFeatures())
 		// }
+		getTrack()
+		if (track) {
+			getArtistDetails()
+
+			getTrackFeatures()
+		}
 	}, [])
 
-	if (!track && !artistDetails) return null
+	if (!track && !artistDetails && !trackFeatures) return null
 
 	return (
 		<div className='track-main'>
-			<div className='track-card-cover'>
+			{/* {ArtistImage} */}
+			<ArtistImage />
+			{/* <div className='track-card-cover'>
 				<div
 					className='track-card'
-					// style={{
-					// 	backgroundImage: `url(${
-					// 		artistDetails.images[0].url || artistDetails.images.url
-					// 	})`,
-					// }}
+					style={{
+						backgroundImage: `url(${
+							artistDetails.images[0].url ? artistDetails.images[0].url : null
+						})`,
+					}}
 				>
 					<div className='track-track-details'>
 						<div className='track-text-con'>
@@ -136,17 +162,13 @@ export function Track() {
 								alt={[track.name] + ' cover'}
 							></img>
 						</div>
-						<div className='album-text-con'>
-							{/* <h3>
-								<span className=''>{track.sections[0].metadata[0].text}</span>
-							</h3> */}
-						</div>
+						<div className='album-text-con'></div>
 					</div>
 				</div>
 			</div>
 			<div>
 				<h3>{JSON.stringify(artistDetails)}</h3>
-			</div>
+			</div> */}
 		</div>
 	)
 }
