@@ -1,18 +1,31 @@
 import { useState } from 'react'
+import { useEffect } from 'react'
 
-export const useTrack = (track) => {
-	console.log(track)
-	const [title, setTitle] = useState('')
-	const [artist, setArtist] = useState('')
-	const [album, setAlbum] = useState('')
-	const [year, setYear] = useState('')
-	const [background, setBackground] = useState('')
-	const [cover, setCover] = useState('')
+export const useTrack = () => {
+	const [track, setTrack] = useState({})
+	const [songTitle, setSongTitle] = useState({})
+	const [songArtist, setSongArtist] = useState({})
+	const [songAlbum, setSongAlbum] = useState({})
+	// const [track, setTrack] = useState({})
 
-	setAlbum(track.sections[0].metadata[0].text)
-	setYear(track.sections[0].metadata[2].text)
-	setBackground(track.sections[0].metapages[0].image)
-	setCover(track.sections[0].metapages[0].image)
+	const setTrackDetails = async (data) => {
+		await setTrack(data)
+		console.log(data)
+		await setSongTitle(track.name)
+		console.log(songTitle)
+		// setSongArtist(track.artists[0].name)
+		setSongAlbum(track.album.name)
+		// const songArtist =
+		// const songAlbum = track.album.images[0].name
+		// return [songTitle, songArtist, songAlbum]
+	}
 
-	return { title, artist, album, year, background, cover }
+	useEffect(() => {
+		// setTrack(track)
+		// setSongTitle(track.name)
+		// setSongAlbum(track.album.name)
+		// setSongArtist(track.artists[0].name)
+	}, [])
+
+	return [songTitle, songArtist, songAlbum, { setTrackDetails }]
 }
