@@ -38,6 +38,7 @@ export const useSpotifyToken = () => {
 		const search = await axios.request(options).catch((err) => console.log(err))
 		const newToken = await search.data.access_token
 		// console.log("New token: ", newToken);
+		localStorage.removeItem('spotifyToken')
 		localStorage.setItem('spotifyToken', newToken)
 		setToken(newToken)
 		console.log('NEW TOKEN:', newToken)
@@ -46,7 +47,7 @@ export const useSpotifyToken = () => {
 	}
 
 	const getStoredToken = () => {
-		setToken(localStorage.getItem('spotifyToken'))
+		setToken(localStorage.getItem('spotifyToken')) || refreshToken()
 	}
 
 	return [token, { refreshToken, getStoredToken }]

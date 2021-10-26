@@ -28,7 +28,7 @@ export function Track() {
 		const search = await axios.request(options)
 		const trackData = await search.data
 		console.log(trackData)
-		setTrack(trackData)
+		await setTrack(trackData)
 		// if (track) {
 		// getTrackFeatures()
 		// }
@@ -47,8 +47,8 @@ export function Track() {
 		}
 		const search = await axios.request(options).catch((err) => console.log(err))
 		const featureData = await search.data
-		setTrackFeatures(featureData)
-		console.log('Artist detail ready:', track)
+		await setTrackFeatures(featureData)
+		console.log('Artist detail ready:', featureData)
 		// try {
 		// 	const search = await axios.request(options)
 		// 	const featureData = await search.data
@@ -62,19 +62,15 @@ export function Track() {
 	}
 
 	async function getArtistDetails() {
-		// console.log(track.artists);
-		// console.log('DETAILS', trackFeatures, artistImageURL, track.artists)
-		// console.log('IMAGE URL:', artistImageURL)
 		const options = {
 			method: 'GET',
-			// url: artistImageURL,
-			url: track.artists[0].href || track.artists.href,
+			url: track.artists[0]?.href || track.artists.href,
 			headers: {
 				Authorization: 'Bearer ' + token,
 			},
 		}
+		// console.log(options)
 		const search = await axios.request(options).catch((err) => console.log(err))
-		// console.log(search)
 		const artistData = await search.data
 		console.log('ARTIST DATA', artistData)
 		setArtistDetails(artistData)
@@ -89,21 +85,22 @@ export function Track() {
 		// }
 	}
 
-	const ArtistImage = () => {
-		return (
-			<div>
-				<img
-					style={{ height: '400px' }}
-					src={
-						artistDetails &&
-						(artistDetails.images[0]?.url ||
-							'https://is5-ssl.mzstatic.com/image/thumb/Features115/v4/cc/62/0c/cc620ccb-c10d-c538-ce73-06cf185b3303/mzl.ynbraxen.jpg/800x800cc.jpg')
-					}
-					alt='artist'
-				/>
-			</div>
-		)
-	}
+	// const ArtistBackground = () => {
+	// 	return (
+	// 		<div >
+	// 			<img
+	// 				style={{ height: '400px' }}
+	// 				src={
+	// 					artistDetails &&
+	// 					(artistDetails.images[0]?.url
+	// 						? artistDetails.images[0]?.url
+	// 						: 'https://is5-ssl.mzstatic.com/image/thumb/Features115/v4/cc/62/0c/cc620ccb-c10d-c538-ce73-06cf185b3303/mzl.ynbraxen.jpg/800x800cc.jpg')
+	// 				}
+	// 				alt='artist'
+	// 			/>
+	// 		</div>
+	// 	)
+	// }
 
 	useEffect(() => {
 		// if (id) {
@@ -113,21 +110,21 @@ export function Track() {
 		// if (id) {
 		// 	getTrack().then(getTrackFeatures())
 		// }
-		getTrack()
+		if (!track) {
+			getTrack()
+		}
 		if (track) {
-			getArtistDetails()
-
 			getTrackFeatures()
+			getArtistDetails()
 		}
 	}, [])
 
-	if (!track && !artistDetails && !trackFeatures) return null
+	// if (!track && !artistDetails && !trackFeatures) return null
+	if (!track) return null
 
 	return (
 		<div className='track-main'>
-			{/* {ArtistImage} */}
-			<ArtistImage />
-			{/* <div className='track-card-cover'>
+			<div className='track-card-cover'>
 				<div
 					className='track-card'
 					style={{
@@ -166,8 +163,11 @@ export function Track() {
 					</div>
 				</div>
 			</div>
-			<div>
+			{/* <div>
 				<h3>{JSON.stringify(artistDetails)}</h3>
+			</div>
+			<div>
+				<h3>{JSON.stringify(track, null, 4)}</h3>
 			</div> */}
 		</div>
 	)
