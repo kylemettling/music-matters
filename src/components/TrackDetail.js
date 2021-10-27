@@ -5,6 +5,7 @@ import { useParams } from 'react-router'
 import { shazam, spotify } from './config/Connection'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import { useTrack } from './hooks'
+import { useAppState } from './../state'
 
 export function TrackDetail() {
 	const { id } = useParams()
@@ -16,16 +17,16 @@ export function TrackDetail() {
 	const [trackTitle, setTrackTitle] = useState('')
 	const [albumCover, setAlbumCover] = useState('')
 	const [artistCover, setArtistCover] = useState('')
-	const [
+	const {
 		songTitle,
 		songArtist,
 		// songLength,
 		// songYear,
 		songAlbum,
 		// artistImage,
-		// albumImage,
-		{ setTrackDetails },
-	] = useTrack()
+		albumCoverURL,
+		setTrackDetails,
+	} = useAppState()
 	const {
 		location: {
 			state: { token },
@@ -42,8 +43,9 @@ export function TrackDetail() {
 		}
 		const search = await axios.request(options)
 		const trackData = await search.data
-		console.log(trackData)
+		// console.log(trackData)
 		await setTrack(trackData)
+		await setTrackDetails(trackData)
 		// if (track) {
 		// getTrackFeatures()
 		// }
@@ -88,7 +90,8 @@ export function TrackDetail() {
 		const search = await axios.request(options).catch((err) => console.log(err))
 		const artistData = await search.data
 		// console.log('ARTIST DATA', artistData)
-		setArtistDetails(artistData)
+		await setArtistDetails(artistData)
+		// console.log(songTitle, songArtist, songAlbum, albumCoverURL)
 		// setArtistImageURL
 		// console.log('Artist detail ready:', track)
 		// try {
@@ -130,6 +133,16 @@ export function TrackDetail() {
 	// 	const songTitle = track.name
 	// }
 
+	const AlbumCover = () => {
+		return (
+			<img
+				style={{ height: '400px', width: '400px' }}
+				src={`${albumCoverURL}`}
+				alt={songAlbum + 'cover'}
+			/>
+		)
+	}
+
 	useEffect(() => {
 		// if (id) {
 		// 	getTrack()
@@ -142,14 +155,20 @@ export function TrackDetail() {
 			getTrack()
 		}
 		if (track) {
-			// setUseTrack(track)
 			getTrackFeatures()
 			getArtistDetails()
+			// setUseTrack(track)
 		}
 		if (track && artistDetails) {
 			setTrackDetails(track)
+			setAlbumCover(albumCoverURL)
+
+			console.log(songTitle, songArtist, songAlbum, albumCoverURL)
 			// console.log(trackTitle, trackArtist)
 		}
+		// if (albumCoverURL) {
+		// 	console.log(albumCoverURL)
+		// }
 	}, [])
 
 	if (!track && !artistDetails && !trackFeatures) return null
@@ -157,7 +176,19 @@ export function TrackDetail() {
 
 	return (
 		<div className='track-main'>
-			<span>{trackTitle}</span>
+			<div style={{ display: 'flex', flexDirection: 'column' }}>
+				<span>{songTitle}</span>
+				<span>{songArtist}</span>
+				<span>{songAlbum}</span>
+				{/* <span>huh{albumCoverURL}</span> */}
+				{/* <img
+					style={{ height: '400px', width: '400px' }}
+					src={albumCoverURL ? albumCoverURL[0].url : undefined}
+					alt={songAlbum + 'cover'}
+				/> */}
+
+				<AlbumCover />
+			</div>
 			{/* <span>{songAlbum}</span> */}
 			{/* <span>{songArtist}</span> */}
 			{/* <span>{albumCoverURL}</span>

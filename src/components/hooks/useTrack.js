@@ -2,30 +2,31 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 
 export const useTrack = () => {
-	const [track, setTrack] = useState({})
-	const [songTitle, setSongTitle] = useState({})
-	const [songArtist, setSongArtist] = useState({})
-	const [songAlbum, setSongAlbum] = useState({})
+	const [track, setTrack] = useState()
+	const [songTitle, setSongTitle] = useState('')
+	const [songArtist, setSongArtist] = useState('')
+	const [songAlbum, setSongAlbum] = useState('')
+	const [albumCoverURL, setAlbumCoverURL] = useState('')
 	// const [track, setTrack] = useState({})
 
-	const setTrackDetails = async (data) => {
-		await setTrack(data)
-		console.log(data)
-		await setSongTitle(track.name)
-		console.log(songTitle)
-		// setSongArtist(track.artists[0].name)
-		setSongAlbum(track.album.name)
+	const setTrackDetails = (data) => {
+		// console.log(data.album.images)
+		setTrack(data)
+		const artistName = data.artists[0].name
+		const albumCover = { ...data.album.images }
+		// console.log(albumCover)
+		setSongTitle(data.name)
+		setSongArtist(artistName)
+		setSongAlbum(data.album.name)
+		// console.log(songTitle, songAlbum, songArtist)
 		// const songArtist =
-		// const songAlbum = track.album.images[0].name
-		// return [songTitle, songArtist, songAlbum]
+		const albumURL = albumCover[0].url
+		console.log(albumCover[0].url)
+		setAlbumCoverURL(albumURL)
+		// return { songTitle, songArtist, songAlbum, albumCoverURL }
 	}
 
-	useEffect(() => {
-		// setTrack(track)
-		// setSongTitle(track.name)
-		// setSongAlbum(track.album.name)
-		// setSongArtist(track.artists[0].name)
-	}, [])
+	// useEffect(() => {}, [albumCoverURL])
 
-	return [songTitle, songArtist, songAlbum, { setTrackDetails }]
+	return { songTitle, songArtist, songAlbum, albumCoverURL, setTrackDetails }
 }
