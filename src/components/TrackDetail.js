@@ -12,10 +12,10 @@ export function TrackDetail() {
 	const [track, setTrack] = useState('')
 	const [trackFeatures, setTrackFeatures] = useState({})
 	const [artistDetails, setArtistDetails] = useState({})
-	const [trackAlbum, setTrackAlbum] = useState('')
-	const [trackArtist, setTrackArtist] = useState('')
-	const [trackTitle, setTrackTitle] = useState('')
-	const [albumCover, setAlbumCover] = useState('')
+	// const [trackAlbum, setTrackAlbum] = useState('')
+	// const [trackArtist, setTrackArtist] = useState('')
+	// const [trackTitle, setTrackTitle] = useState('')
+	// const [albumCover, setAlbumCover] = useState('')
 	const [artistCover, setArtistCover] = useState('')
 	const {
 		songTitle,
@@ -25,6 +25,7 @@ export function TrackDetail() {
 		songAlbum,
 		// artistImage,
 		albumCoverURL,
+		// artistCoverURL,
 		setTrackDetails,
 	} = useAppState()
 	const {
@@ -89,7 +90,8 @@ export function TrackDetail() {
 		// console.log(options)
 		const search = await axios.request(options).catch((err) => console.log(err))
 		const artistData = await search.data
-		// console.log('ARTIST DATA', artistData)
+		console.log('ARTIST DATA', artistData)
+		await setArtistCover(artistData.images[0].url)
 		await setArtistDetails(artistData)
 		// console.log(songTitle, songArtist, songAlbum, albumCoverURL)
 		// setArtistImageURL
@@ -133,15 +135,15 @@ export function TrackDetail() {
 	// 	const songTitle = track.name
 	// }
 
-	const AlbumCover = () => {
-		return (
-			<img
-				style={{ height: '400px', width: '400px' }}
-				src={`${albumCoverURL}`}
-				alt={songAlbum + 'cover'}
-			/>
-		)
-	}
+	// const AlbumCover = () => {
+	// 	return (
+	// 		<img
+	// 			style={{ height: '400px', width: '1000px' }}
+	// 			src={`${albumCoverURL}`}
+	// 			alt={songAlbum + 'cover'}
+	// 		/>
+	// 	)
+	// }
 
 	useEffect(() => {
 		// if (id) {
@@ -161,11 +163,14 @@ export function TrackDetail() {
 		}
 		if (track && artistDetails) {
 			setTrackDetails(track)
-			setAlbumCover(albumCoverURL)
+			// console.log(trackFeatures)
+			// console.log(artistDetails)
+			// console.log(artistDetails.images[0].url)
+			// setArtistCover(artistDetails?.images[0]?.url)
 
-			console.log(songTitle, songArtist, songAlbum, albumCoverURL)
 			// console.log(trackTitle, trackArtist)
 		}
+		// console.log(songTitle, songArtist, songAlbum, albumCoverURL)
 		// if (albumCoverURL) {
 		// 	console.log(albumCoverURL)
 		// }
@@ -175,71 +180,57 @@ export function TrackDetail() {
 	// if (!track ) return null
 
 	return (
-		<div className='track-main'>
-			<div style={{ display: 'flex', flexDirection: 'column' }}>
+		<div>
+			<div className='track-main'>
+				{/* <div style={{ display: 'flex', flexDirection: 'column' }}>
 				<span>{songTitle}</span>
 				<span>{songArtist}</span>
 				<span>{songAlbum}</span>
-				{/* <span>huh{albumCoverURL}</span> */}
-				{/* <img
-					style={{ height: '400px', width: '400px' }}
-					src={albumCoverURL ? albumCoverURL[0].url : undefined}
-					alt={songAlbum + 'cover'}
-				/> */}
+
 
 				<AlbumCover />
-			</div>
-			{/* <span>{songAlbum}</span> */}
-			{/* <span>{songArtist}</span> */}
-			{/* <span>{albumCoverURL}</span>
+			</div> */}
+				{/* <span>{songAlbum}</span> */}
+				{/* <span>{songArtist}</span> */}
+				{/* <span>{albumCoverURL}</span>
 			<span>{artistImageURL}</span> */}
-			{/* <div className='track-card-cover'>
-				<div
-					className='track-card'
-					style={{
-						backgroundImage: `url(${
-							artistDetails.images[0].url ? artistDetails.images[0].url : null
-						})`,
-					}}
-				>
-					<div className='track-track-details'>
-						<div className='track-text-con'>
-							<h2>
-								<span className='track-text bump-text-track'>{track.name}</span>
-							</h2>
+				<div className='track-card-cover'>
+					<div
+						className='track-card'
+						style={{
+							backgroundImage: `url(${artistCover})`,
+						}}
+					>
+						<div className='track-track-details'>
+							<div className='track-text-con'>
+								<h2>
+									<span className='track-text bump-text-track'>
+										{songTitle}
+									</span>
+								</h2>
+							</div>
+							<div className='track-text-con'>
+								<h3 className='subtitle'>
+									<span className='track-text track bump-text'>
+										{songArtist}
+									</span>
+								</h3>
+							</div>
 						</div>
-						<div className='track-text-con'>
-							<h3 className='subtitle'>
-								<span className='track-text track bump-text'>
-									{track.artists[0]?.name}
-								</span>
-							</h3>
+						<div className='track-album-details'>
+							<div className='track-text'>
+								<img
+									className='album-cover'
+									src={albumCoverURL}
+									alt={[songAlbum] + ' cover'}
+								></img>
+							</div>
+							<div className='album-text-con'>{songAlbum}</div>
 						</div>
-					</div>
-					<div className='track-album-details'>
-						<div className='track-text'>
-							<img
-								className='album-cover'
-								src={
-									track.album.images[0]?.url
-										? track.album.images[0]?.url
-										: 'https://is5-ssl.mzstatic.com/image/thumb/Features115/v4/cc/62/0c/cc620ccb-c10d-c538-ce73-06cf185b3303/mzl.ynbraxen.jpg/800x800cc.jpg'
-								}
-								alt={[track.name] + ' cover'}
-							></img>
-						</div>
-						<div className='album-text-con'></div>
 					</div>
 				</div>
-			</div> */}
+			</div>
+			<div>{JSON.stringify(trackFeatures)}</div>
 		</div>
 	)
-}
-{
-	/* <div>
-	<h3>{JSON.stringify(artistDetails)}</h3>
-</div>
-<div>
-	<h3>{JSON.stringify(track, null, 4)}</h3>
-</div> */
 }
