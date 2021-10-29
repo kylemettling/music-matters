@@ -90,3 +90,6 @@ h3 > .track-text.track {
 .bump-text {
 	padding: 1px;
 }
+.audio-feautres {
+	display: flex;
+}

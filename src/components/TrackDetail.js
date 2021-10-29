@@ -65,7 +65,7 @@ export function TrackDetail() {
 		}
 		const search = await axios.request(options).catch((err) => console.log(err))
 		const featureData = await search.data
-		setTrackFeatures(featureData)
+		await setTrackFeatures(featureData)
 		// console.log('Track features ready:', featureData)
 		// try {
 		// 	const search = await axios.request(options)
@@ -90,9 +90,9 @@ export function TrackDetail() {
 		// console.log(options)
 		const search = await axios.request(options).catch((err) => console.log(err))
 		const artistData = await search.data
-		console.log('ARTIST DATA', artistData)
-		await setArtistCover(artistData.images[0].url)
-		await setArtistDetails(artistData)
+		// console.log('ARTIST DATA', artistData.images[0].url)
+		setArtistDetails(artistData)
+		setArtistCover(artistDetails.images[0].url)
 		// console.log(songTitle, songArtist, songAlbum, albumCoverURL)
 		// setArtistImageURL
 		// console.log('Artist detail ready:', track)
@@ -105,69 +105,21 @@ export function TrackDetail() {
 		// }
 	}
 
-	// const ArtistBackground = () => {
-	// 	return (
-	// 		<div >
-	// 			<img
-	// 				style={{ height: '400px' }}
-	// 				src={
-	// 					artistDetails &&
-	// 					(artistDetails.images[0]?.url
-	// 						? artistDetails.images[0]?.url
-	// 						: 'https://is5-ssl.mzstatic.com/image/thumb/Features115/v4/cc/62/0c/cc620ccb-c10d-c538-ce73-06cf185b3303/mzl.ynbraxen.jpg/800x800cc.jpg')
-	// 				}
-	// 				alt='artist'
-	// 			/>
-	// 		</div>
-	// 	)
-	// }
-	// function setTrackDetails() {
-	// 	setTrackTitle(track.name)
-	// 	setTrackAlbum(track.album.name)
-	// 	setTrackArtist(track.artists[0]?.name)
-	// 	setAlbumCover(track.album.images[0]?.url)
-	// 	console.log(trackTitle, trackAlbum, trackArtist)
-	// 	setArtistCover(artistDetails.images[0]?.url)
-	// 	const songArtist = track.artists[0]?.name || ''
-	// 	const songAlbum = track.album.name || ''
-	// 	const albumCoverURL = track.album.images[0]?.url || ''
-	// 	const artistImageURL = artistDetails.images[0]?.url || ''
-	// 	const songTitle = track.name
-	// }
-
-	// const AlbumCover = () => {
-	// 	return (
-	// 		<img
-	// 			style={{ height: '400px', width: '1000px' }}
-	// 			src={`${albumCoverURL}`}
-	// 			alt={songAlbum + 'cover'}
-	// 		/>
-	// 	)
-	// }
-
 	useEffect(() => {
-		// if (id) {
-		// 	getTrack()
-		// }
-		// Promise.all([getTrack(), getTrackFeatures(), getArtistDetails()])
-		// if (id) {
-		// 	getTrack().then(getTrackFeatures())
-		// }
 		if (!track) {
 			getTrack()
 		}
 		if (track) {
 			getTrackFeatures()
 			getArtistDetails()
+			setTrackDetails(track)
 			// setUseTrack(track)
 		}
 		if (track && artistDetails) {
-			setTrackDetails(track)
 			// console.log(trackFeatures)
 			// console.log(artistDetails)
 			// console.log(artistDetails.images[0].url)
 			// setArtistCover(artistDetails?.images[0]?.url)
-
 			// console.log(trackTitle, trackArtist)
 		}
 		// console.log(songTitle, songArtist, songAlbum, albumCoverURL)
@@ -230,7 +182,7 @@ export function TrackDetail() {
 					</div>
 				</div>
 			</div>
-			<div>{JSON.stringify(trackFeatures)}</div>
+			<div className='audio-features'>{JSON.stringify(trackFeatures)}</div>
 		</div>
 	)
 }
