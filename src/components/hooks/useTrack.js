@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useEffect } from 'react'
+import axios from 'axios'
 
 export const useTrack = () => {
 	const [track, setTrack] = useState()
@@ -10,7 +10,7 @@ export const useTrack = () => {
 	const [artistCoverURL, setArtistCoverURL] = useState('')
 	// const [track, setTrack] = useState({})
 
-	const setTrackDetails = (data) => {
+	const setTrackDetails = (data, token) => {
 		// console.log(data.album.images)
 		setTrack(data)
 		const artistName = data.artists[0].name
@@ -25,6 +25,28 @@ export const useTrack = () => {
 		// const albumURL = albumCover
 		// console.log(albumCover[0].url)
 		setAlbumCoverURL(albumCover)
+
+		const getArtistCoverURL = (data) => {
+			const options = {
+				method: 'GET',
+				url: data.artists[0].url,
+				headers: {
+					Authorization: 'Bearer ' + token,
+				},
+			}
+			console.log('OPTIONS: ', options)
+			const fetchArtistDetails = async () => {
+				const search = await axios
+					.request(options)
+					.catch((err) => console.log(err))
+				const artistData = await search.data
+				const artistCover = artistData.images[0]?.url
+				console.log(artistCover)
+				setArtistCoverURL(artistCover)
+			}
+			fetchArtistDetails()
+		}
+		getArtistCoverURL(data)
 		// setArtistCoverURL(artistCover)
 		// return { songTitle, songArtist, songAlbum, albumCoverURL }
 	}
@@ -36,7 +58,7 @@ export const useTrack = () => {
 		songArtist,
 		songAlbum,
 		albumCoverURL,
-		// artistCoverURL,
+		artistCoverURL,
 		setTrackDetails,
 	}
 }
