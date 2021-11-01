@@ -20,8 +20,8 @@ export default function Search() {
 	// const [token, { refreshToken, getStoredToken }] = useSpotifyToken()
 	const { token, refreshToken, getStoredToken } = useAppState()
 
-	const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID
-	const clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
+	// const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID
+	// const clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
 
 	async function getSpotifySearchData() {
 		// if (!spotifyToken) {
@@ -58,7 +58,7 @@ export default function Search() {
 	return (
 		<Fragment>
 			<div className='searchCon'>
-				<h2 className='search-text'>What song are you playing?</h2>
+				<h2 className='search-text'>What song is playing?</h2>
 				<div className='search'>
 					<input
 						className='searchInput'
