@@ -3,6 +3,10 @@
   margin: 0;
   padding: 0;
 }
+body {
+  background-image: linear-gradient(#262833, #262733);
+  color: white;
+}
 
 .App {
   text-align: center;
