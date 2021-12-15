@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { spotify } from './config/Connection'
 import { Result } from './Result'
 import { Track } from './Track'
 
-export default function Results({ resultList, searchName, searchToggle }) {
+export default function Results({
+	resultList,
+	searchName,
+	searchToggle,
+	spotifyToken,
+}) {
 	const [tracks, setTracks] = useState([])
 	const [artists, setArtists] = useState([])
 
@@ -25,7 +31,12 @@ export default function Results({ resultList, searchName, searchToggle }) {
 	return (
 		<React.Fragment>
 			<div className='resultCon'>
-				<Result results={tracks} type='track' search={searchToggle} />
+				<Result
+					results={tracks}
+					spotifytoken={spotifyToken}
+					type='track'
+					search={searchToggle}
+				/>
 				{/* <Result results={tracks} type="track" search={searchToggle} /> */}
 				{/* <Result results={artists} type="artist" search={searchToggle} /> */}
 			</div>

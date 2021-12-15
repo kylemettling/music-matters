@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 // import { Track } from './Track'
 
-export function Result({ results, type, searchToggle }) {
+export function Result({ results, type, searchToggle, spotifyToken }) {
 	const [data, setData] = useState(false)
 	useEffect(() => {
 		// console.log(results, data)
@@ -29,19 +29,32 @@ export function Result({ results, type, searchToggle }) {
 								{/* <li className='result-item' key={i}> */}
 								<div className='result-item'>
 									<div className='name-con'>
-										<h3 className='result-title'>
-											<Link
-												to={`/${type}/${hit.key || hit.id}`}
-												track-href={hit.href}
-											>
-												{hit.title || hit.name}
-											</Link>
-										</h3>
-										<h4 className='result-subtitle'>
-											<Link to={`/artist/${hit.key || hit.artists[0].id}`}>
-												{hit.artists[0].name}
-											</Link>
-										</h4>
+										<div className='name-artist'>
+											<h3 className='result-title'>
+												<Link
+													to={`/${type}/${hit.key || hit.id}`}
+													track-href={hit.href}
+													spotifytoken={spotifyToken}
+												>
+													{hit.title || hit.name}
+												</Link>
+											</h3>
+											<h4 className='result-subtitle'>
+												<Link to={`/artist/${hit.key || hit.artists[0].id}`}>
+													{hit.artists[0].name}
+												</Link>
+											</h4>
+										</div>
+										<div className='detail-con'>
+											<span className='detail-release'>
+												{hit.album.release_date.split('-')[0]}
+											</span>
+											<span>
+												{/* {new Date(hit.duration_ms).getTime()} */}
+												{new Date(hit.duration_ms).getMinutes()}m
+												{new Date(hit.duration_ms).getSeconds()}s
+											</span>
+										</div>
 									</div>{' '}
 									<div>
 										{/* <span className='minutes'> </span>
@@ -69,16 +82,7 @@ export function Result({ results, type, searchToggle }) {
 										/>
 									</Link>
 								</div>
-								<div className='detail-con'>
-									<span className='detail-release'>
-										{hit.album.release_date.split('-')[0]}
-									</span>
-									<span>
-										{/* {new Date(hit.duration_ms).getTime()} */}
-										{new Date(hit.duration_ms).getMinutes()}m
-										{new Date(hit.duration_ms).getSeconds()}s
-									</span>
-								</div>
+
 								{/* </li> */}
 							</div>
 						</li>

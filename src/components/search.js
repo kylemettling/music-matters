@@ -5,7 +5,7 @@ import Results from './results'
 import { shazam, spotify } from './config/Connection'
 
 export default function Search() {
-	const [artistRequest, setArtistRequest] = useState('synchronicity')
+	// const [artistRequest, setArtistRequest] = useState("synchronicity");
 
 	const [searchResult, setSearchResult] = useState([])
 	const [searchToggle, setSearchToggle] = useState(false)
@@ -51,11 +51,6 @@ export default function Search() {
 				})
 				// getSpotifySearchData()
 
-				if (!res) {
-					localStorage.removeItem('spotifyToken')
-					getSpotifyToken()
-				}
-
 				localStorage.setItem('spotifyToken', res.data.access_token)
 				setSpotifyToken(res.data.access_token)
 			} catch (err) {
@@ -64,16 +59,6 @@ export default function Search() {
 		}
 	}
 	async function getSpotifySearchData() {
-		//  {
-		getSpotifyToken()
-		// 	console.log('TOKEN TIME!', spotifyToken)
-		// }
-		// console.log("token", spotifyToken);
-		// const title = "Synchronicity II";
-		// const artistData = "The Police";
-		// ${artistRequest ? artistRequest + '%20artist:' : ''}
-		console.log(spotifyToken, searchQuery, optionState)
-		// try {
 		const res = await axios(
 			`https://api.spotify.com/v1/search?q=${searchQuery}&type=${optionState}`,
 			{
@@ -85,88 +70,30 @@ export default function Search() {
 		).catch((err) => {
 			console.log(err)
 		})
+		if (!res) {
+			localStorage.removeItem('spotifyToken')
+			getSpotifyToken()
+		}
 
-		// getSpotifyToken()
-
-		// .then((data) => {
-		// 	if (!data) {
-		// 		localStorage.removeItem('spotifyToken')
-		// 		getSpotifyToken()
-		// 	}
-		// })
-
-		// setSpotifySearchData(res.data)
-		setSearchResult(res.data)
 		setSearchToggle(true)
-
-		// } catch (err) {
-		// console.log(res)
-
-		// console.log(err)
-		// }
-
-		// try {
-		//   const search = await axios.request(options);
-		//   console.log(search);
-		//   setResult(search);
-		//   setSearchToggle(true);
-		// } catch (err) {
-		//   console.error(err);
-		// }
+		setSearchResult(res.data)
 	}
 
-	// function getStoredToken() {
-	//   const
-	// }
-	// async function getResults(e) {
-	// console.log(artistRequest)
-
-	// Shazam search options
-	// const options = {
-	//   method: "GET",
-	//   url: shazam.urls.search,
-	//   params: {
-	//     term: artistRequest,
-	//     locale: "en-US",
-	//     offset: "0",
-	//     limit: "5",
-	//   },
-	//   headers: {
-	//     "x-rapidapi-host": `${shazam.host}`,
-	//     "x-rapidapi-key": `${shazam.key}`,
-	//   },
-	// };
-
-	// Spotify search options
-	// const options = {
-	//   method: "GET",
-	//   url: spotify.urls.search,
-	//   params: {
-	//     term: artistRequest,
-	//     locale: "en-US",
-	//     offset: "0",
-	//     limit: "5",
-	//   },
-	//   headers: {
-	//     "x-rapidapi-host": `${shazam.host}`,
-	//     "x-rapidapi-key": `${shazam.key}`,
-	//   },
-	// };
-
 	useEffect(() => {
-		// getStoredToken()
+		// if no token value, get localStorage item or call the getSpotifyToken function
+		if (!spotifyToken) {
+			setSpotifyToken(localStorage.getItem('spotifyToken') || getSpotifyToken)
+			console.log(spotifyToken)
+		}
 
-		setSpotifyToken(localStorage.getItem('spotifyToken') || getSpotifyToken())
-		console.log(spotifyToken)
+		// set the value to state for select option
 		setOptionState(optionState)
-		// console.log('TOKEN ON LOAD:', spotifyToken, optionState)
-		// console.log(spotifyToken)
 	}, [spotifyToken, optionState])
 
 	return (
 		<Fragment>
 			<div className='searchCon'>
-				<h2>What song are you playing?</h2>
+				<h2 className='search-text'>What song are you playing?</h2>
 				<div className='search'>
 					<input
 						className='searchInput'
@@ -197,6 +124,7 @@ export default function Search() {
 				<Results
 					resultList={searchResult}
 					// searchName={artistRequest}
+					spotifyToken={spotifyToken}
 					searchToggle={searchToggle}
 				/>
 			</div>
