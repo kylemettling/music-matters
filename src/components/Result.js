@@ -1,94 +1,104 @@
-import React, { Fragment, useState } from 'react'
-import './results.css'
-import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Fragment, useState } from "react";
+import "./results.css";
+import { useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 // import { Track } from './Track'
 
-export function Result({ results, type, searchToggle, spotifyToken }) {
-	const [data, setData] = useState(false)
-	useEffect(() => {
-		// console.log(results, data)
-		setData(true)
-	}, [results, data, searchToggle])
+export function Result({ results, type, searchToggle, token }) {
+  const [data, setData] = useState(false);
+  useEffect(() => {
+    // console.log(results, data)
+    // console.log(token);
+    setData(true);
+  }, [results, data, searchToggle, token]);
 
-	function togglePlay() {}
+  return (
+    <div>
+      <ul className="item-con">
+        {results &&
+          results.map((hit, i) => (
+            <li key={i}>
+              <div className="item">
+                <span
+                  key={hit.key}
+                  className={type === "track" ? "track-label" : "artist-label"}
+                >
+                  {type === "track" ? "Tracks" : "Artists"}
+                </span>
+                {/* <li className='result-item' key={i}> */}
+                <div className="result-item">
+                  <div className="name-con">
+                    <div className="name-artist">
+                      <h3 className="result-title">
+                        <Link
+                          to={{
+                            pathname: `/${type}/${hit.key || hit.id}`,
+                            state: { token: token },
+                          }}
 
-	return (
-		<div>
-			<ul className='item-con'>
-				{results &&
-					results.map((hit, i) => (
-						<li key={i}>
-							<div className='item'>
-								<span
-									key={hit.key}
-									className={type === 'track' ? 'track-label' : 'artist-label'}
-								>
-									{type === 'track' ? 'Tracks' : 'Artists'}
-								</span>
-								{/* <li className='result-item' key={i}> */}
-								<div className='result-item'>
-									<div className='name-con'>
-										<div className='name-artist'>
-											<h3 className='result-title'>
-												<Link
-													to={`/${type}/${hit.key || hit.id}`}
-													track-href={hit.href}
-													spotifytoken={spotifyToken}
-												>
-													{hit.title || hit.name}
-												</Link>
-											</h3>
-											<h4 className='result-subtitle'>
-												<Link to={`/artist/${hit.key || hit.artists[0].id}`}>
-													{hit.artists[0].name}
-												</Link>
-											</h4>
-										</div>
-										<div className='detail-con'>
-											<span className='detail-release'>
-												{hit.album.release_date.split('-')[0]}
-											</span>
-											<span>
-												{/* {new Date(hit.duration_ms).getTime()} */}
-												{new Date(hit.duration_ms).getMinutes()}m
-												{new Date(hit.duration_ms).getSeconds()}s
-											</span>
-										</div>
-									</div>{' '}
-									<div>
-										{/* <span className='minutes'> </span>
+                          // token={spotifyToken}
+                        >
+                          {hit.title || hit.name}
+                        </Link>
+                      </h3>
+                      <h4 className="result-subtitle">
+                        <Link
+                          to={{
+                            pathname: `/${type}/${
+                              hit.key || hit.artists[0].id
+                            }`,
+                            state: { token: token },
+                          }}
+                          // token={token}
+                        >
+                          {hit.artists[0].name}
+                        </Link>
+                      </h4>
+                    </div>
+                    <div className="detail-con">
+                      <span className="detail-release">
+                        {hit.album.release_date.split("-")[0]}
+                      </span>
+                      <span>
+                        {/* {new Date(hit.duration_ms).getTime()} */}
+                        {new Date(hit.duration_ms).getMinutes()}m
+                        {new Date(hit.duration_ms).getSeconds()}s
+                      </span>
+                    </div>
+                  </div>{" "}
+                  <div>
+                    {/* <span className='minutes'> </span>
 										<span className='seconds'> </span> */}
-									</div>
-									<Link to={`/album/${hit.key || hit.album.id}`}>
-										{/* {hit.artists[0].name} */}
-										<img
-											className='result-cover'
-											// Shazam image resolver
-											// src={
-											// 	hit.images?.coverarthq
-											// 		? hit.images?.coverarthq ||
-											// 		  hit.artists?.images.background
-											// 		: hit.avatar
-											// 		? hit.avatar
-											// 		: 'https://is5-ssl.mzstatic.com/image/thumb/Features115/v4/cc/62/0c/cc620ccb-c10d-c538-ce73-06cf185b3303/mzl.ynbraxen.jpg/800x800cc.jpg'
-											// }
+                  </div>
+                  <Link to={`/album/${hit.key || hit.album.id}`}>
+                    {/* {hit.artists[0].name} */}
+                    <img
+                      className="result-cover"
+                      // Shazam image resolver
+                      // src={
+                      // 	hit.images?.coverarthq
+                      // 		? hit.images?.coverarthq ||
+                      // 		  hit.artists?.images.background
+                      // 		: hit.avatar
+                      // 		? hit.avatar
+                      // 		: 'https://is5-ssl.mzstatic.com/image/thumb/Features115/v4/cc/62/0c/cc620ccb-c10d-c538-ce73-06cf185b3303/mzl.ynbraxen.jpg/800x800cc.jpg'
+                      // }
 
-											src={
-												hit.album.images[0].url ||
-												'https://is5-ssl.mzstatic.com/image/thumb/Features115/v4/cc/62/0c/cc620ccb-c10d-c538-ce73-06cf185b3303/mzl.ynbraxen.jpg/800x800cc.jpg'
-											}
-											alt={[hit.title || hit?.name] + ' cover'}
-										/>
-									</Link>
-								</div>
+                      src={
+                        hit.album.images[0].url ||
+                        "https://is5-ssl.mzstatic.com/image/thumb/Features115/v4/cc/62/0c/cc620ccb-c10d-c538-ce73-06cf185b3303/mzl.ynbraxen.jpg/800x800cc.jpg"
+                      }
+                      alt={[hit.title || hit?.name] + " cover"}
+                    />
+                  </Link>
+                </div>
 
-								{/* </li> */}
-							</div>
-						</li>
-					))}
-			</ul>
-			<div className='fill'></div>
-		</div>
-	)
+                {/* </li> */}
+              </div>
+            </li>
+          ))}
+      </ul>
+      <div className="fill"></div>
+    </div>
+  );
 }
