@@ -3,17 +3,20 @@ import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import Results from "./results";
 import { shazam, spotify } from "./config/Connection";
-import { getSpotifyToken } from "./SpotifyToken";
+import { useSpotifyToken } from "./useSpotifyToken";
 
 export default function Search() {
   const [artistRequest, setArtistRequest] = useState("synchronicity");
 
   const [searchResult, setSearchResult] = useState([]);
   const [searchToggle, setSearchToggle] = useState(false);
-  const [spotifySearchData, setSpotifySearchData] = useState("no data");
-  const [spotifyToken, setSpotifyToken] = useState("");
+  // const [spotifySearchData, setSpotifySearchData] = useState("no data");
+  // const [spotifyToken, setSpotifyToken] = useState("");
   const [optionState, setOptionState] = useState("track");
   const [searchQuery, setSearchQuery] = useState("Synchronicity II");
+
+  // token management
+  const [token, { getNewToken, tokenToggle }] = useSpotifyToken();
 
   const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
   const clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
@@ -45,34 +48,34 @@ export default function Search() {
       `https://api.spotify.com/v1/search?q=${searchQuery}&type=${optionState}`,
       {
         headers: {
-          Authorization: "Bearer " + spotifyToken,
+          Authorization: "Bearer " + token,
         },
         method: "GET",
       }
     ).catch((err) => {
       console.log(err);
     });
-    // if (!res) {
-    //   localStorage.removeItem("spotifyToken");
-    // }
-    setSearchToggle(true);
+    if (!res) {
+      // localStorage.removeItem("spotifyToken");
+      // const token = getSpotifyToken();
+      getNewToken();
+      // localStorage.addItem("spotifyToken", token);
+      // setSpotifyToken(token);
+      // console.log(token);
+      getSpotifySearchData();
+    }
+    // setSearchToggle(true);
     setSearchResult(res.data);
+    tokenToggle();
   }
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("spotifyToken");
-    // console.log(storedToken);
-    if (!storedToken) {
-      // const getToken = async () => {
-      const token = getSpotifyToken();
-      // console.log("TOKEN?", token);
-      // return token;
-
-      setSpotifyToken(token);
-    } else {
-      setSpotifyToken(storedToken);
+    if (!token) {
+      const storedToken = localStorage.getItem("spotifyToken") || "";
+      console.log("stored?: ", storedToken);
+      // setSpotifyToken(storedToken);
     }
-    console.log("TOKEN IN SEARCH", spotifyToken);
+    // console.log(spotifyToken);
     // setSpotifyToken(localStorage.getItem("spotifyToken"));
     // console.log(spotifyToken);
     setOptionState(optionState);
@@ -113,7 +116,7 @@ export default function Search() {
           resultList={searchResult}
           // searchName={artistRequest}
           searchToggle={searchToggle}
-          token={spotifyToken}
+          token={token}
         />
       </div>
     </Fragment>

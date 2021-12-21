@@ -7,7 +7,7 @@ import { Track } from "./components/Track.js";
 import { Artist } from "./components/Artist.js";
 import { Chordbook } from "./components/Chordbook.js";
 import "./App.css";
-import { SpotifyToken } from "./components/SpotifyToken.js";
+// import { SpotifyToken } from "./components/SpotifyToken.js";
 
 function App() {
   return (
