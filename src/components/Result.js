@@ -5,12 +5,12 @@ import { Link, useHistory } from "react-router-dom";
 // import { Track } from './Track'
 
 export function Result({ results, type, searchToggle, token }) {
-  const [data, setData] = useState(false);
+  // const [data, setData] = useState(false);
   useEffect(() => {
     // console.log(results, data)
     // console.log(token);
-    setData(true);
-  }, [results, data, searchToggle, token]);
+    // setData(true);
+  }, [results, searchToggle, token]);
 
   return (
     <div>

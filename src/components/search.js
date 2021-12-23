@@ -16,34 +16,18 @@ export default function Search() {
   const [searchQuery, setSearchQuery] = useState("Synchronicity II");
 
   // token management
-  const [token, { getNewToken, tokenToggle }] = useSpotifyToken();
+  const [token, { refreshToken, getStoredToken }] = useSpotifyToken();
 
   const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
   const clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
 
-  // async function getSpotifyToken() {
-  //   try {
-  //     const res = await axios("https://accounts.spotify.com/api/token", {
-  //       headers: {
-  //         "Content-Type": "application/x-www-form-urlencoded",
-  //         Authorization: "Basic " + btoa(clientId + ":" + clientSecret),
-  //       },
-  //       data: "grant_type=client_credentials",
-  //       method: "POST",
-  //     });
-
-  //     localStorage.setItem("spotifyToken", res.data.access_token);
-  //     setSpotifyToken(res.data.access_token);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
   async function getSpotifySearchData() {
     // if (!spotifyToken) {
     //   getSpotifyToken();
     // }
     // console.log(spotifyToken, searchQuery, optionState);
-    // console.log(spotifyToken);
+    // console.log(token);
+    console.log(searchQuery, optionState);
     const res = await axios(
       `https://api.spotify.com/v1/search?q=${searchQuery}&type=${optionState}`,
       {
@@ -56,28 +40,16 @@ export default function Search() {
       console.log(err);
     });
     if (!res) {
-      // localStorage.removeItem("spotifyToken");
-      // const token = getSpotifyToken();
-      getNewToken();
-      // localStorage.addItem("spotifyToken", token);
-      // setSpotifyToken(token);
-      // console.log(token);
+      refreshToken();
       getSpotifySearchData();
     }
-    // setSearchToggle(true);
+    setSearchToggle(true);
     setSearchResult(res.data);
-    tokenToggle();
+    // tokenToggle();
   }
 
   useEffect(() => {
-    if (!token) {
-      const storedToken = localStorage.getItem("spotifyToken") || "";
-      console.log("stored?: ", storedToken);
-      // setSpotifyToken(storedToken);
-    }
-    // console.log(spotifyToken);
-    // setSpotifyToken(localStorage.getItem("spotifyToken"));
-    // console.log(spotifyToken);
+    getStoredToken();
     setOptionState(optionState);
   }, [optionState]);
 

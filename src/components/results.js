@@ -15,9 +15,9 @@ export default function Results({
     // console.log(token);
     if (searchToggle) {
       // const data = resultList['data']
-      console.log(token);
+      // console.log(token);
       const data = resultList["tracks"]?.items || [];
-      console.log("search data:", data);
+      // console.log("search data:", data);
       setTracks(data);
       // const resTracks = [...data['tracks']['hits']].map(({ track: res }) => res)
       // const resArtists = data['artists']['hits'].map(({ artist: res }) => res)
