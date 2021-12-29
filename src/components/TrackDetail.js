@@ -13,6 +13,7 @@ export function TrackDetail() {
   const [trackFeatures, setTrackFeatures] = useState({});
   const [artistURL, setArtistURL] = useState("");
   const [artistCover, setArtistCover] = useState("");
+  const [songLyrics, setSongLyrics] = useState("");
   const {
     songTitle,
     songArtist,
@@ -68,6 +69,12 @@ export function TrackDetail() {
     fetchTrackFeatures();
   }
 
+  // GET track lyrics (Shazam only)
+
+  async function getTrackLyrics() {
+    // setSongLyrics(trackData)
+  }
+
   useEffect(() => {
     getTrack();
     getTrackFeatures();
@@ -116,7 +123,9 @@ export function TrackDetail() {
         </div>
       </div>
       <div className="audio-features">
-        {JSON.stringify(trackFeatures, null, 4)}
+        {/* <div>{JSON.stringify(trackFeatures, null, 4)}</div> */}
+        <span className="track-key">Key: {trackFeatures.key}</span>
+        <span className="track-mode">Mode: {trackFeatures.mode}</span>
       </div>
     </div>
   );
