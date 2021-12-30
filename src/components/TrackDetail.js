@@ -47,7 +47,9 @@ export function TrackDetail() {
       },
     };
     const fetchTrack = async () => {
-      const search = await axios.request(options);
+      const search = await axios
+        .request(options)
+        .catch((err) => console.log(err));
       const trackData = await search.data;
       const url = trackData.artists[0].href;
       getArtistCoverURL(url, token);
@@ -78,7 +80,23 @@ export function TrackDetail() {
   // GET track lyrics (Shazam only)
 
   async function getTrackLyrics() {
-    // setSongLyrics(trackData)
+    var options = {
+      method: "GET",
+      url: shazam.urls.search,
+      params: { term: songTitle, locale: "en-US", offset: "0", limit: "1" },
+      headers: {
+        "x-rapidapi-host": shazam.host,
+        "x-rapidapi-key": shazam.key,
+      },
+    };
+
+    const search = await axios
+      .request(options)
+      .catch((err) => console.log(err));
+    const lyrics = await search;
+    const searchedSongKey = lyrics.data.tracks.hits[0].track.key;
+
+    // console.log(lyrics.data.tracks.hits[0].track.key);
   }
 
   const onRefChange = useCallback((node) => {
@@ -94,6 +112,7 @@ export function TrackDetail() {
   useEffect(() => {
     getTrack();
     getTrackFeatures();
+    getTrackLyrics();
     if (artistImageDimensions.height) {
       console.log(artistImageDimensions);
     }
@@ -105,12 +124,22 @@ export function TrackDetail() {
   return (
     <div>
       <div className="track-main">
-        <div className="track-card-cover">
+        <div
+          className="track-card-cover"
+          style={
+            {
+              // height: `${artistImageDimensions.height}px`,
+              // width: `${artistImageDimensions.width}px`,
+            }
+          }
+        >
           <div
             className="track-card"
             ref={onRefChange}
             style={{
               backgroundImage: `url(${artistCoverURL})`,
+              // height: `${artistImageDimensions.height}px`,
+              // width: `${artistImageDimensions.width}px`,
             }}
           >
             <div className="track-track-details">

@@ -39,6 +39,7 @@ body {
   /* display: none; */
   width: 1000px;
   height: 600px;
+
   background-size: cover;
   justify-content: space-between;
   padding: 1.5%;
@@ -46,8 +47,10 @@ body {
 .track-card-cover {
   /* position: absolute; */
   background-size: cover;
-  height: 600px;
-  width: 1000px;
+  width: inherit;
+  height: inherit;
+  /* height: 600px; */
+  /* width: 1000px; */
   background-color: rgba(0, 0, 0, 0.55);
   z-index: 1;
 }
