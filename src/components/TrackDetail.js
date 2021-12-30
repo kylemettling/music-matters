@@ -1,6 +1,6 @@
 import axios from "axios";
 import "./track.css";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useParams } from "react-router";
 import { shazam, spotify } from "./config/Connection";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -31,7 +31,7 @@ export function TrackDetail() {
     getArtistCoverURL,
   } = useAppState();
 
-  const imageRef = useRef(null);
+  // const imageRef = useRef(null);
   const {
     location: {
       state: { token },
@@ -81,16 +81,23 @@ export function TrackDetail() {
     // setSongLyrics(trackData)
   }
 
+  const onRefChange = useCallback((node) => {
+    if (node != null) {
+      const height = node.offsetHeight;
+      const width = node.offsetWidth;
+      console.log(height, width);
+      setImageDimensions({ h: height, w: width });
+      // console.log(artistImageDimensions);
+      // console.log(node);
+    }
+  }, []);
   useEffect(() => {
     getTrack();
     getTrackFeatures();
-    if (artistCoverURL) {
-      const height = imageRef.current.offsetHeight;
-      const width = imageRef.current.offsetWidth;
-      setImageDimensions({ h: height, w: width });
+    if (artistImageDimensions.height) {
       console.log(artistImageDimensions);
     }
-  }, [imageRef]);
+  }, []);
 
   if (!track && !artistURL && !trackFeatures) return null;
   // if (!track ) return null
@@ -101,7 +108,7 @@ export function TrackDetail() {
         <div className="track-card-cover">
           <div
             className="track-card"
-            ref={imageRef}
+            ref={onRefChange}
             style={{
               backgroundImage: `url(${artistCoverURL})`,
             }}

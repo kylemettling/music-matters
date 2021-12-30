@@ -27,7 +27,7 @@ export const useTrack = () => {
         Authorization: "Bearer " + token,
       },
     };
-    console.log("OPTIONS: ", options);
+    // console.log("OPTIONS: ", options);
     const fetchArtistDetails = async () => {
       const search = await axios
         .request(options)
