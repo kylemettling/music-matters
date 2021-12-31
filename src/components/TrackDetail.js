@@ -13,11 +13,11 @@ export function TrackDetail() {
   const [trackFeatures, setTrackFeatures] = useState({});
   const [artistURL, setArtistURL] = useState("");
   const [artistCover, setArtistCover] = useState("");
-  const [songLyrics, setSongLyrics] = useState("");
   const [artistImageDimensions, setImageDimensions] = useState({
     h: null,
     w: null,
   });
+  const [songLyrics, setSongLyrics] = useState({ text: "", footer: "" });
   const {
     songTitle,
     songArtist,
@@ -80,42 +80,96 @@ export function TrackDetail() {
   // GET track lyrics (Shazam only)
 
   async function getTrackLyrics() {
-    var options = {
-      method: "GET",
-      url: shazam.urls.search,
-      params: { term: songTitle, locale: "en-US", offset: "0", limit: "1" },
-      headers: {
-        "x-rapidapi-host": shazam.host,
-        "x-rapidapi-key": shazam.key,
-      },
-    };
+    // let searchedSongKey;
 
-    const search = await axios
-      .request(options)
-      .catch((err) => console.log(err));
-    const lyrics = await search;
-    const searchedSongKey = lyrics.data.tracks.hits[0].track.key;
+    async function getSongId() {
+      // console.log(songTitle);
+      const options = {
+        method: "GET",
+        url: shazam.urls.search,
+        params: {
+          term: `${songTitle}`,
+          locale: "en-US",
+          offset: "0",
+          limit: "15  ",
+        },
+        headers: {
+          "x-rapidapi-host": shazam.host,
+          "x-rapidapi-key": shazam.key,
+        },
+      };
+      console.log(options);
+      // GET request for searching with songTitle to return key
+      const search = await axios
+        .request(options)
+        .then((res) => res.data)
+        .catch((err) => console.log(err));
 
-    // console.log(lyrics.data.tracks.hits[0].track.key);
+      console.log(search);
+      const results = search.tracks.hits;
+      // console.log(results);
+      const filteredRes = results.filter((song) =>
+        song?.track?.subtitle === songArtist ? song.track.key : null
+      );
+      console.log(filteredRes[0].track.key);
+      getSongLyrics(filteredRes[0].track.key);
+    }
+
+    getSongId();
+    // GET request using song key to Shazam for song get-details
+    async function getSongLyrics(songId) {
+      // console.log(songId);
+      const options = {
+        method: "GET",
+        url: shazam.urls.trackDetail,
+        params: { key: songId, locale: "en-US" },
+        headers: {
+          "x-rapidapi-host": shazam.host,
+          "x-rapidapi-key": shazam.key,
+        },
+      };
+      // console.log("options:", options);
+      const search = await axios
+        .request(options)
+        .catch((err) => console.log(err));
+      // .then((res) => {
+      //   console.log(res);
+      //   return res.data?.sections?.filter((section) =>
+      //     section?.type === "LYRICS"
+      //       ? section
+      //       : "Sorry, lyrics for this title are not presently available."
+      //   );
+      // });
+      const res = search.data.sections.filter(
+        (section) => section.type === "LYRICS"
+      )[0];
+      // console.log(sections[0].text);
+      // console.log(search);
+      setSongLyrics({
+        text:
+          res?.text ||
+          "Sorry, lyrics for this title are not presently available.",
+        footer: res?.footer,
+      });
+    }
   }
 
   const onRefChange = useCallback((node) => {
     if (node != null) {
       const height = node.offsetHeight;
       const width = node.offsetWidth;
-      console.log(height, width);
+      // console.log(height, width);
       setImageDimensions({ h: height, w: width });
-      // console.log(artistImageDimensions);
-      // console.log(node);
     }
   }, []);
   useEffect(() => {
+    // setSongLyrics({ text: "", footer: "" });
     getTrack();
     getTrackFeatures();
     getTrackLyrics();
-    if (artistImageDimensions.height) {
-      console.log(artistImageDimensions);
-    }
+    // if (artistImageDimensions.height) {
+    //   console.log(artistImageDimensions);
+    // }
   }, []);
 
   if (!track && !artistURL && !trackFeatures) return null;
@@ -175,6 +229,13 @@ export function TrackDetail() {
         {/* <div>{JSON.stringify(trackFeatures, null, 4)}</div> */}
         <span className="track-key">Key: {trackFeatures.key}</span>
         <span className="track-mode">Mode: {trackFeatures.mode}</span>
+        <div className="song-lyrics-con">
+          <div className="song-lyrics-text-con">
+            <p className="song-lyrics-text">
+              {JSON.stringify(songLyrics.text)}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
