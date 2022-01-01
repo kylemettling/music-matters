@@ -1,5 +1,7 @@
 import React, { createContext, useContext } from 'react'
 import { useSpotifyToken, useTrack } from '../components/hooks'
+import chordNotes from './scaleNotes'
+// import { chordNotes } from 'state'
 
 export const AppContext = createContext({})
 
@@ -10,7 +12,7 @@ export const PageWrapper = ({ children }) => {
 		songArtist,
 		songAlbum,
 		songKey,
-		songMode,
+		songKeyCenterQuality,
 		spotifySongId,
 		albumCoverURL,
 		artistCover,
@@ -18,6 +20,8 @@ export const PageWrapper = ({ children }) => {
 		isActiveTrack,
 		clearTrackData,
 	} = useTrack()
+	// const {chordNotes} = chordNotes
+	// const scaleNotes = chordNotes
 	return (
 		<AppContext.Provider
 			value={{
@@ -28,13 +32,14 @@ export const PageWrapper = ({ children }) => {
 				songArtist,
 				songAlbum,
 				songKey,
-				songMode,
+				songKeyCenterQuality,
 				spotifySongId,
 				albumCoverURL,
 				artistCover,
 				setTrack,
 				isActiveTrack,
 				clearTrackData,
+				chordNotes,
 				// setTrackFeatures,
 				// getArtistCoverURL,
 			}}

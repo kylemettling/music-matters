@@ -5,6 +5,7 @@ import Results from './results'
 import { shazam, spotify } from './config/Connection'
 import { useSpotifyToken } from './hooks'
 import { useAppState } from '../state'
+import chordNotes from './../state/scaleNotes'
 
 export default function Search() {
 	const [artistRequest, setArtistRequest] = useState('synchronicity')
@@ -18,13 +19,23 @@ export default function Search() {
 
 	// token management
 	// const [token, { refreshToken, getStoredToken }] = useSpotifyToken()
-	const { token, refreshToken, getStoredToken, isTrackActive, clearTrackData } =
-		useAppState()
+	const {
+		token,
+		refreshToken,
+		getStoredToken,
+		isTrackActive,
+		clearTrackData,
+		chordNotes,
+	} = useAppState()
 
 	// const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID
 	// const clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
 
-	async function getSpotifySearchData() {
+	async function getSpotifySearchData(e) {
+		console.log(token)
+		if (!token) {
+			refreshToken()
+		}
 		const res = await axios(
 			`https://api.spotify.com/v1/search?q=${searchQuery}&type=${optionState}`,
 			{
@@ -36,23 +47,24 @@ export default function Search() {
 		).catch((err) => {
 			console.log(err)
 		})
+		console.log(res)
 		if (!res) {
 			refreshToken()
 			getSpotifySearchData()
 		}
 		setSearchToggle(true)
 		setSearchResult(res.data)
-		// tokenToggle();
+		// tokenToggle()
 	}
 
 	useEffect(() => {
 		// setTrack({})
+		getStoredToken()
 		clearTrackData()
 		// console.log('Is track active?', isTrackActive)
 		// if (isTrackActive) {
 		// 	console.log('Active?', isTrackActive)
 		// }
-		getStoredToken()
 		setOptionState(optionState)
 	}, [optionState])
 
@@ -87,6 +99,13 @@ export default function Search() {
 						Fetch!
 					</button>
 				</div>
+				<pre>
+					{JSON.stringify(
+						chordNotes.filter((el) => el.root === 'F'),
+						null,
+						4
+					)}
+				</pre>
 				<Results
 					resultList={searchResult}
 					// searchName={artistRequest}
