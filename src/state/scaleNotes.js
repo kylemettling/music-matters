@@ -1,63 +1,56 @@
-const chordNotes = [
-	{
-		root: 'C',
+const scaleNotes = {
+	C: {
 		notes: ['C', 'D', 'E', 'F', 'G', 'A', 'B'],
 	},
-	{
-		root: 'C#',
+
+	'C#': {
 		notes: ['C#', 'D#', 'F', 'F#', 'G#', 'A#', 'C'],
 	},
-	{
-		root: 'Db',
+	Db: {
 		notes: ['Db', 'Eb', 'F', 'Gb', 'Ab', 'Bb', 'C'],
 	},
-	{
-		root: 'D',
+	D: {
 		notes: ['D', 'E', 'F#', 'G', 'A', 'B', 'C#'],
 	},
-	{
-		root: 'D#',
+	'D#': {
 		notes: ['D#', 'F', 'G', 'G#', 'A#', 'C', 'D'],
 	},
-	{
-		root: 'Eb',
+	Eb: {
 		notes: ['Eb', 'F', 'G', 'Ab', 'Bb', 'C', 'D'],
 	},
-	{
-		root: 'E',
+	E: {
 		notes: ['E', 'F#', 'G#', 'A', 'B', 'C#', 'D#'],
 	},
-	{
-		root: 'F',
+	F: {
 		notes: ['F', 'G', 'A', 'A#', 'C', 'D', 'E'],
 	},
-	{
-		root: 'F#',
+	'F#': {
 		notes: ['F#', 'G#', 'A#', 'B', 'C#', 'D#', 'F'],
 	},
-	{
-		root: 'G',
+	Gb: {
+		notes: ['Gb', 'Ab', 'Bb', 'B', 'Db', 'Eb', 'F'],
+	},
+	G: {
 		notes: ['G', 'A', 'B', 'C', 'D', 'E', 'F#'],
 	},
-	{
-		root: 'G#',
+	'G#': {
 		notes: ['G#', 'A#', 'C', 'C#', 'D#', 'F', 'G'],
 	},
-	{
-		root: 'A',
+	Ab: {
+		notes: ['Ab', 'Bb', 'C', 'Db', 'Eb', 'F', 'G'],
+	},
+	A: {
 		notes: ['A', 'B', 'C#', 'D', 'E', 'F#', 'G#'],
 	},
-	{
-		root: 'A#',
+	'A#': {
 		notes: ['A#', 'C', 'D', 'D#', 'F', 'G', 'A'],
 	},
-	{
-		root: 'Bb',
+	Bb: {
 		notes: ['Bb', 'C', 'D', 'Eb', 'F', 'G', 'A'],
 	},
-	{
-		root: 'B',
+	B: {
 		notes: ['B', 'C#', 'D#', 'E', 'F#', 'G#', 'A#'],
 	},
-]
-export default chordNotes
+}
+
+export default scaleNotes

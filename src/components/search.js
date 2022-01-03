@@ -25,7 +25,7 @@ export default function Search() {
 		getStoredToken,
 		isTrackActive,
 		clearTrackData,
-		chordNotes,
+		getScaleChords,
 	} = useAppState()
 
 	// const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID
@@ -99,13 +99,7 @@ export default function Search() {
 						Fetch!
 					</button>
 				</div>
-				<pre>
-					{JSON.stringify(
-						chordNotes.filter((el) => el.root === 'F'),
-						null,
-						4
-					)}
-				</pre>
+				<pre>{JSON.stringify(chordNotes['F'].notes, null, 4)}</pre>
 				<Results
 					resultList={searchResult}
 					// searchName={artistRequest}

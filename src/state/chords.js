@@ -1,9 +1,11 @@
 const data = [
-	{
-		id: 1,
-		keyCenter: 'C',
-		position: 1,
-	},
+	{ id: 1, root: 'A', type: 'min', position: 1 },
+	{ id: 2, root: 'B', type: 'dim', position: 2 },
+	{ id: 3, root: 'C#', type: 'maj', position: 3 },
+	{ id: 4, root: 'D', type: 'min', position: 4 },
+	{ id: 5, root: 'E', type: 'min', position: 5 },
+	{ id: 6, root: 'F#', type: 'maj', position: 6 },
+	{ id: 7, root: 'G#', type: 'maj', position: 7 },
 ]
 // [
 // 	{

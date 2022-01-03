@@ -12,7 +12,7 @@ import { useScript } from './components/hooks/useScript.js'
 // import { SpotifyToken } from "./components/SpotifyToken.js";
 
 function App() {
-	useScript('https://www.scales-chords.com/api/scales-chords-api.js')
+	// useScript('https://www.scales-chords.com/api/scales-chords-api.js')
 
 	return (
 		<PageWrapper>
@@ -29,7 +29,7 @@ function App() {
 						<Route path='/'>
 							{/* <SpotifyToken /> */}
 							<Search />
-							<Chordbook />
+							<Chordbook root='A' mode='aeolian' />
 						</Route>
 					</Switch>
 				</Router>

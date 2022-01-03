@@ -1,2 +1,2 @@
 export * from './PageWrapper.js'
-export * from './scaleNotes'
+export * from './scaleNotes.js'

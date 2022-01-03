@@ -7,30 +7,55 @@ import { useAppState } from './../state/PageWrapper'
 import Chord from './Chord'
 import data from '../state/chords'
 import './chordbook.css'
-export function Chordbook() {
-	const [chordList, setChordList] = useState(data)
-	const { songKeyCenterQuality, chordNotes } = useAppState
+import scaleNotes from '../state/scaleNotes'
+import scaleChordStructure from '../state/scaleChordStructure'
 
-	const listRenderer = orderBy(chordList, 'position').map((item) => (
-		<Chord key={item.id} item={item} />
-	))
+export function Chordbook({ root = 'A', mode = 'aeolian' }) {
+	const [chordList, setChordList] = useState([])
 
-	function createScaleChords() {
-		console.log('generating scale chords', songKeyCenterQuality)
-	}
+	const { songKeyCenterQuality, chordNotes, getScaleChords } = useAppState()
+	const listRenderer = orderBy(chordList, 'position').map((chord) => {
+		console.log(chord)
+		return (
+			<Chord
+				key={chord.id}
+				root={chord.root}
+				chordType={chord.type}
+				id={chord.id}
+				position={chord.position}
+			/>
+		)
+	})
+	// const listRenderer = orderBy(chordList, 'position').map((chord) => (
+	// 	<Chord key={chord.id} chord={chord} />
+	// ))
 
-	function createNewChord() {
-		console.log('Create new chord')
-		const list = [...chordList]
-		const newItem = {
-			id: `${list[list.length - 1].id + 1}`,
-			keyCenter: 'B',
-			quality: 0,
-			position: list[list.length - 1].position + 1,
-		}
-		// console.log(newItem);
-		list.push(<Chord key={newItem.id} item={newItem} />)
-		// setChordList(list);
+	// function createScaleChords() {
+	// 	console.log('generating scale chords', songKeyCenterQuality)
+	// }
+
+	function createSuggestedChords() {
+		const chords = getScaleChords(root, scaleNotes, scaleChordStructure, mode)
+		// console.log('new scale chords', chords)
+		// const newList = chords.map((chord) => (
+		// 	<Chord key={chord.id} chord={{ ...chord }} />
+		// ))
+		// for (const chord of chords) {
+		// 	console.log(chord.id)
+		// 	newList.unshift(<Chord key={chord.id} chord={chord} />)
+		// }
+		// console.log(newList)
+		// console.log(chords)
+		// console.log(chords)
+		setChordList(chords)
+		// const list = [...chordList]
+		// const newItem = {
+		// 	id: `${list[list.length - 1].id + 1}`,
+		// 	keyCenter: 'B',
+		// 	quality: 0,
+		// 	position: list[list.length - 1].position + 1,
+		// }
+		// list.push(<Chord key={newItem.id} item={newItem} />)
 	}
 
 	// using useCallback is optional
@@ -117,7 +142,7 @@ export function Chordbook() {
 								</div>
 							)}
 						</Droppable>
-						<button className='add-chord' onClick={createNewChord}>
+						<button className='add-chord' onClick={createSuggestedChords}>
 							+
 						</button>
 					</DragDropContext>
