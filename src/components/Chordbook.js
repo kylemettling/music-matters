@@ -48,7 +48,7 @@ export function Chordbook({ root = 'A', mode = 'aeolian' }) {
 		// }
 		// console.log(newList)
 		// console.log(chords)
-		console.log(chords)
+		// console.log(chords)
 		setChordList(chords)
 		// return chordList
 		// const list = [...chordList]
@@ -75,61 +75,65 @@ export function Chordbook({ root = 'A', mode = 'aeolian' }) {
 	const onDragUpdate = useCallback(() => {
 		/*...*/
 	}, [])
-	const onDragEnd = useCallback((result) => {
-		// the only one that is required
-		const { destination, source } = result
+	const onDragEnd = useCallback(
+		(result) => {
+			// the only one that is required
+			const { destination, source } = result
 
-		// make sure change occurs
-		if (!destination || !source) {
-			return
-		}
-		// access to initial (source) position
-		// access to dropped (destination) position
-		if (
-			destination.droppableId === source.droppableId &&
-			destination.index === source.index
-		) {
-			return
-		}
-		// check the direction (> or <)
-		const directionOfDrag =
-			destination.index > source.index ? 'GREATER' : 'LESS'
+			// make sure change occurs
+			if (!destination || !source) {
+				return
+			}
+			// access to initial (source) position
+			// access to dropped (destination) position
+			if (
+				destination.droppableId === source.droppableId &&
+				destination.index === source.index
+			) {
+				return
+			}
+			// check the direction (> or <)
+			const directionOfDrag =
+				destination.index > source.index ? 'GREATER' : 'LESS'
 
-		// find the affected range
-		let affectedRange
-		if (directionOfDrag === 'GREATER') {
-			affectedRange = range(source.index, destination.index + 1)
-		} else {
-			affectedRange = range(destination.index, source.index)
-		}
-		// console.log('drag result', result)
+			// find the affected range
+			let affectedRange
+			if (directionOfDrag === 'GREATER') {
+				affectedRange = range(source.index, destination.index + 1)
+			} else {
+				affectedRange = range(destination.index, source.index)
+			}
+			console.log('drag result', result)
 
-		// if songs affected (+ or -) update positions
-		const reorderedChordbook = chordList.map((chord) => {
-			console.log(chord.id, parseInt(result.draggableId))
-			if (chord.id === parseInt(result.draggableId)) {
-				chord.position = destination.index
-				// console.log('condition 1', chord)
-				return chord
-			} else if (affectedRange.includes(chord.position)) {
-				if (directionOfDrag === 'GREATER') {
-					chord.position = chord.position - 1
-					// console.log('condition 2.1', chord)
+			// if songs affected (+ or -) update positions
+			const reorderedChordbook = chordList.map((chord) => {
+				console.log(chordList)
+				// console.log(chord.id, parseInt(result.draggableId))
+				if (chord.id === parseInt(result.draggableId)) {
+					chord.position = destination.index
+					// console.log('condition 1', chord)
 					return chord
-				} else if (directionOfDrag === 'LESS') {
-					chord.position = chord.position + 1
-					// console.log('condition 2.2', chord)
+				} else if (affectedRange.includes(chord.position)) {
+					if (directionOfDrag === 'GREATER') {
+						chord.position = chord.position - 1
+						// console.log('condition 2.1', chord)
+						return chord
+					} else if (directionOfDrag === 'LESS') {
+						chord.position = chord.position + 1
+						// console.log('condition 2.2', chord)
+						return chord
+					}
+				} else {
+					// console.log('condition 3', chord)
 					return chord
 				}
-			} else {
-				// console.log('condition 3', chord)
-				return chord
-			}
-		})
-		// console.log(reorderedChordbook)
-		setChordList(reorderedChordbook)
-		// update the playlist state
-	}, [])
+			})
+			// console.log(reorderedChordbook)
+			setChordList(reorderedChordbook)
+			// update the playlist state
+		}
+		// [chordList]
+	)
 	useEffect(() => {
 		if (!chordList.length) {
 			createSuggestedChords()
