@@ -1,0 +1,7 @@
+.chord-hidden {
+	/* visibility: hidden; */
+	display: none;
+}
+.show-chord {
+	/* position: absolute; */
+}

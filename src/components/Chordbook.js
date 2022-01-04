@@ -9,23 +9,25 @@ import data from '../state/chords'
 import './chordbook.css'
 import scaleNotes from '../state/scaleNotes'
 import scaleChordStructure from '../state/scaleChordStructure'
+import { ChordImage } from './ChordImage'
+import { useScript } from './hooks/useScript'
 
 export function Chordbook({ root = 'A', mode = 'aeolian' }) {
 	const [chordList, setChordList] = useState([])
+	const [keyOptionState, setKeyOptionState] = useState('D')
+	const [modeOptionState, setModeOptionState] = useState('aeolian')
 
 	const { songKeyCenterQuality, chordNotes, getScaleChords } = useAppState()
-	const listRenderer = orderBy(chordList, 'position').map((chord) => {
-		console.log(chord)
-		return (
-			<Chord
-				key={chord.id}
-				root={chord.root}
-				chordType={chord.type}
-				id={chord.id}
-				position={chord.position}
-			/>
-		)
-	})
+	const listRenderer = orderBy(chordList, 'position').map((chord) => (
+		<Chord
+			key={chord.id}
+			root={chord.root}
+			chordType={chord.type}
+			id={chord.id}
+			position={chord.position}
+		/>
+	))
+	// useScript('https://www.scales-chords.com/api/scales-chords-api.js')
 	// const listRenderer = orderBy(chordList, 'position').map((chord) => (
 	// 	<Chord key={chord.id} chord={chord} />
 	// ))
@@ -46,8 +48,9 @@ export function Chordbook({ root = 'A', mode = 'aeolian' }) {
 		// }
 		// console.log(newList)
 		// console.log(chords)
-		// console.log(chords)
+		console.log(chords)
 		setChordList(chords)
+		// return chordList
 		// const list = [...chordList]
 		// const newItem = {
 		// 	id: `${list[list.length - 1].id + 1}`,
@@ -103,6 +106,7 @@ export function Chordbook({ root = 'A', mode = 'aeolian' }) {
 
 		// if songs affected (+ or -) update positions
 		const reorderedChordbook = chordList.map((chord) => {
+			console.log(chord.id, parseInt(result.draggableId))
 			if (chord.id === parseInt(result.draggableId)) {
 				chord.position = destination.index
 				// console.log('condition 1', chord)
@@ -122,32 +126,89 @@ export function Chordbook({ root = 'A', mode = 'aeolian' }) {
 				return chord
 			}
 		})
+		// console.log(reorderedChordbook)
 		setChordList(reorderedChordbook)
 		// update the playlist state
 	}, [])
+	useEffect(() => {
+		if (!chordList.length) {
+			createSuggestedChords()
+		}
+	}, [])
+	// useEffect(() => {}, [])
 
 	return (
 		<div className='chordbook-con'>
 			<div className='chordbook-main'>
 				<div className='header'>
+					{/* <ChordImage chordName={'a-min'} /> */}
 					<h2>Chordbook!</h2>
+				</div>
+				<div className='key-mode-select-con'>
+					<select
+						name='KeySelector'
+						id='key_selector'
+						value={keyOptionState}
+						onChange={(e) => setKeyOptionState(e.target.value)}
+					>
+						<option value='C'>C</option>
+						<option value='C#'>C#</option>
+						<option value='Db'>Db</option>
+						<option value='D'>D</option>
+						<option value='D#'>D#</option>
+						<option value='Eb'>Eb</option>
+						<option value='E'>E</option>
+						<option value='F'>F</option>
+						<option value='F#'>F#</option>
+						<option value='Gb'>Gb</option>
+						<option value='G'>G</option>
+						<option value='G#'>G#</option>
+						<option value='Ab'>Ab</option>
+						<option value='A'>A</option>
+						<option value='A#'>A#</option>
+						<option value='Bb'>Bb</option>
+						<option value='B'>B</option>
+					</select>
+					<select
+						name='ModeSelector'
+						id='mode_selector'
+						value={modeOptionState}
+						onChange={(e) => setModeOptionState(e.target.value)}
+					>
+						<option value='ionian'>Ionian (I) - major</option>
+						<option value='dorian'>Dorain (II) - major</option>
+						<option value='phrygian'>Phrygian (III) - minor</option>
+						<option value='Lydian'>Lydian (IV) - major</option>
+						<option value='mixolydian'>Mixolydian (V) - major</option>
+						<option value='aeolian'>Aeolian (VI) - minor</option>
+						<option value='locrian'>Locrian (VII) - diminished</option>
+					</select>
+					<button className='key-mode-submit'>Get Scale</button>
 				</div>
 				<div className='chord-con'>
 					<DragDropContext onDragEnd={onDragEnd}>
-						<Droppable droppableId='CHORDBOOK'>
+						<Droppable droppableId='CHORDBOOK' direction='horizontal'>
 							{(provided) => (
-								<div ref={provided.innerRef} {...provided.droppableProps}>
+								<div
+									ref={provided.innerRef}
+									{...provided.droppableProps}
+									className='chords'
+								>
 									{listRenderer}
 									{provided.placeholder}
 								</div>
 							)}
 						</Droppable>
-						<button className='add-chord' onClick={createSuggestedChords}>
+						{/* <button className='add-chord' onClick={createSuggestedChords}>
 							+
-						</button>
+						</button> */}
 					</DragDropContext>
 				</div>
 			</div>
+			{/* <style>
+				@import
+				url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Yantramanav:wght@100&display=swap');
+			</style> */}
 		</div>
 	)
 }

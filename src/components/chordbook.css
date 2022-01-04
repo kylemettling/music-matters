@@ -1,51 +1,97 @@
 .list {
-  height: 200px;
-  width: 200px;
-  color: green;
+	height: 200px;
+	width: 200px;
+	color: green;
 }
 .chordbook-con {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
 }
 .chordbook-main {
-  display: flex;
-  flex-direction: column;
-  border: 2px solid darkcyan;
-  border-radius: 5px;
-  width: 500px;
-  /* justify-content: center; */
+	display: flex;
+	flex-direction: column;
+	border: 2px solid lightblue;
+	border-radius: 5px;
+	width: 550px;
+	/* justify-content: center; */
 }
 .chord-con {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	/* display: flex; */
+
+	/* flex-direction: row; */
+	justify-content: center;
+	align-items: center;
 }
 .header {
-  display: flex;
-  font-size: 42px;
-  color: lightblue;
+	display: flex;
+	font-size: 42px;
+	color: lightblue;
 }
 .title {
-  font-size: 36px;
+	font-size: 36px;
 }
 .chord-detail {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  /* align-content: center; */
+	display: flex;
+	font-size: 24px;
+	height: 125px;
+	width: 200px;
+	font-family: 'Neuton';
+	/* flex-direction: column; */
+	justify-content: center;
+	/* align-content: center; */
 }
 .add-chord {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: darkcyan;
-  height: 30px;
-  width: 45px;
-  padding-bottom: 4px;
-  /* align-items: center; */
-  /* border: none; */
-  border-color: transparent;
-  border-radius: 5px;
-  font-size: 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: lightblue;
+	height: 30px;
+	width: 45px;
+	padding-bottom: 4px;
+	/* align-items: center; */
+	/* border: none; */
+	border-color: transparent;
+	border-radius: 5px;
+	font-size: 25px;
+}
+.key-mode-select-con {
+	display: flex;
+	/* flex-direction: row; */
+	justify-content: center;
+}
+#mode_selector,
+#key_selector {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	font-size: 20px;
+	background-color: lightblue;
+}
+#mode_selector,
+#key_selector,
+.key-mode-submit {
+	height: 30px;
+	text-align: center;
+}
+#mode_selector {
+	width: 175px;
+}
+#key_selector {
+	width: 55px;
+}
+.key-mode-submit {
+	background-color: #39e991;
+	font-size: 18px;
+	border: transparent;
+	padding: 3px 3px;
+	text-align: center;
+}
+.chord-image-con img {
+	position: absolute;
+	width: 225px;
+}
+.chords {
+	display: flex;
+	flex-direction: row;
 }

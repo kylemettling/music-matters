@@ -12,7 +12,7 @@ import { useScript } from './components/hooks/useScript.js'
 // import { SpotifyToken } from "./components/SpotifyToken.js";
 
 function App() {
-	// useScript('https://www.scales-chords.com/api/scales-chords-api.js')
+	useScript('https://www.scales-chords.com/api/scales-chords-api.js')
 
 	return (
 		<PageWrapper>
@@ -33,6 +33,20 @@ function App() {
 						</Route>
 					</Switch>
 				</Router>
+				<link
+					rel='stylesheet'
+					href='https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css'
+				></link>
+				<link rel='preconnect' href='https://fonts.googleapis.com'></link>
+				<link
+					rel='preconnect'
+					href='https://fonts.gstatic.com'
+					crossOrigin
+				></link>
+				<link
+					href='https://fonts.googleapis.com/css2?family=Neuton&display=swap'
+					rel='stylesheet'
+				></link>
 				<style>
 					@import uimport {useEffect} from 'react';
 					rl('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Yantramanav:wght@100&display=swap');

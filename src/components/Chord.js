@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { useAppState } from '../state'
+import { useScript } from './hooks/useScript'
+import { ChordImage } from './ChordImage'
 
 function Chord({ id, position, root, chordType }) {
 	const { startingScaleData } = useAppState()
@@ -12,8 +14,15 @@ function Chord({ id, position, root, chordType }) {
 	// }
 	// console.log(item)
 
+	// useScript('https://www.scales-chords.com/api/scales-chords-api.js')
+	function handleQuality() {
+		const newType =
+			chordType === 'min' ? 'm' : chordType === 'maj' ? '' : chordType
+		return newType
+	}
+
 	useEffect(() => {
-		console.log(id, position, root, chordType)
+		// console.log(id, position, root, chordType)
 	}, [id, position, root, chordType])
 	// return null
 	return (
@@ -24,12 +33,15 @@ function Chord({ id, position, root, chordType }) {
 					{...provided.draggableProps}
 					ref={provided.innerRef}
 				>
-					<a href='#' {...provided.dragHandleProps}>
+					<div {...provided.dragHandleProps}>
+						{/* <a href='#' {...provided.dragHandleProps}> */}
+						{/* <a href='#' {...provided.dragHandleProps}>
 						Drag Me!
-					</a>
-
-					<div>{root + chordType}</div>
-					{/* <div>{chordType}</div> */}
+					</a> */}
+						<ChordImage chordName={root + handleQuality(chordType)} />
+						<span>{root + chordType}</span>
+					</div>
+					{/* </a> */}
 				</div>
 			)}
 		</Draggable>
