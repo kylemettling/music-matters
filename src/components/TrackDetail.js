@@ -15,6 +15,7 @@ export function TrackDetail() {
     songArtist,
     songAlbum,
     albumCoverURL,
+    artistURL,
     artistCover,
     setTrack,
     songKey,
@@ -25,6 +26,7 @@ export function TrackDetail() {
     refreshToken,
     setTrackFeatures,
     isActiveTrack,
+    isStoredTrack,
     setIsActiveTrack,
     clearTrackData,
   } = useAppState();
@@ -96,41 +98,82 @@ export function TrackDetail() {
   // getSongId()
   // GET request using song key to Shazam for song get-details
   async function getSongLyrics(songId) {
-    if (!songId) {
-      setSongLyrics({
-        text: "No lyrics for this track :(",
-        footer: "",
-      });
-    } else {
-      const options = {
-        method: "GET",
-        url: shazam.urls.trackDetail,
-        params: { key: songId, locale: "en-US" },
-        headers: {
-          "x-rapidapi-host": shazam.host,
-          "x-rapidapi-key": shazam.key,
-        },
-      };
-      console.log("options:", options);
-      const lyricSearch = await axios
-        .request(options)
-        .catch((err) => console.log(err));
-      console.log(lyricSearch);
-      const lyrics = lyricSearch?.data?.sections?.filter(
-        (section) => section.type === "LYRICS"
-      )[0];
-      setSongLyrics({
-        text: lyrics?.text,
-        footer: lyrics?.footer,
-      });
-    }
+    // if (!songId) {
+    //   setSongLyrics({
+    //     text: "No lyrics for this track :(",
+    //     footer: "",
+    //   });
+    // } else {
+    //   const options = {
+    //     method: "GET",
+    //     url: shazam.urls.trackDetail,
+    //     params: { key: songId, locale: "en-US" },
+    //     headers: {
+    //       "x-rapidapi-host": shazam.host,
+    //       "x-rapidapi-key": shazam.key,
+    //     },
+    //   };
+    //   const lyricSearch = await axios
+    //     .request(options)
+    //     .catch((err) => console.log(err));
+    //   console.log("lyrics", lyricSearch);
+    //   const lyrics = lyricSearch?.data?.sections?.filter(
+    //     (section) => section.type === "LYRICS"
+    //   )[0];
+    //   setSongLyrics({
+    //     text: lyrics?.text,
+    //     footer: lyrics?.footer,
+    //   });
+    // }
+    setSongLyrics({
+      text: "Lyrics are paused",
+      footer: "",
+    });
   }
+
+  const storeTrack = () => {
+    localStorage.setItem("songTitle", songTitle);
+    localStorage.setItem("songArtist", songArtist);
+    localStorage.setItem("songAlbum", songAlbum);
+    localStorage.setItem("songKey", songKey);
+    localStorage.setItem("songMode", songMode);
+    localStorage.setItem("spotifySongId", spotifySongId);
+    localStorage.setItem("albumCoverURL", albumCoverURL);
+    localStorage.setItem("artistURL", artistURL);
+    console.log(localStorage);
+    // setIsActiveTrack(true);
+  };
+
+  const getStoredTrack = () => {
+    const path = window.location.pathname.split("/");
+    const currentTrackId = path[path.length - 1];
+    const storedTrackId = localStorage.getItem("trackId");
+
+    console.log(currentTrackId, storedTrackId);
+    // const storedArtistId = localStorage.getItem("artistId");
+    // if (currentTrackId === storedTrackId) {
+    // }
+
+    // if(spotifySongId === history.location.pathname)
+  };
+  const checkStoredTrack = () => {};
+
   useEffect(() => {
-    if (!songTitle) {
-      getTrack();
+    if (!token) {
+      getStoredToken();
     }
-    if (songTitle !== "" && songArtist !== "") {
-      getSongId(songTitle);
+    if (!songTitle) {
+      getStoredTrack();
+      // checkStoredTrack()
+      // clearTrackData();
+      // getTrack();
+    }
+    // if (songTitle !== "" && songArtist !== "") {
+    //   console.log(isActiveTrack);
+    //   storeTrack();
+    // }
+    if (isActiveTrack) {
+      storeTrack();
     }
   }, [songTitle, songArtist]);
 
