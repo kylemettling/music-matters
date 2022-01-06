@@ -17,7 +17,6 @@ export const PageWrapper = ({ children }) => {
 		setTrack,
 		isActiveTrack,
 		clearTrackData,
-		getStoredTrack,
 	} = useTrack()
 	return (
 		<AppContext.Provider
@@ -36,7 +35,6 @@ export const PageWrapper = ({ children }) => {
 				setTrack,
 				isActiveTrack,
 				clearTrackData,
-				getStoredTrack,
 				// setTrackFeatures,
 				// getArtistCoverURL,
 			}}

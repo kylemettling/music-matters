@@ -5,7 +5,7 @@ import Search from './components/search'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { TrackDetail } from './components/TrackDetail.js'
 import { Artist } from './components/Artist.js'
-import { Chordbook } from './components/Chordbook.js'
+// import { Chordbook } from './components/Chordbook.js'
 import { PageWrapper } from './state'
 import './App.css'
 // import { SpotifyToken } from "./components/SpotifyToken.js";
@@ -19,7 +19,6 @@ function App() {
 					<Switch>
 						<Route path='/track/:id'>
 							<TrackDetail />
-							<Chordbook />
 						</Route>
 						<Route path='/artist/:id'>
 							<Artist />
@@ -28,7 +27,6 @@ function App() {
 							{/* <SpotifyToken /> */}
 							<Search />
 						</Route>
-						<Route></Route>
 					</Switch>
 				</Router>
 				<style>
