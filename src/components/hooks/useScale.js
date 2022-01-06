@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
-import { useAppState } from '../../state'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
-import { spotify } from '../config/Connection'
-import axios from 'axios'
+import { useState, useEffect } from "react";
+import { useAppState } from "../../state";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { spotify } from "../config/Connection";
+import axios from "axios";
 
 // export const useTrack = () => {
 //   const [isActiveTrack, setIsActiveTrack] = useState(false);
