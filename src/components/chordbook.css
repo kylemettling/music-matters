@@ -1,29 +1,51 @@
 .list {
-	height: 200px;
-	width: 200px;
-	color: green;
+  height: 200px;
+  width: 200px;
+  color: green;
+}
+.chordbook-con {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
 }
 .chordbook-main {
-	display: flex;
-	flex-direction: column;
-	/* justify-content: center; */
+  display: flex;
+  flex-direction: column;
+  border: 2px solid darkcyan;
+  border-radius: 5px;
+  width: 500px;
+  /* justify-content: center; */
 }
 .chord-con {
-	display: flex;
-	justify-content: center;
-	/* flex-direction: row; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .header {
-	display: flex;
-	font-size: 42px;
-	color: lightblue;
+  display: flex;
+  font-size: 42px;
+  color: lightblue;
 }
 .title {
-	font-size: 36px;
+  font-size: 36px;
 }
 .chord-detail {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	/* align-content: center; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-content: center; */
+}
+.add-chord {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: darkcyan;
+  height: 30px;
+  width: 45px;
+  padding-bottom: 4px;
+  /* align-items: center; */
+  /* border: none; */
+  border-color: transparent;
+  border-radius: 5px;
+  font-size: 25px;
 }
