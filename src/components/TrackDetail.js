@@ -21,7 +21,7 @@ export function TrackDetail() {
 		artistCover,
 		setTrack,
 		songKey,
-		songMode,
+		songKeyCenterQuality,
 		spotifySongId,
 		getStoredToken,
 		token,
@@ -173,12 +173,12 @@ export function TrackDetail() {
 				'x-rapidapi-key': pianoChords.key,
 			},
 		}
-		console.log(options)
+		// console.log(options)
 		const search = await axios
 			.request(options)
 			.catch((err) => console.log('getRootChord - error', err))
 		const data = search.data
-		console.log(data)
+		// console.log(data)
 		setRootChords(search)
 	}
 
@@ -243,7 +243,7 @@ export function TrackDetail() {
 			<div className='audio-features'>
 				{/* <div>{JSON.stringify(trackFeatures, null, 4)}</div> */}
 				<span className='track-key'>Key: {songKey}</span>
-				<span className='track-mode'>Mode: {songMode}</span>
+				<span className='track-mode'>Mode: {songKeyCenterQuality}</span>
 				<span>{rootChords}</span>
 				{/* <div className='song-lyrics-con'>
 					<div className='song-lyrics-text-con'>

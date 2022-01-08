@@ -1,0 +1,27 @@
+11/1= F#
+2/0= Gm (aeolian) 
+9/0 = Em (phrygian)
+2/1 = G (ionian)
+5/0 = A#m (dorian)
+7/1 = C (ionian)
+2/1 = G (mixolydian)
+7/1 = C (ionian)
+2/1 = G (lydian)
+8/1 = D# (mixolydian)
+9/1 = E (ionian)
+9/1 = E (ionian)
+1/0 = F#m (dorian)
+0/1 = C (ionian)
+4/0 = Bm (phrygian)
+4/0 = Bm (phrygian) ?
+10/1 = Fm (dorian)
+7/1 = C (lydian)
+2/1 = G (lydian) A mix?
+2/1 = A (ionian)
+0/1 = C (mixolydian)
+11/0 = F#m (aeolian) 11 could be 1
+11/0 = F#m (aeolian)
+2/1 = D (mixolydian)
+4/1 = B (dorian) 1 = m here???
+11/0 = F#m (dorian)
+11/1 = F# (mixolydian)

@@ -12,7 +12,7 @@ import scaleChordStructure from '../state/scaleChordStructure'
 import { ChordImage } from './ChordImage'
 import { useScript } from './hooks/useScript'
 
-export function Chordbook({ root = 'A', mode = 'aeolian' }) {
+export function Chordbook({ root = 'C', mode = 'ionian' }) {
 	const [chordList, setChordList] = useState([])
 	const [keyOptionState, setKeyOptionState] = useState('D')
 	const [modeOptionState, setModeOptionState] = useState('aeolian')
@@ -59,6 +59,10 @@ export function Chordbook({ root = 'A', mode = 'aeolian' }) {
 		// 	position: list[list.length - 1].position + 1,
 		// }
 		// list.push(<Chord key={newItem.id} item={newItem} />)
+	}
+
+	function handleScaleChange(e) {
+		console.log(keyOptionState, modeOptionState)
 	}
 
 	// using useCallback is optional
@@ -187,7 +191,12 @@ export function Chordbook({ root = 'A', mode = 'aeolian' }) {
 						<option value='aeolian'>Aeolian (VI) - minor</option>
 						<option value='locrian'>Locrian (VII) - diminished</option>
 					</select>
-					<button className='key-mode-submit'>Get Scale</button>
+					<button
+						className='key-mode-submit'
+						onClick={(e) => handleScaleChange(e)}
+					>
+						Get Scale
+					</button>
 				</div>
 				<div className='chord-con'>
 					<DragDropContext onDragEnd={onDragEnd}>
