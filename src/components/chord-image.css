@@ -4,4 +4,5 @@
 }
 .show-chord {
 	/* position: absolute; */
+	z-index: 1;
 }

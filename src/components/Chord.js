@@ -3,11 +3,11 @@ import { Draggable } from 'react-beautiful-dnd'
 import { useAppState } from '../state'
 import { useScript } from './hooks/useScript'
 import { ChordImage } from './ChordImage'
+import { useState } from 'react'
 
-function Chord({ id, position, root, chordType }) {
+function Chord({ id, position, root, chordType, image }) {
 	const { startingScaleData } = useAppState()
-
-	//
+	const [chordImg, setChordImg] = useState(null) //
 	// console.log('chord', item.id)
 	// const setChordQuality = (quality) => {
 	// 	quality === 1 ? "minor" :
@@ -21,9 +21,19 @@ function Chord({ id, position, root, chordType }) {
 		return newType
 	}
 
+	// useLayoutEffect(() => {
+	// 	effect
+	// 	return () => {
+	// 		cleanup
+	// 	};
+	// }, [input])
+
 	useEffect(() => {
 		// console.log(id, position, root, chordType)
-	}, [id, position, root, chordType])
+		// if (chordImg) {
+		// 	setChordImg(image)
+		// }
+	}, [id, position, root, chordType, image])
 	// return null
 	return (
 		<Draggable draggableId={id.toString()} index={position} key={id}>
@@ -39,6 +49,11 @@ function Chord({ id, position, root, chordType }) {
 						Drag Me!
 					</a> */}
 						<ChordImage chordName={root + handleQuality(chordType)} />
+						{/* {image} */}
+						{/* <img
+							src={`img/${root + handleQuality(chordType)}`}
+							alt={`${root + handleQuality(chordType)}`}
+						/> */}
 						<span>{root + chordType}</span>
 					</div>
 					{/* </a> */}
