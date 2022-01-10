@@ -11,7 +11,7 @@
 .chordbook-main {
 	display: flex;
 	flex-direction: column;
-	border: 2px solid lightblue;
+	/* border: 2px solid lightblue; */
 	border-radius: 5px;
 	width: 550px;
 	/* justify-content: center; */
@@ -25,8 +25,9 @@
 }
 .header {
 	display: flex;
-	font-size: 42px;
+	font-size: 22px;
 	color: lightblue;
+	padding-bottom: 4%;
 }
 .title {
 	font-size: 36px;
@@ -37,6 +38,7 @@
 	height: 125px;
 	width: 200px;
 	font-family: 'Neuton';
+	text-align: center;
 	/* flex-direction: column; */
 	justify-content: center;
 	/* align-content: center; */
@@ -87,10 +89,20 @@
 	padding: 3px 3px;
 	text-align: center;
 }
+.chord-image-con {
+	/* position: absolute; */
+	align-items: center;
+	justify-content: center;
+}
 .chord-image-con img {
-	/* transform: rotate(-90deg); */
+	display: flex;
+	transform: translateX(-87.5px);
+	/* justify-content: center; */
+	border: 3px solid lightblue;
+	align-items: center;
 	position: absolute;
-	width: 175px;
+	width: 225px;
+	margin-top: 0.5%;
 }
 .chords {
 	display: flex;

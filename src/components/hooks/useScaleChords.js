@@ -9,10 +9,10 @@ import { ChordImage } from './../ChordImage'
 
 export const useScaleChords = () => {
 	function getScaleChords(root, mode) {
-		console.log(root, mode)
+		console.log('root in getScaleChords', root)
 		const notes = scaleNotes[root]?.notes
 		const structure = scaleChordStructure[`${mode.toLowerCase()}`]
-		console.log(structure)
+		console.log('Structure!', structure, notes)
 
 		function handleQuality(chordType) {
 			const newType =
@@ -27,7 +27,7 @@ export const useScaleChords = () => {
 				root: note,
 				type: structure[idx],
 				position: idx + 1,
-				image: root + handleQuality(structure[idx]),
+				// image: root + handleQuality(structure[idx]),
 				// image: <ChordImage chordName={root + handleQuality(structure[idx])} />,
 			}
 		})

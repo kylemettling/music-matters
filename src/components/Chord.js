@@ -33,7 +33,7 @@ function Chord({ id, position, root, chordType, image }) {
 		// if (chordImg) {
 		// 	setChordImg(image)
 		// }
-	}, [id, position, root, chordType, image])
+	}, [id, position, root, chordType])
 	// return null
 	return (
 		<Draggable draggableId={id.toString()} index={position} key={id}>
@@ -54,7 +54,7 @@ function Chord({ id, position, root, chordType, image }) {
 							src={`img/${root + handleQuality(chordType)}`}
 							alt={`${root + handleQuality(chordType)}`}
 						/> */}
-						<span>{root + chordType}</span>
+						<span>{root + handleQuality(chordType)}</span>
 					</div>
 					{/* </a> */}
 				</div>

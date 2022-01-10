@@ -1,25 +1,19 @@
-import React, { useEffect, useState, ReactDOM } from 'react'
-import { useScript } from './hooks/useScript'
+import React, { useEffect, useState } from 'react'
 import { GiGuitarHead } from 'react-icons/gi'
 import './chord-image.css'
-import DOMPurify from 'dompurify'
-// import { useEffect } from 'react'
 
 export function ChordImage({ chordName }) {
-	// useScript('https://www.scales-chords.com/api/scales-chords-api.js')
-	// console.log('chordName: ', chordName.replace('#', '%23'))
 	const [toggle, setToggle] = useState(true)
 	const [chord, setChordName] = useState(chordName)
-	// useEffect(() => {
-	// 	setChordName(chordName)
-	// }, [chordName])
 
 	function toggleHidden(e) {
-		// e.preventDefault()
-		// const hmm = document.querySelector('.guitar')
-		// console.log(hmm)
 		setToggle(!toggle)
-		// console.log(toggle)
+	}
+
+	function handleImgName(name) {
+		const newName = name.includes('#') ? name.replace('#', 'sharp') : name
+		console.log(newName)
+		return newName
 	}
 
 	useEffect(() => {
@@ -32,7 +26,6 @@ export function ChordImage({ chordName }) {
 	}, [toggle])
 
 	return (
-		// <React.Fragment>
 		<div className='chord-image-con'>
 			<button
 				className='show-chord'
@@ -46,17 +39,17 @@ export function ChordImage({ chordName }) {
 				}}
 				onClick={(e) => toggleHidden(e)}
 			>
-				<GiGuitarHead
-				// onClick={(e) => toggleHidden(e)}
-				/>
+				<GiGuitarHead />
 			</button>
 			<div
 				className={`chord-image guitar-icon ${toggle ? 'chord-hidden' : ''}`}
 			>
-				<img src={`/img/${chordName}.svg`} alt={`${chordName}-img`} />
+				<img
+					src={`/img/${handleImgName(chordName)}.svg`}
+					alt={`${chordName}-img`}
+				/>
 				{/* <span>{chordName}</span> */}
 			</div>
 		</div>
-		// </React.Fragment>
 	)
 }
