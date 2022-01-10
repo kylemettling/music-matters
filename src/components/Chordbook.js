@@ -12,13 +12,15 @@ import scaleChordStructure from '../state/scaleChordStructure'
 import { ChordImage } from './ChordImage'
 import { useScript } from './hooks/useScript'
 import axios from 'axios'
+import keyTranslation from '../state/keyTranslation'
 
-export function Chordbook({ root, mode, type = 'starting' }) {
+export function Chordbook({ root = 'C', mode = 'lydian', type = 'starting' }) {
 	const [chordList, setChordList] = useState([])
-	const [keyOptionState, setKeyOptionState] = useState('C')
-	const [modeOptionState, setModeOptionState] = useState('lydian')
+	const [keyOptionState, setKeyOptionState] = useState(null)
+	const [modeOptionState, setModeOptionState] = useState(null)
 
-	const { songKeyCenterQuality, chordNotes, getScaleChords } = useAppState()
+	const { songKeyCenterQuality, songKey, chordNotes, getScaleChords } =
+		useAppState()
 
 	function handleQuality(chordType) {
 		const newType =
@@ -37,9 +39,12 @@ export function Chordbook({ root, mode, type = 'starting' }) {
 		/>
 	))
 
-	function createSuggestedChords(root, mode) {
+	function createSuggestedChords() {
 		console.log(root, mode)
-		const chords = getScaleChords(root, mode)
+		const chords = getScaleChords(
+			keyTranslation[songKey] || root,
+			songKeyCenterQuality === 1 ? 'mixolydian' : 'aeolian' || mode
+		)
 		setKeyOptionState(root)
 		setModeOptionState(mode)
 		setChordList(chords)
@@ -126,11 +131,14 @@ export function Chordbook({ root, mode, type = 'starting' }) {
 	)
 	useEffect(() => {
 		// if ((root, mode)) {
-		if ((root, mode)) {
-			createSuggestedChords(root, mode)
-		}
+		// if ((root, mode)) {
+		// if (songKey && songKeyCenterQuality) {
+		// console.log(songKeyCenterQuality, keyTranslation[songKey])
+		createSuggestedChords()
 		// }
-	}, [])
+		// }
+		// }
+	}, [songKey, songKeyCenterQuality])
 
 	return (
 		<div className='chordbook-con'>
@@ -177,7 +185,7 @@ export function Chordbook({ root, mode, type = 'starting' }) {
 						<option value='ionian'>Ionian (I) - major</option>
 						<option value='dorian'>Dorain (II) - major</option>
 						<option value='phrygian'>Phrygian (III) - minor</option>
-						<option value='Lydian'>Lydian (IV) - major</option>
+						<option value='lydian'>Lydian (IV) - major</option>
 						<option value='mixolydian'>Mixolydian (V) - major</option>
 						<option value='aeolian'>Aeolian (VI) - minor</option>
 						<option value='locrian'>Locrian (VII) - diminished</option>
