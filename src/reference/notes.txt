@@ -1,0 +1,5 @@
+Track Detail
+    Chordbook
+        create palette
+        Starting Scale
+        Additional empty scale

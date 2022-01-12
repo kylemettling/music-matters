@@ -1,5 +1,5 @@
 import axios from 'axios'
-import './track.css'
+import './trackDetail.css'
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams } from 'react-router'
 import { shazam, spotify, pianoChords } from './config/Connection'
@@ -8,6 +8,7 @@ import { useTrack, useTrackFeatures } from './hooks'
 import { useAppState } from './../state'
 import { Chordbook } from './Chordbook'
 import keyTranslation from '../state/keyTranslation'
+import Chord from './Chord'
 
 export function TrackDetail() {
 	const { id } = useParams()
@@ -32,16 +33,26 @@ export function TrackDetail() {
 		isStoredTrack,
 		setIsActiveTrack,
 		clearTrackData,
+		getTrackFeatures,
+		getArtistCoverURL,
 	} = useAppState()
 
-	async function getTrack() {
-		if (!token) {
-			getStoredToken()
-		}
+	const [chordPalettes, setChordPalettes] = useState([
+		{
+			root: keyTranslation[songKey],
+			mode: songKeyCenterQuality === 1 ? 'mixolydian' : 'aeolian',
+			type: 'starting',
+		},
+	])
+	async function getTrack(storedId) {
+		// if (!isActiveTrack) {
+		// 	getStoredTrack()
+		// }
+
 		// console.log('token!', token)
 		const options = {
 			method: 'GET',
-			url: spotify.urls.getTrack + id,
+			url: spotify.urls.getTrack + (id || storedId),
 			headers: {
 				Authorization: 'Bearer ' + token,
 			},
@@ -57,12 +68,15 @@ export function TrackDetail() {
 			}
 			const trackData = await search.data
 			// if(!search) {
+			getTrackFeatures(trackData.id, token)
+			getArtistCoverURL(trackData.artists[0].href, token)
 			//   refreshToken()
 			// }
 			return trackData
 		}
 		const data = await fetchTrack()
 		setTrack(data, token)
+		setIsActiveTrack(true)
 	}
 
 	// GET track lyrics (Shazam only)
@@ -146,19 +160,27 @@ export function TrackDetail() {
 		localStorage.setItem('songMode', songKeyCenterQuality)
 		localStorage.setItem('spotifySongId', spotifySongId)
 		localStorage.setItem('albumCoverURL', albumCoverURL)
-		localStorage.setItem('artistURL', artistURL)
-		console.log(localStorage)
-		// setIsActiveTrack(true);
+		localStorage.setItem('artistURL', artistCover.url)
+		console.log('STORAGE!', localStorage)
+		// setIsActiveTrack(true)
 	}
 
 	const getStoredTrack = () => {
 		const path = window.location.pathname.split('/')
 		const currentTrackId = path[path.length - 1]
 		const storedTrackId = localStorage.getItem('trackId')
+		console.log('Storage inside getStoredTrack', localStorage)
 		if (!storedTrackId) {
-			getTrack()
+			getTrack(currentTrackId)
+			// getTrackFeatures()
 		}
-		console.log(currentTrackId, storedTrackId)
+		console.log(
+			'Refreshed track:',
+			currentTrackId,
+			'Stored track:',
+			storedTrackId
+		)
+		// storeTrack()
 		// const storedArtistId = localStorage.getItem("artistId");
 		// if (currentTrackId === storedTrackId) {
 		// }
@@ -183,18 +205,47 @@ export function TrackDetail() {
 		setRootChords(search)
 	}
 
-	useEffect(() => {
-		if (!songTitle) {
-			getStoredTrack()
-		}
-		// if (songKey) {
-		// 	console.log(keyTranslation, songKey)
-		// }
+	function createNewPalette() {
+		console.log('new palette!')
+		// const newPalette = <Chordbook root='F' mode='ionian' type='blank' />
+		// const palettes = [newPalette, ...chordPalettes]
+		// const listRenderer = orderBy(palettes, 'position').map((palette) => (
+		// 	<Chordbook
+		// 		key={chord.id}
+		// 		root={chord.root}
+		// 		chordType={chord.type}
+		// 		id={chord.id}
+		// 		position={chord.position}
+		// 	/>
+		// ))
 
-		// return () => {
-		// 	clearTrackData()
+		// setChordPalettes(palettes)
+	}
+
+	useEffect(() => {
+		if (!token) {
+			getStoredToken()
+		}
+		// if (!songTitle) {
+		// 	console.log('getting stored track!!!')
+		// 	getStoredTrack()
 		// }
-	}, [songTitle, songArtist])
+		if (songKey) {
+			console.log(keyTranslation, songKey)
+		}
+		if (!isActiveTrack) {
+			// console.log('Track is active!!', songTitle)
+			getStoredTrack()
+			// storeTrack()
+			// if (artistCover.url) {
+			// 	setIsActiveTrack(true)
+		}
+		if (isActiveTrack) {
+			storeTrack()
+		}
+
+		// }
+	}, [songTitle, songArtist, isActiveTrack])
 
 	if (!songTitle && !songKey) return null
 	// if (!track ) return null
@@ -207,19 +258,25 @@ export function TrackDetail() {
 						className='track-card'
 						style={{
 							backgroundImage: `url(${artistCover.url})`,
-							height: `${artistCover.h / 1.2}px`,
-							width: `${artistCover.w / 1.2}px`,
+							height: `${
+								artistCover.h > 900 ? artistCover.h / 2 : artistCover.h / 1.2
+							}px`,
+							width: `${
+								artistCover.w /
+								// > 900 ? artistCover.w / 2 : artistCover.w
+								1.2
+							}px`,
 						}}
 					>
 						<div className='track-track-details'>
+							{/* <div className="track-text-con"> */}
 							<div className='track-text-con'>
 								<h2>
 									<span className='track-text bump-text-track'>
 										{songTitle}
 									</span>
 								</h2>
-							</div>
-							<div className='track-text-con'>
+								{/* </div> */}
 								<h3 className='subtitle'>
 									<span className='track-text track bump-text'>
 										{songArtist}
@@ -228,22 +285,24 @@ export function TrackDetail() {
 							</div>
 						</div>
 						<div className='track-album-details'>
-							<div className='track-text'>
+							<div className='pad-album-cover'>
 								<img
 									className='album-cover'
 									src={albumCoverURL}
 									alt={[songAlbum] + ' cover'}
 								></img>
 							</div>
-							<div className='album-text-con'>{songAlbum}</div>
+							<div className='album-text-con'>
+								<span>{songAlbum}</span>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div className='audio-features'>
-				{/* <div>{JSON.stringify(trackFeatures, null, 4)}</div> */}
-				<span>{rootChords}</span>
-				{/* <div className='song-lyrics-con'>
+			{/* <div className='audio-features'> */}
+			{/* <div>{JSON.stringify(trackFeatures, null, 4)}</div> */}
+			{/* <span>{rootChords}</span> */}
+			{/* <div className='song-lyrics-con'>
 					<div className='song-lyrics-text-con'>
           <p className='song-lyrics-text'>
           {JSON.stringify(songLyrics.text)}
@@ -253,15 +312,27 @@ export function TrackDetail() {
           <span>{JSON.stringify(songLyrics.footer)}</span>
 					</div>
 				</div> */}
-			</div>
+			{/* </div> */}
 			<div className='chordbook-con'>
-				<Chordbook
+				{/* <Chordbook
 					root={keyTranslation[songKey]}
 					mode={songKeyCenterQuality === 1 ? 'mixolydian' : 'aeolian'}
 					type='starting'
-				/>
+				/> */}
+
+				{chordPalettes.map((palette, idx) => (
+					<Chordbook
+						key={idx}
+						root={palette.root}
+						mode={palette.mode}
+						type={palette.type}
+					/>
+				))}
 				{/* root={songKey} mode={songMode} */}
 			</div>
+			<button className='add-chord' onClick={createNewPalette}>
+				+
+			</button>
 			<span className='track-key'>Key: {songKey}</span>
 			<span className='track-key'>Translated: {keyTranslation[songKey]}</span>
 			<span className='track-mode'>Mode: {songKeyCenterQuality}</span>

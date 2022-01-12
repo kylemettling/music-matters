@@ -3,7 +3,7 @@ const keyTranslation = {
 	1: 'A',
 	2: 'G',
 	3: 'G#',
-	4: 'Bm',
+	4: 'B',
 	5: 'A',
 	6: 'C',
 	7: 'C',

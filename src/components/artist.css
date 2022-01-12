@@ -1,81 +1,79 @@
-body {
-	/* font-family: 'Abril Fatface', cursive; */
-	font-family: 'Yantramanav', sans-serif;
+/* body {
+  font-family: "Abril Fatface", cursive;
+  font-family: "Yantramanav", sans-serif;
 }
 .artist-album-details {
-	display: flex;
-	align-content: flex-end;
-	flex-direction: column;
-	align-items: flex-end;
+  display: flex;
+  align-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
 }
 .album-cover {
-	height: 125px;
-	display: flex;
-	box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.4);
+  height: 125px;
+  display: flex;
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.4);
 }
 .artist-artist-details {
-	display: flex;
-	flex-direction: column;
-	font-size: 22px;
+  display: flex;
+  flex-direction: column;
+  font-size: 22px;
 }
 
 .artist-artist-details,
 .artist-album-details {
-	z-index: 1;
+  z-index: 1;
 }
 
 .artist-card {
-	display: flex;
-	width: 600px;
-	height: 600px;
-	background-size: cover;
-	justify-content: space-between;
-	padding: 1.5%;
+  display: flex;
+  width: 600px;
+  height: 600px;
+  background-size: cover;
+  justify-content: space-between;
+  padding: 1.5%;
 }
 .artist-card-cover {
-	position: absolute;
-	background-size: cover;
-	width: 600px;
-	height: 600px;
-	background-color: rgba(0, 0, 0, 0.15);
-	z-index: 1;
+  position: absolute;
+  background-size: cover;
+  width: 600px;
+  height: 600px;
+  background-color: rgba(0, 0, 0, 0.15);
+  z-index: 1;
 }
 .artist-main {
-	margin-top: 5%;
-	display: flex;
-	justify-content: center;
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
 }
 .artist-album-details h3 {
-	z-index: 1;
-	overflow: hidden;
+  z-index: 1;
+  overflow: hidden;
 }
 .subtitle {
-	padding-top: 6px;
+  padding-top: 6px;
 }
 
 .artist-text {
-	background-color: rgba(0, 0, 0, 0.55);
-	overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.55);
+  overflow: hidden;
 }
 
 div.artist-text {
-	border-radius: 5px 5px 0px 0px;
-	padding: 10px;
+  border-radius: 5px 5px 0px 0px;
+  padding: 10px;
 }
-/* h2 > .artist-text {
-} */
 h3 > .artist-text.artist {
-	border-radius: 0px 0px 5px 5px;
+  border-radius: 0px 0px 5px 5px;
 }
 .album-text-con {
-	padding: 4px;
-	background-color: rgba(0, 0, 0, 0.55);
-	border-radius: 0px 0px 5px 5px;
+  padding: 4px;
+  background-color: rgba(0, 0, 0, 0.55);
+  border-radius: 0px 0px 5px 5px;
 }
 .bump-text-artist {
-	padding: 4px;
-	border-radius: 5px 5px 0px 0px;
+  padding: 4px;
+  border-radius: 5px 5px 0px 0px;
 }
 .bump-text {
-	padding: 2px;
-}
+  padding: 2px;
+} */

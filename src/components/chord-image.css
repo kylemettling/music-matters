@@ -1,8 +1,11 @@
 .chord-hidden {
-	/* visibility: hidden; */
-	display: none;
+  /* visibility: hidden; */
+  /* display: none; */
 }
 .show-chord {
-	/* position: absolute; */
-	z-index: 1;
+  /* position: absolute; */
+  z-index: 1;
+}
+.show-chord:hover {
+  cursor: grab;
 }

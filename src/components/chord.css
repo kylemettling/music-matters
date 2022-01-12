@@ -1,0 +1,12 @@
+.chord-name {
+  /* display: flex; */
+  font-weight: bold;
+
+  font-size: 32px;
+  height: 125px;
+  width: 200px;
+  font-family: "Neuton";
+  text-align: center;
+  justify-self: center;
+  align-content: center;
+}

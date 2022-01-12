@@ -21,7 +21,10 @@ export const PageWrapper = ({ children }) => {
 		artistCover,
 		setTrack,
 		isActiveTrack,
+		setIsActiveTrack,
 		clearTrackData,
+		getTrackFeatures,
+		getArtistCoverURL,
 	} = useTrack()
 	return (
 		<AppContext.Provider
@@ -40,8 +43,11 @@ export const PageWrapper = ({ children }) => {
 				setTrack,
 				isActiveTrack,
 				clearTrackData,
+				setIsActiveTrack,
 				// scaleNotes,
 				getScaleChords,
+				getTrackFeatures,
+				getArtistCoverURL,
 				// scaleChordStructure,
 				// notes,
 				// chordStructure,
