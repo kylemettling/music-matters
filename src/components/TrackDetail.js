@@ -187,9 +187,13 @@ export function TrackDetail() {
 		if (!songTitle) {
 			getStoredTrack()
 		}
-		if (songKey) {
-			console.log(keyTranslation, songKey)
-		}
+		// if (songKey) {
+		// 	console.log(keyTranslation, songKey)
+		// }
+
+		// return () => {
+		// 	clearTrackData()
+		// }
 	}, [songTitle, songArtist])
 
 	if (!songTitle && !songKey) return null
