@@ -99,7 +99,7 @@ export default function Search() {
             Fetch!
           </button>
         </div>
-        <pre>{JSON.stringify(chordNotes["F"].notes, null, 4)}</pre>
+        {/* <pre>{JSON.stringify(chordNotes["F"].notes, null, 4)}</pre> */}
         <Results
           resultList={searchResult}
           // searchName={artistRequest}

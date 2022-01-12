@@ -29,7 +29,7 @@ function App() {
             <Route path="/">
               {/* <SpotifyToken /> */}
               <Search />
-              <Chordbook />
+              {/* <Chordbook /> */}
             </Route>
           </Switch>
         </Router>
