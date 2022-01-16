@@ -14,7 +14,7 @@ export const useTrack = () => {
 
 	const [spotifySongId, setSpotifySongId] = useState('')
 	const [albumCoverURL, setAlbumCoverURL] = useState('')
-	const [artistURL, setArtistURL] = useState('')
+	// const [artistURL, setArtistURL] = useState('')
 	const [isStoredTrack, setIsStoredTrack] = useState(false)
 	const { token, refreshToken, getStoredToken } = useAppState()
 
@@ -23,11 +23,7 @@ export const useTrack = () => {
 		h: '',
 		w: '',
 	})
-	const history = useHistory()
-	// function setTrackFeatures(data) {
-	// 	setSongKey(data.key)
-	// 	setKeyCenterQuality(data.mode)
-	// }
+	// const history = useHistory()
 
 	async function getTrackFeatures(id, token) {
 		if (id !== '' && token !== '') {
@@ -38,7 +34,7 @@ export const useTrack = () => {
 					Authorization: 'Bearer ' + token,
 				},
 			}
-			console.log('GET TRACK FEATURES ID:', id)
+			// console.log('GET TRACK FEATURES ID:', id)
 			const fetchTrackFeatures = async () => {
 				const search = await axios
 					.request(options)
@@ -115,7 +111,7 @@ export const useTrack = () => {
 		localStorage.setItem('spotifySongId', spotifySongId)
 		localStorage.setItem('albumCoverURL', albumCoverURL)
 		localStorage.setItem('artistURL', artistCover.url)
-		console.log('STORAGE!', localStorage)
+		// console.log('STORAGE!', localStorage)
 		setIsActiveTrack(true)
 	}
 
@@ -139,7 +135,7 @@ export const useTrack = () => {
 		songKeyCenterQuality,
 		spotifySongId,
 		albumCoverURL,
-		artistURL,
+		// artistURL,
 		artistCover,
 		setTrack,
 		isStoredTrack,

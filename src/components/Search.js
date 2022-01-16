@@ -62,13 +62,8 @@ export default function Search() {
 	}
 
 	useEffect(() => {
-		// setTrack({})
 		getStoredToken()
 		clearTrackData()
-		// console.log('Is track active?', isTrackActive)
-		// if (isTrackActive) {
-		// 	console.log('Active?', isTrackActive)
-		// }
 		setOptionState(optionState)
 	}, [optionState])
 

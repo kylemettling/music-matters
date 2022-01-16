@@ -1,4 +1,4 @@
-const notes = [
+const rawNotes = [
 	'A',
 	['A#', 'Bb'],
 	'B',
@@ -12,4 +12,4 @@ const notes = [
 	'G',
 ]
 
-export default notes
+export default rawNotes

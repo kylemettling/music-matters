@@ -161,7 +161,7 @@ export function TrackDetail() {
 		localStorage.setItem('spotifySongId', spotifySongId)
 		localStorage.setItem('albumCoverURL', albumCoverURL)
 		localStorage.setItem('artistURL', artistCover.url)
-		console.log('STORAGE!', localStorage)
+		// console.log('STORAGE!', localStorage)
 		// setIsActiveTrack(true)
 	}
 
@@ -169,17 +169,17 @@ export function TrackDetail() {
 		const path = window.location.pathname.split('/')
 		const currentTrackId = path[path.length - 1]
 		const storedTrackId = localStorage.getItem('trackId')
-		console.log('Storage inside getStoredTrack', localStorage)
+		// console.log('Storage inside getStoredTrack', localStorage)
 		if (!storedTrackId) {
 			getTrack(currentTrackId)
 			// getTrackFeatures()
 		}
-		console.log(
-			'Refreshed track:',
-			currentTrackId,
-			'Stored track:',
-			storedTrackId
-		)
+		// console.log(
+		// 	'Refreshed track:',
+		// 	currentTrackId,
+		// 	'Stored track:',
+		// 	storedTrackId
+		// )
 		// storeTrack()
 		// const storedArtistId = localStorage.getItem("artistId");
 		// if (currentTrackId === storedTrackId) {
@@ -206,7 +206,7 @@ export function TrackDetail() {
 	}
 
 	function createNewPalette() {
-		console.log('new palette!')
+		// console.log('new palette!')
 		// const newPalette = <Chordbook root='F' mode='ionian' type='blank' />
 		// const palettes = [newPalette, ...chordPalettes]
 		// const listRenderer = orderBy(palettes, 'position').map((palette) => (
@@ -218,7 +218,6 @@ export function TrackDetail() {
 		// 		position={chord.position}
 		// 	/>
 		// ))
-
 		// setChordPalettes(palettes)
 	}
 
@@ -231,14 +230,10 @@ export function TrackDetail() {
 		// 	getStoredTrack()
 		// }
 		if (songKey) {
-			console.log(keyTranslation, songKey)
+			// console.log(keyTranslation, songKey)
 		}
-		if (!isActiveTrack) {
-			// console.log('Track is active!!', songTitle)
-			getStoredTrack()
-			// storeTrack()
-			// if (artistCover.url) {
-			// 	setIsActiveTrack(true)
+		if (!isActiveTrack) { 
+			getStoredTrack() 
 		}
 		if (isActiveTrack) {
 			storeTrack()
