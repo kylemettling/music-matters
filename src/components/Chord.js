@@ -1,69 +1,150 @@
-import { useEffect } from "react";
-import { Draggable } from "react-beautiful-dnd";
-import { useAppState } from "../state";
-import { useScript } from "./hooks/useScript";
-import { ChordImage } from "./ChordImage";
-import { useState } from "react";
-import "./chord.css";
+import { useEffect } from 'react'
+import { Draggable } from 'react-beautiful-dnd'
+import { useAppState } from '../state'
+import { useScript } from './hooks/useScript'
+import { ChordImage } from './ChordImage'
+import { useState } from 'react'
+import './chord.css'
 
 function Chord({ id, position, root, chordType, image }) {
-  const { startingScaleData } = useAppState();
-  const [chordImg, setChordImg] = useState(null); //
-  // console.log('chord', item.id)
-  // const setChordQuality = (quality) => {
-  // 	quality === 1 ? "minor" :
-  // }
-  // console.log(item)
+	const { startingScaleData } = useAppState()
+	const [chordImg, setChordImg] = useState(null) //
+	const [isEditing, setToggleIsEditing] = useState(false)
+	const [chordRoot, setChordRoot] = useState(undefined)
+	const [chordRootType, setChordRootType] = useState(undefined)
+	const [keyOptionState, setKeyOptionState] = useState(chordRoot || root)
+	const [modeOptionState, setModeOptionState] = useState(chordRootType)
+	// const [newNoteValue, setNewNoteValue] = useState(
+	// 	root + handleQuality(chordType)
+	// )
+	// console.log('chord', item.id)
+	// const setChordQuality = (quality) => {
+	// 	quality === 1 ? "minor" :
+	// }
+	// console.log(item)
 
-  // useScript('https://www.scales-chords.com/api/scales-chords-api.js')
-  function handleQuality() {
-    const newType =
-      chordType === "min" ? "m" : chordType === "maj" ? "" : chordType;
-    return newType;
-  }
+	// useScript('https://www.scales-chords.com/api/scales-chords-api.js')
+	function handleQuality() {
+		const newType =
+			chordType === 'min' ? 'm' : chordType === 'maj' ? '' : chordType
+		return newType
+	}
+	function handleEditToggle(e) {
+		// e.preventDefault()
+		console.log(e.target)
 
-  // useLayoutEffect(() => {
-  // 	effect
-  // 	return () => {
-  // 		cleanup
-  // 	};
-  // }, [input])
+		if (!isEditing) {
+			setToggleIsEditing(!isEditing)
+		}
+	}
+	function handleChordChange(e) {
+		console.log(e.target.value)
+		setChordRoot(e.target.value)
+		setKeyOptionState(e.target.value)
+		setToggleIsEditing(!isEditing)
+	}
+	// useLayoutEffect(() => {
+	// 	effect
+	// 	return () => {
+	// 		cleanup
+	// 	};
+	// }, [input])
 
-  useEffect(() => {
-    // console.log(id, position, root, chordType)
-    // if (chordImg) {
-    // 	setChordImg(image)
-    // }
-  }, [id, position, root, chordType]);
-  // return null
-  return (
-    <Draggable draggableId={id.toString()} index={position} key={id}>
-      {(provided) => (
-        <div
-          className="chord-detail"
-          {...provided.draggableProps}
-          ref={provided.innerRef}
-        >
-          <div {...provided.dragHandleProps}>
-            {/* <a href='#' {...provided.dragHandleProps}> */}
-            {/* <a href='#' {...provided.dragHandleProps}>
+	useEffect(() => {
+		// console.log(id, position, root, chordType)
+		// if (chordImg) {
+		// 	setChordImg(image)
+		// }
+		// if (chordRoot && !isEditing) {
+		// 	setChordRoot(root)
+		// }
+		// if (!keyOptionState) {
+		// 	setChordRoot(root)
+		// }
+		console.log(isEditing)
+	}, [id, position, chordType, chordRootType, chordRoot])
+	// return null
+	return (
+		<Draggable draggableId={id.toString()} index={position} key={id}>
+			{(provided) => (
+				<div
+					className='chord-detail'
+					{...provided.draggableProps}
+					ref={provided.innerRef}
+				>
+					<div {...provided.dragHandleProps}>
+						{/* <a href='#' {...provided.dragHandleProps}> */}
+						{/* <a href='#' {...provided.dragHandleProps}>
 						Drag Me!
 					</a> */}
-            <span className="chord-name">
-              {root + handleQuality(chordType)}
-            </span>
-            <ChordImage chordName={root + handleQuality(chordType)} />
-            {/* {image} */}
-            {/* <img
+						<div className={`chord-name-edit`}></div>
+						<span className='chord-name' onClick={(e) => handleEditToggle(e)}>
+							{(isEditing && (
+								<div className='key-mode-select-con'>
+									<select
+										name='KeySelector'
+										id='key_selector'
+										value={keyOptionState}
+										onChange={(e) => handleChordChange(e)}
+									>
+										<option value='C'>C</option>
+										<option value='C#'>C#</option>
+										<option value='Db'>Db</option>
+										<option value='D'>D</option>
+										<option value='D#'>D#</option>
+										<option value='Eb'>Eb</option>
+										<option value='E'>E</option>
+										<option value='F'>F</option>
+										<option value='F#'>F#</option>
+										<option value='Gb'>Gb</option>
+										<option value='G'>G</option>
+										<option value='G#'>G#</option>
+										<option value='Ab'>Ab</option>
+										<option value='A'>A</option>
+										<option value='A#'>A#</option>
+										<option value='Bb'>Bb</option>
+										<option value='B'>B</option>
+									</select>
+									{/* <select
+										name='ModeSelector'
+										id='mode_selector'
+										value={modeOptionState}
+										onChange={(e) => setModeOptionState(e.target.value)}
+									>
+										<option value='ionian'>Ionian (I) - major</option>
+										<option value='dorian'>Dorain (II) - minor</option>
+										<option value='phrygian'>Phrygian (III) - minor</option>
+										<option value='lydian'>Lydian (IV) - major</option>
+										<option value='mixolydian'>Mixolydian (V) - major</option>
+										<option value='aeolian'>Aeolian (VI) - minor</option>
+										<option value='locrian'>Locrian (VII) - diminished</option>
+									</select> */}
+									{/* <button
+										className='key-mode-submit'
+										onClick={(e) => handleScaleChange(e)}
+									>
+										Get Scale
+									</button> */}
+								</div>
+							)) ||
+								chordRoot ||
+								root + handleQuality(chordType)}
+							{/* {} */}
+						</span>
+						<ChordImage
+							chordName={chordRoot || root + handleQuality(chordType)}
+						/>
+						{/* {image} */}
+						{/* <img
 							src={`img/${root + handleQuality(chordType)}`}
 							alt={`${root + handleQuality(chordType)}`}
 						/> */}
-          </div>
-          {/* </a> */}
-        </div>
-      )}
-    </Draggable>
-  );
+					</div>
+					{/* </a> */}
+				</div>
+			)}
+		</Draggable>
+	)
 }
 
-export default Chord;
+export default Chord

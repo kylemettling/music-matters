@@ -35,6 +35,7 @@ export const useScaleChords = () => {
 		const indexOfRootNote = rawNotes.indexOf(root)
 		console.log(
 			'🚀 ~ file: useScaleChords.js ~ line 33 ~ getScaleChords ~ indexOfRootNote',
+			root,
 			indexOfRootNote
 		)
 		// console.log(
@@ -43,7 +44,7 @@ export const useScaleChords = () => {
 		// )
 
 		// find major scale relative to
-		const relativeScaleIndex = indexOfRootNote - degreeOfScale
+		const relativeScaleIndex = (indexOfRootNote - degreeOfScale) % 7
 		console.log(
 			'🚀 ~ file: useScaleChords.js ~ line 41 ~ getScaleChords ~ relativeScaleIndex',
 			relativeScaleIndex
@@ -60,7 +61,7 @@ export const useScaleChords = () => {
 			// console.log(noteSet.notes.notes[degreeOfScale] === root)
 			// console.log(noteSet.notes[degreeOfScale] === root, degreeOfScale, root)
 			// console.log('NOTE SET!!!', noteSet)
-			return noteSet.notes.notes[degreeOfScale - 1] === root
+			return noteSet.notes.notes[(degreeOfScale - 1) % 7] === root
 				? noteSet.notes.notes
 				: null
 		})
@@ -73,29 +74,52 @@ export const useScaleChords = () => {
 
 		console.log('TEST ARR', testArr)
 
-		if (!scaleNoteIndexSearch) {
-			scaleNoteIndexSearch = testArr.filter((noteSet) => {
-				//   const isFlat = null
-				const isFlat = noteSet.root[1] === 'b'
-				const isSharp = noteSet.root[1] === '#'
-				const newRootIndex = isFlat
-					? rawNotes.indexOf(root) + 1
-					: rawNotes.indexOf(root) - 1
+		// if (!scaleNoteIndexSearch) {
+		// 	scaleNoteIndexSearch = testArr.filter((noteSet) => {
+		//   const isFlat = null
+		// const isFlat = noteSet.root[1] === 'b'
+		// const isSharp = noteSet.root[1] === '#'
+		// console.log(
+		// 	root,
+		// 	rawNotes.indexOf(root),
+		// 	noteSet,
+		// 	isFlat || isSharp
+		// 		? rawNotes[rawNotes.indexOf(root) + 1]
+		// 		: rawNotes[rawNotes.indexOf(root) - 1]
+		// const newRootIndex = isFlat
+		// 	? rawNotes.indexOf(root) + 1
+		// 	: rawNotes.indexOf(root) - 1
+		// )
 
-				console.log(
-					'new root:',
-					rawNotes.indexOf(
-						isFlat ? rawNotes.indexOf(root) : rawNotes.indexOf(root)
-					)
-				)
-				console.log(noteSet, isFlat, isSharp)
-				return noteSet.notes.notes[degreeOfScale - 1] === root
-					? noteSet.notes.notes
-					: null
-			})
-		}
+		// const getOpposite =
+		// 	isFlat || isSharp
+		// 		? rawNotes[(rawNotes.indexOf(root) + 1) % 11]
+		// 		: rawNotes[(rawNotes.indexOf(root) - 1) % 11]
+		// console.log('Get opposite', getOpposite)
+		// console.log(
+		// 	'new root:',
+		// 	rawNotes.indexOf(
+		// 		isFlat ? rawNotes.indexOf(root) : rawNotes.indexOf(root)
+		// 	)
+		// )
+		// 		console.log(noteSet, isFlat, isSharp)
+		// 		return noteSet.notes.notes[degreeOfScale - 1] === getOpposite.length
+		// 			? rawNotes[rawNotes.indexOf(root) + 1][0]
+		// 			: rawNotes[rawNotes.indexOf(root) - 1][1]
+		// 			? noteSet.notes.notes
+		// 			: null
+		// 	})
+		// }
 
-		const copyOfNotes = scaleNoteIndexSearch[0].notes.notes.slice()
+		const copyOfNotes =
+			scaleNoteIndexSearch[0]?.notes?.notes.slice() ||
+			scaleNoteIndexSearch[1]?.notes?.notes.slice()
+		console.log(
+			'COPY OF NOTES',
+			copyOfNotes,
+			'index search: ',
+			scaleNoteIndexSearch
+		)
 		const first = copyOfNotes.slice(degreeOfScale - 1)
 		const last = copyOfNotes.slice(0, degreeOfScale - 1)
 		// console.log('NOTES!!!', first, last)
