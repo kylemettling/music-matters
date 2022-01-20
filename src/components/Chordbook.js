@@ -50,6 +50,20 @@ export function Chordbook({ root = 'C', mode = 'lydian', type = 'starting' }) {
 		setChordList(chords)
 	}
 
+	function createBlankChords() {
+		const chords = [{ id: 1, key: '', root: '', type: '', position: 1 }]
+		chords.map((chord) => (
+			<Chord
+				key={chord.key}
+				root={chord.root}
+				chordType={chord.type}
+				id={chord.id}
+				position={chord.position}
+			/>
+		))
+		setChordList(chords)
+	}
+
 	function handleScaleChange(e) {
 		const newChords = getScaleChords(keyOptionState, modeOptionState)
 		console.log(newChords)
@@ -123,89 +137,104 @@ export function Chordbook({ root = 'C', mode = 'lydian', type = 'starting' }) {
 		// [chordList]
 	)
 	useEffect(() => {
+		// if(type === "blank") {
+		// 	setBlankState({
+
+		// 	})
+		// }
 		// if ((root, mode)) {
 		// if ((root, mode)) {
 		// if (songKey && songKeyCenterQuality) {
 		// console.log(songKeyCenterQuality, keyTranslation[songKey])
-		createSuggestedChords()
+		if (type === 'starting') {
+			createSuggestedChords()
+		} else if (type === 'blank') {
+			createBlankChords()
+		}
 		// }
 		// }
 		// }
 	}, [songKey, songKeyCenterQuality])
 
 	return (
-		<div className='chordbook-con'>
-			<div className='chordbook-main'>
-				<div className='header'>
-					{type === 'starting' ? <h3>Suggested scale</h3> : <h3>Chordbook!</h3>}
-				</div>
-				{type === 'starting' && (
-					<div className='key-mode-select-con'>
-						<select
-							name='KeySelector'
-							id='key_selector'
-							value={keyOptionState}
-							onChange={(e) => setKeyOptionState(e.target.value)}
-						>
-							<option value='C'>C</option>
-							<option value='C#'>C#</option>
-							<option value='Db'>Db</option>
-							<option value='D'>D</option>
-							<option value='D#'>D#</option>
-							<option value='Eb'>Eb</option>
-							<option value='E'>E</option>
-							<option value='F'>F</option>
-							<option value='F#'>F#</option>
-							<option value='Gb'>Gb</option>
-							<option value='G'>G</option>
-							<option value='G#'>G#</option>
-							<option value='Ab'>Ab</option>
-							<option value='A'>A</option>
-							<option value='A#'>A#</option>
-							<option value='Bb'>Bb</option>
-							<option value='B'>B</option>
-						</select>
-						<select
-							name='ModeSelector'
-							id='mode_selector'
-							value={modeOptionState}
-							onChange={(e) => setModeOptionState(e.target.value)}
-						>
-							<option value='ionian'>Ionian (I) - major</option>
-							<option value='dorian'>Dorain (II) - minor</option>
-							<option value='phrygian'>Phrygian (III) - minor</option>
-							<option value='lydian'>Lydian (IV) - major</option>
-							<option value='mixolydian'>Mixolydian (V) - major</option>
-							<option value='aeolian'>Aeolian (VI) - minor</option>
-							<option value='locrian'>Locrian (VII) - diminished</option>
-						</select>
-						<button
-							className='key-mode-submit'
-							onClick={(e) => handleScaleChange(e)}
-						>
-							Get Scale
-						</button>
-					</div>
-				)}
-				<div className='chord-con'>
-					<DragDropContext onDragEnd={onDragEnd}>
-						<Droppable droppableId='CHORDBOOK' direction='horizontal'>
-							{(provided) => (
-								<div
-									ref={provided.innerRef}
-									{...provided.droppableProps}
-									className='chords'
-								>
-									{listRenderer}
-									{provided.placeholder}
-								</div>
+		<div>
+			{type === 'starting' && (
+				<div className='chordbook-con'>
+					<div className='chordbook-main'>
+						<div className='header'>
+							{type === 'starting' ? (
+								<h3>Suggested scale</h3>
+							) : (
+								<h3>Chordbook!</h3>
 							)}
-						</Droppable>
-						{/* <button className='add-chord' onClick={createSuggestedChords}>
+						</div>
+						<div className='key-mode-select-con'>
+							<select
+								name='KeySelector'
+								id='key_selector'
+								value={keyOptionState}
+								onChange={(e) => setKeyOptionState(e.target.value)}
+							>
+								<option value='C'>C</option>
+								<option value='C#'>C#</option>
+								<option value='Db'>Db</option>
+								<option value='D'>D</option>
+								<option value='D#'>D#</option>
+								<option value='Eb'>Eb</option>
+								<option value='E'>E</option>
+								<option value='F'>F</option>
+								<option value='F#'>F#</option>
+								<option value='Gb'>Gb</option>
+								<option value='G'>G</option>
+								<option value='G#'>G#</option>
+								<option value='Ab'>Ab</option>
+								<option value='A'>A</option>
+								<option value='A#'>A#</option>
+								<option value='Bb'>Bb</option>
+								<option value='B'>B</option>
+							</select>
+							<select
+								name='ModeSelector'
+								id='mode_selector'
+								value={modeOptionState}
+								onChange={(e) => setModeOptionState(e.target.value)}
+							>
+								<option value='ionian'>Ionian (I) - major</option>
+								<option value='dorian'>Dorain (II) - minor</option>
+								<option value='phrygian'>Phrygian (III) - minor</option>
+								<option value='lydian'>Lydian (IV) - major</option>
+								<option value='mixolydian'>Mixolydian (V) - major</option>
+								<option value='aeolian'>Aeolian (VI) - minor</option>
+								<option value='locrian'>Locrian (VII) - diminished</option>
+							</select>
+							<button
+								className='key-mode-submit'
+								onClick={(e) => handleScaleChange(e)}
+							>
+								Get Scale
+							</button>
+						</div>
+					</div>
+				</div>
+			)}
+			<div className='chord-con'>
+				<DragDropContext onDragEnd={onDragEnd}>
+					<Droppable droppableId='CHORDBOOK' direction='horizontal'>
+						{(provided) => (
+							<div
+								ref={provided.innerRef}
+								{...provided.droppableProps}
+								className='chords'
+							>
+								{listRenderer}
+								{provided.placeholder}
+							</div>
+						)}
+					</Droppable>
+					{/* <button className='add-chord' onClick={createSuggestedChords}>
 							+
 						</button> */}
-					</DragDropContext>
-				</div>
+				</DragDropContext>
 			</div>
 		</div>
 	)

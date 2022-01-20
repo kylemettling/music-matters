@@ -9,6 +9,7 @@ import { useAppState } from './../state'
 import { Chordbook } from './Chordbook'
 import keyTranslation from '../state/keyTranslation'
 import Chord from './Chord'
+import { orderBy, random, range } from 'lodash'
 
 export function TrackDetail() {
 	const { id } = useParams()
@@ -205,20 +206,28 @@ export function TrackDetail() {
 		setRootChords(search)
 	}
 
-	function createNewPalette() {
-		// console.log('new palette!')
-		// const newPalette = <Chordbook root='F' mode='ionian' type='blank' />
-		// const palettes = [newPalette, ...chordPalettes]
+	function createBlankPalette() {
+		console.log('new palette!')
+		//  <Chordbook root='F' mode='ionian' type='blank' />
+		const blank = {
+			key: '',
+			root: '',
+			type: '',
+			id: '',
+			position: chordPalettes.length + 1,
+		}
+		const newPalette = <Chordbook {...blank} />
+		const palettes = [...chordPalettes, newPalette]
 		// const listRenderer = orderBy(palettes, 'position').map((palette) => (
 		// 	<Chordbook
-		// 		key={chord.id}
-		// 		root={chord.root}
-		// 		chordType={chord.type}
-		// 		id={chord.id}
-		// 		position={chord.position}
+		// 		key={palette.id}
+		// 		root={palette.root}
+		// 		type={palette.type}
+		// 		id={palette.id}
+		// 		position={palette.position}
 		// 	/>
 		// ))
-		// setChordPalettes(palettes)
+		setChordPalettes(palettes)
 	}
 
 	useEffect(() => {
@@ -232,8 +241,8 @@ export function TrackDetail() {
 		if (songKey) {
 			// console.log(keyTranslation, songKey)
 		}
-		if (!isActiveTrack) { 
-			getStoredTrack() 
+		if (!isActiveTrack) {
+			getStoredTrack()
 		}
 		if (isActiveTrack) {
 			storeTrack()
@@ -308,24 +317,24 @@ export function TrackDetail() {
 					</div>
 				</div> */}
 			{/* </div> */}
-			<div className='chordbook-con'>
-				{/* <Chordbook
+			{/* <div className='chordbook-con'> */}
+			{/* <Chordbook
 					root={keyTranslation[songKey]}
 					mode={songKeyCenterQuality === 1 ? 'mixolydian' : 'aeolian'}
 					type='starting'
 				/> */}
 
-				{chordPalettes.map((palette, idx) => (
-					<Chordbook
-						key={idx}
-						root={palette.root}
-						mode={palette.mode}
-						type={palette.type}
-					/>
-				))}
-				{/* root={songKey} mode={songMode} */}
-			</div>
-			<button className='add-chord' onClick={createNewPalette}>
+			{chordPalettes.map((palette, idx) => (
+				<Chordbook
+					key={idx}
+					root={palette.root}
+					mode={palette.mode}
+					type={palette.type}
+				/>
+			))}
+			{/* root={songKey} mode={songMode} */}
+			{/* </div> */}
+			<button className='add-chord' onClick={createBlankPalette}>
 				+
 			</button>
 			<span className='track-key'>Key: {songKey}</span>

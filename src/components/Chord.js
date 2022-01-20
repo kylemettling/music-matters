@@ -3,10 +3,10 @@ import { Draggable } from 'react-beautiful-dnd'
 import { useAppState } from '../state'
 import { useScript } from './hooks/useScript'
 import { ChordImage } from './ChordImage'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import './chord.css'
 
-function Chord({ id, position, root, chordType, image }) {
+function Chord({ id, position, root, chordType }) {
 	const { startingScaleData } = useAppState()
 	const [chordImg, setChordImg] = useState(null) //
 	const [isEditing, setToggleIsEditing] = useState(false)
@@ -14,6 +14,7 @@ function Chord({ id, position, root, chordType, image }) {
 	const [chordRootType, setChordRootType] = useState(undefined)
 	const [keyOptionState, setKeyOptionState] = useState(chordRoot || root)
 	const [modeOptionState, setModeOptionState] = useState(chordRootType)
+	const editRef = useRef()
 	// const [newNoteValue, setNewNoteValue] = useState(
 	// 	root + handleQuality(chordType)
 	// )
@@ -39,8 +40,9 @@ function Chord({ id, position, root, chordType, image }) {
 	}
 	function handleChordChange(e) {
 		console.log(e.target.value)
-		setChordRoot(e.target.value)
+		// return
 		setKeyOptionState(e.target.value)
+		setChordRoot(e.target.value)
 		setToggleIsEditing(!isEditing)
 	}
 	// useLayoutEffect(() => {
@@ -61,6 +63,18 @@ function Chord({ id, position, root, chordType, image }) {
 		// if (!keyOptionState) {
 		// 	setChordRoot(root)
 		// }
+		const checkIfClickedoutside = (e) => {
+			console.log(e)
+			if (editRef.current && !editRef.current.contains(e.target)) {
+				setToggleIsEditing(false)
+			}
+		}
+		document.addEventListener('mousedown', checkIfClickedoutside)
+
+		return () => {
+			document.removeEventListener('mousedown', checkIfClickedoutside)
+		}
+
 		console.log(isEditing)
 	}, [id, position, chordType, chordRootType, chordRoot])
 	// return null
@@ -77,35 +91,35 @@ function Chord({ id, position, root, chordType, image }) {
 						{/* <a href='#' {...provided.dragHandleProps}>
 						Drag Me!
 					</a> */}
-						<div className={`chord-name-edit`}></div>
-						<span className='chord-name' onClick={(e) => handleEditToggle(e)}>
-							{(isEditing && (
-								<div className='key-mode-select-con'>
-									<select
-										name='KeySelector'
-										id='key_selector'
-										value={keyOptionState}
-										onChange={(e) => handleChordChange(e)}
-									>
-										<option value='C'>C</option>
-										<option value='C#'>C#</option>
-										<option value='Db'>Db</option>
-										<option value='D'>D</option>
-										<option value='D#'>D#</option>
-										<option value='Eb'>Eb</option>
-										<option value='E'>E</option>
-										<option value='F'>F</option>
-										<option value='F#'>F#</option>
-										<option value='Gb'>Gb</option>
-										<option value='G'>G</option>
-										<option value='G#'>G#</option>
-										<option value='Ab'>Ab</option>
-										<option value='A'>A</option>
-										<option value='A#'>A#</option>
-										<option value='Bb'>Bb</option>
-										<option value='B'>B</option>
-									</select>
-									{/* <select
+						<div className={`chord-name-edit`} ref={editRef}>
+							<span className='chord-name' onClick={(e) => handleEditToggle(e)}>
+								{(isEditing && (
+									<div className='key-mode-select-con'>
+										<select
+											name='KeySelector'
+											id='key_selector'
+											value={keyOptionState}
+											onChange={(e) => handleChordChange(e)}
+										>
+											<option value='C'>C</option>
+											<option value='C#'>C#</option>
+											<option value='Db'>Db</option>
+											<option value='D'>D</option>
+											<option value='D#'>D#</option>
+											<option value='Eb'>Eb</option>
+											<option value='E'>E</option>
+											<option value='F'>F</option>
+											<option value='F#'>F#</option>
+											<option value='Gb'>Gb</option>
+											<option value='G'>G</option>
+											<option value='G#'>G#</option>
+											<option value='Ab'>Ab</option>
+											<option value='A'>A</option>
+											<option value='A#'>A#</option>
+											<option value='Bb'>Bb</option>
+											<option value='B'>B</option>
+										</select>
+										{/* <select
 										name='ModeSelector'
 										id='mode_selector'
 										value={modeOptionState}
@@ -119,28 +133,29 @@ function Chord({ id, position, root, chordType, image }) {
 										<option value='aeolian'>Aeolian (VI) - minor</option>
 										<option value='locrian'>Locrian (VII) - diminished</option>
 									</select> */}
-									{/* <button
+										{/* <button
 										className='key-mode-submit'
 										onClick={(e) => handleScaleChange(e)}
 									>
 										Get Scale
 									</button> */}
-								</div>
-							)) ||
-								chordRoot ||
-								root + handleQuality(chordType)}
-							{/* {} */}
-						</span>
-						<ChordImage
-							chordName={chordRoot || root + handleQuality(chordType)}
-						/>
-						{/* {image} */}
-						{/* <img
+									</div>
+								)) ||
+									chordRoot ||
+									root + handleQuality(chordType)}
+								{/* {} */}
+							</span>
+							<ChordImage
+								chordName={chordRoot || root + handleQuality(chordType)}
+							/>
+							{/* {image} */}
+							{/* <img
 							src={`img/${root + handleQuality(chordType)}`}
 							alt={`${root + handleQuality(chordType)}`}
 						/> */}
+						</div>
+						{/* </a> */}
 					</div>
-					{/* </a> */}
 				</div>
 			)}
 		</Draggable>
