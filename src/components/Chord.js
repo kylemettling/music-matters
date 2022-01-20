@@ -4,7 +4,8 @@ import { useAppState } from '../state'
 import { useScript } from './hooks/useScript'
 import { ChordImage } from './ChordImage'
 import { useState, useRef } from 'react'
-import './chord.css'
+// import './chord.css'
+import './style.css'
 
 function Chord({ id, position, root, chordType }) {
 	const { startingScaleData } = useAppState()
@@ -12,7 +13,7 @@ function Chord({ id, position, root, chordType }) {
 	const [isEditing, setToggleIsEditing] = useState(false)
 	const [chordRoot, setChordRoot] = useState(undefined)
 	const [chordRootType, setChordRootType] = useState(undefined)
-	const [keyOptionState, setKeyOptionState] = useState(chordRoot || root)
+	const [keyOptionState, setKeyOptionState] = useState(root)
 	const [modeOptionState, setModeOptionState] = useState(chordRootType)
 	const editRef = useRef()
 	// const [newNoteValue, setNewNoteValue] = useState(
@@ -39,7 +40,7 @@ function Chord({ id, position, root, chordType }) {
 		}
 	}
 	function handleChordChange(e) {
-		console.log(e.target.value)
+		console.log('handleChordChange', e.target.value, chordRoot)
 		// return
 		setKeyOptionState(e.target.value)
 		setChordRoot(e.target.value)
@@ -74,9 +75,7 @@ function Chord({ id, position, root, chordType }) {
 		return () => {
 			document.removeEventListener('mousedown', checkIfClickedoutside)
 		}
-
-		console.log(isEditing)
-	}, [id, position, chordType, chordRootType, chordRoot])
+	}, [id, position, chordType, chordRootType, chordRoot, editRef])
 	// return null
 	return (
 		<Draggable draggableId={id.toString()} index={position} key={id}>

@@ -14,7 +14,7 @@ import { TestChordbook } from './components/TestChordbook'
 
 function App() {
 	useScript('https://www.scales-chords.com/api/scales-chords-api.js')
-
+	// document.body.classList.add('dark')
 	return (
 		<PageWrapper>
 			<Fragment>

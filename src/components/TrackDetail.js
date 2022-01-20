@@ -1,5 +1,6 @@
 import axios from 'axios'
-import './trackDetail.css'
+// import './trackDetail.css'
+// import './style.css'
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams } from 'react-router'
 import { shazam, spotify, pianoChords } from './config/Connection'

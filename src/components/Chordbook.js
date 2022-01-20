@@ -16,8 +16,8 @@ import keyTranslation from '../state/keyTranslation'
 
 export function Chordbook({ root = 'C', mode = 'lydian', type = 'starting' }) {
 	const [chordList, setChordList] = useState([])
-	const [keyOptionState, setKeyOptionState] = useState('')
-	const [modeOptionState, setModeOptionState] = useState('')
+	const [keyOptionState, setKeyOptionState] = useState(root)
+	const [modeOptionState, setModeOptionState] = useState(mode)
 
 	const { songKeyCenterQuality, songKey, chordNotes, getScaleChords } =
 		useAppState()
@@ -52,21 +52,24 @@ export function Chordbook({ root = 'C', mode = 'lydian', type = 'starting' }) {
 
 	function createBlankChords() {
 		const chords = [{ id: 1, key: '', root: '', type: '', position: 1 }]
-		chords.map((chord) => (
-			<Chord
-				key={chord.key}
-				root={chord.root}
-				chordType={chord.type}
-				id={chord.id}
-				position={chord.position}
-			/>
+		const newChords = chords.map((chord) => (
+			<div>Chord!!</div>
+			// <Chord
+			// 	key={chord.key}
+			// 	root={chord.root}
+			// 	chordType={chord.type}
+			// 	id={chord.id}
+			// 	position={chord.position}
+			// />
 		))
-		setChordList(chords)
+		console.log(newChords)
+		setChordList(newChords)
 	}
 
 	function handleScaleChange(e) {
+		setChordList([])
 		const newChords = getScaleChords(keyOptionState, modeOptionState)
-		console.log(newChords)
+		console.log('NEW!', newChords)
 		setChordList(newChords)
 	}
 
@@ -77,9 +80,9 @@ export function Chordbook({ root = 'C', mode = 'lydian', type = 'starting' }) {
 		console.log('ok')
 	}, [])
 	const onDragUpdate = useCallback(() => {}, [])
+	// the only one that is required
 	const onDragEnd = useCallback(
 		(result) => {
-			// the only one that is required
 			const { destination, source } = result
 
 			// make sure change occurs
@@ -154,7 +157,7 @@ export function Chordbook({ root = 'C', mode = 'lydian', type = 'starting' }) {
 		// }
 		// }
 		// }
-	}, [songKey, songKeyCenterQuality])
+	}, [songKey, songKeyCenterQuality, type])
 
 	return (
 		<div>

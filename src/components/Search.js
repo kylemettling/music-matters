@@ -1,4 +1,5 @@
-import './search.css'
+// import './search.css'
+import './style.css'
 import { Fragment, useEffect, useState } from 'react'
 import axios from 'axios'
 import Results from './results'
