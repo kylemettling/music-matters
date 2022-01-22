@@ -1,12 +1,47 @@
 /* former logo color: #39e991 */
 
-.logo {
-	/* padding-top: 4rem; */
-	/* box-shadow: var(--level-3); */
-	/* filter: blur(5px); */
-	/* filter: drop-shadow(0px 0px 5px rgb(2, 255, 234)); */
-	/* backdrop-filter: blur(5px); */
+.themeSelect {
+	color: var(--green);
+	font-size: 2.5rem;
+	transform: rotate(-30deg);
+	/* animation: rotateBackward 0.3s forwards; */
 }
+.themeSelectForward {
+	color: var(--white);
+	font-size: 2.5rem;
+	/* transform: rotate(50deg); */
+	animation: rotateForward 0.3s forwards;
+}
+.themeSelectBackward {
+	/* color: var(--green); */
+	font-size: 2.5rem;
+	animation: rotateBackward 0.3s forwards;
+}
+
+@keyframes rotateForward {
+	0% {
+		transform: rotate(-30deg);
+	}
+	50% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(30deg);
+	}
+}
+@keyframes rotateBackward {
+	0% {
+		transform: rotate(30deg);
+	}
+	50% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(-30deg);
+	}
+}
+
+/* .themeSlec  */
 .logo:hover {
 	filter: drop-shadow(0px 0px 5px #2effee);
 }

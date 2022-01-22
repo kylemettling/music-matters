@@ -3,29 +3,38 @@
 	display: flex;
 	justify-content: center;
 	text-align: center;
+	/* border: var(--line); */
+}
+.chordbook {
+	padding-top: 1rem;
 }
 .chords {
 	display: flex;
 	text-align: center;
 	gap: 0.5rem;
 	padding-top: 0.5rem;
-	border: 4px solid var(--black);
+	outline: none;
+	padding: 1rem 3rem;
 }
 .blur {
-	/* filter: blur(3px) 0.2s ease-in; */
-	/* color: red; */
 	animation: blurIn 0.05s forwards;
-	/* filter: blur(1.75px); */
+	box-shadow: var(--level-5);
+	transform: scale(0.75);
 }
 @keyframes blurIn {
 	0% {
 		filter: blur(0px);
 	}
+	50% {
+		filter: blur(0.5px);
+	}
 	100% {
-		filter: blur(1.5px);
+		filter: blur(1.2px);
 	}
 }
 .chord-detail {
+	--chordTextColor: var(--lightGrey);
+	color: var(--chordTextColor);
 	font-size: var(--baseFontSize);
 	padding: 1rem;
 	border: 3px var(--green) solid;

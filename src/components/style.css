@@ -6,7 +6,9 @@
 	--red: #ff5470;
 	--yellow: #fde24f;
 	--black: #1b2d45;
+	--paleBlue: #4747a1;
 	--darkBlue: #00214d;
+	--darkerBlue: #130f21;
 	--darkGrey: #222;
 	--grey: #bfbfbf;
 	--lightGrey: #f2f4f6;
@@ -15,16 +17,19 @@
 	/* Define Colors intentions */
 	--primary: var(--green);
 	--danger: var(--red);
-	--background: var(--lightGrey);
-	--textColor: var(--black);
+	--background: var(--paleBlue);
+	--textColor: var(--darkerBlue);
 	--buttonTextColor: var(--black);
+	--buttonColor: var(--primary);
 	--lineColor: var(--grey);
-	--cardBg: var(--white);
+	--cardBg: var(--grey);
 	--headerBackground: var(--darkBlue);
 	--footerBackground: var(--black);
+	--cardTextColor: var(--white);
 
 	/* Styles */
 	--line: solid 1px var(--lineColor);
+	/* --line: dashed 5px var(--yellow); */
 
 	/* Type */
 	--headingFont: 'Space Mono', monospace;
@@ -82,7 +87,7 @@ header {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* padding: 0 var(--containerPadding); */
+	padding: var(--containerPadding);
 }
 header nav a {
 	color: white;
@@ -206,7 +211,7 @@ hr {
 }
 
 button {
-	--buttonColor: var(--primary);
+	/* --buttonColor: var(--primary); */
 	appearance: none;
 	color: var(--buttonTextColor);
 	background-color: var(--buttonColor);
@@ -290,6 +295,8 @@ button.small {
 }
 
 .card {
+	/* --cardTextColor: var(--white);
+	color: var(--cardTextColor); */
 	padding: 2em;
 	background: var(--cardBg);
 	box-shadow: var(--level-5);
@@ -310,9 +317,11 @@ button.small {
 	--cardBg: var(--darkGrey);
 	--background: var(--black);
 	--textColor: var(--lightGrey);
+	--buttonColor: var(--paleBlue);
+	--buttonTextColor: var(--white);
 	--headerBackground: var(--darkGrey);
-	--buttonTextColor: var(--black);
 	--footerBackground: var(--darkGrey);
+	--chordTextColor: var(--white);
 }
 
 .oled {
