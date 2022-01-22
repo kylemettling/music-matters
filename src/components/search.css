@@ -1,5 +1,9 @@
 .main {
-  /* padding: 3rem; */
-  flex-direction: column;
-  align-items: center;
+	flex-direction: column;
+	align-items: center;
+}
+
+input + select,
+select + button {
+	margin-left: 0.5rem;
 }

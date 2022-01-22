@@ -1,9 +1,9 @@
 .track {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 a {
-  cursor: inherit;
+	cursor: inherit;
 }
 .track h1,
 h2,
@@ -11,70 +11,90 @@ h3,
 h4,
 h5,
 h6 {
-  cursor: default;
+	cursor: default;
 }
 h1 {
-  /* font-size: 2.25rem; */
+	/* font-size: 2.25rem; */
 }
 .detailCard {
-  grid-template-columns: 45% 55%;
-  /* grid-template-columns: 37% 63%; */
-  padding-top: 5rem;
-  grid-gap: 2.5rem;
+	grid-template-columns: 45% 55%;
+	/* grid-template-columns: 37% 63%; */
+	padding-top: 5rem;
+	grid-gap: 2.5rem;
 }
 .details {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: space-evenly;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	justify-content: space-evenly;
 }
-@keyframes slideIn {
-  100% {
-    left: 0;
-  }
-}
-/* @keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 100%;
-  }
-} */
 .details > * {
-  padding: 0;
-  margin: 0;
+	padding: 0;
+	margin: 0;
 }
 .details img {
-  height: 12rem;
-  border-radius: var(--borderRadius);
+	height: 12rem;
+	border-radius: var(--borderRadius);
 }
 
 .artistImage {
-  border-radius: var(--borderRadius);
+	border-radius: var(--borderRadius);
 }
 
 .artistImage {
-  height: inherit;
-  height: 500px;
-  max-width: 900px;
+	height: inherit;
+	height: 500px;
+	max-width: 900px;
 }
 .artistImage,
 .cover {
-  box-shadow: var(--level-4);
+	box-shadow: var(--level-4);
 }
-/* .title,
+.title,
 .artist,
-.cover,
-.artistImage {
-  padding: 0 8px 0 6px;
-  margin: 1px;
-} */
+.album,
+/* animation: blurText 0.5s ease-in; */
+.cover {
+}
 .title:hover,
 .artist:hover,
-.album:hover {
-  box-shadow: var(--level-4);
-  outline: 1px var(--green) solid;
-  border-radius: 2px;
-  position: static;
+.cover:hover,
+.album:hover,
+.artistImage:hover {
+	--blurAmount: 3px;
+	box-shadow: var(--level-4);
+	outline: 1px var(--green) solid;
+	border-radius: 2px;
+	position: static;
+	/* animation: testAnimation 0.82s infinite; */
+	/* animation: blurText 0.3s forwards; */
+	/* filter: blur(1px) 2s ease-in; */
+}
+/* @keyframes testAnimation {
+	50% {
+		outline: 1px dotted orange;
+	}
+} */
+@keyframes blurText {
+	0% {
+		filter: blur(0px);
+	}
+	50% {
+		filter: blur(3px);
+	}
+	/* 20% {
+		filter: blur(2.5px);
+	}
+	40% {
+		filter: blur(5px);
+	}
+	60% {
+		filter: blur(6px);
+	}
+	80% {
+		filter: blur(3px);
+	} */
+	100% {
+		filter: blur(2px);
+	}
 }

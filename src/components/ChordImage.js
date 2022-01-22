@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { GiGuitarHead } from 'react-icons/gi'
-import './chord-image.css'
+import './chordImage.css'
 
 export function ChordImage({ chordName }) {
 	const [toggle, setToggle] = useState(true)

@@ -1,0 +1,15 @@
+.chord-hidden {
+  /* visibility: hidden; */
+  /* display: none; */
+}
+.chord-image img {
+  height: 8.5rem;
+  border-radius: var(--borderRadius);
+}
+.show-chord {
+  /* position: absolute; */
+  z-index: 1;
+}
+.show-chord:hover {
+  cursor: grab;
+}

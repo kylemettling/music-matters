@@ -1,37 +1,51 @@
 .chordbook,
 .chordbookStarter {
-  display: flex;
-  justify-content: center;
-  text-align: center;
+	display: flex;
+	justify-content: center;
+	text-align: center;
 }
 .chords {
-  display: flex;
-  text-align: center;
-  gap: 0.5rem;
-  padding-top: 0.5rem;
-  border: 4px solid var(--black);
+	display: flex;
+	text-align: center;
+	gap: 0.5rem;
+	padding-top: 0.5rem;
+	border: 4px solid var(--black);
+}
+.blur {
+	/* filter: blur(3px) 0.2s ease-in; */
+	/* color: red; */
+	animation: blurIn 0.05s forwards;
+	/* filter: blur(1.75px); */
+}
+@keyframes blurIn {
+	0% {
+		filter: blur(0px);
+	}
+	100% {
+		filter: blur(1.5px);
+	}
 }
 .chord-detail {
-  font-size: var(--baseFontSize);
-  padding: 1rem;
-  border: 3px var(--green) solid;
-  border-radius: var(--borderRadius);
-  background: #282c34;
+	font-size: var(--baseFontSize);
+	padding: 1rem;
+	border: 3px var(--green) solid;
+	border-radius: var(--borderRadius);
+	background: #282c34;
 }
 .keyModeSelect {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  gap: 0.5rem;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	gap: 0.5rem;
 }
 /* select + select,
 select + button {
   margin-left: 0.5rem;
 } */
 .keyModeSubmit {
-  display: flex;
-  align-content: flex-end;
-  /* margin-bottom: 1px; */
+	display: flex;
+	align-content: flex-end;
+	/* margin-bottom: 1px; */
 }
 /* .list {
 	height: 200px;
