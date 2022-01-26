@@ -3,6 +3,7 @@ import { useAppState } from '../../state'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import { spotify } from '../config/Connection'
 import axios from 'axios'
+import keyTranslation from './../../state/keyTranslation'
 
 export const useTrack = () => {
 	const [isActiveTrack, setIsActiveTrack] = useState(false)
@@ -48,13 +49,17 @@ export const useTrack = () => {
 				const featureData = await search.data
 				// setTrackFeatures(featureData)
 
-				// console.log(featureData.key, featureData.mode);
-				setSongKey(featureData.key)
-				setKeyCenterQuality(featureData.mode)
+				console.log('IN FEATURES', featureData.key, featureData.mode)
+				setSongKey(keyTranslation[featureData.key])
+				const keyCenter = featureData.mode === 1 ? 'mixolydian' : 'aeolian'
+				console.log(
+					'🚀 ~ file: useTrack.js ~ line 55 ~ fetchTrackFeatures ~ keyCenter',
+					keyCenter
+				)
+				setKeyCenterQuality(keyCenter)
 			}
 			fetchTrackFeatures()
-			storeTrack()
-			// setIsActiveTrack(true)
+			// storeTrack()
 		}
 	}
 	// const getTrackDetails = (data) => {
@@ -69,8 +74,9 @@ export const useTrack = () => {
 		setAlbumCoverURL(albumCover)
 		// setArtistURL(url);
 		// console.log('Arist URL:', url)
-		// getArtistCoverURL(url, token)
-		// getTrackFeatures(data.id, token)
+		getArtistCoverURL(url, token)
+		getTrackFeatures(data.id, token)
+		setIsActiveTrack(true)
 		// if (artistCover !== '' && songKeyCenterQuality !== '') {
 		// setIsActiveTrack(true)
 		// }
@@ -112,7 +118,7 @@ export const useTrack = () => {
 		localStorage.setItem('albumCoverURL', albumCoverURL)
 		localStorage.setItem('artistURL', artistCover.url)
 		// console.log('STORAGE!', localStorage)
-		setIsActiveTrack(true)
+		// setIsActiveTrack(true)
 	}
 
 	const clearTrackData = () => {
@@ -122,7 +128,7 @@ export const useTrack = () => {
 		setSongAlbum('')
 		setAlbumCoverURL('')
 		getArtistCoverURL('', '')
-		getTrackFeatures('', '')
+		// getTrackFeatures('', '')
 		setSongKey('')
 		setKeyCenterQuality('')
 		setIsActiveTrack(false)

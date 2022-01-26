@@ -3,6 +3,7 @@
 	display: flex;
 	justify-content: center;
 	text-align: center;
+	/* height: 10rem; */
 	/* border: var(--line); */
 }
 .chordbook {
@@ -10,11 +11,14 @@
 }
 .chords {
 	display: flex;
+	position: relative;
+	width: 100%;
 	text-align: center;
 	gap: 0.5rem;
 	padding-top: 0.5rem;
 	outline: none;
 	padding: 1rem 3rem;
+	min-height: 14rem;
 }
 .blur {
 	animation: blurIn 0.05s forwards;
@@ -47,6 +51,17 @@
 	align-items: flex-end;
 	gap: 0.5rem;
 }
+.suggestedScale {
+	text-transform: capitalize;
+	text-align: center;
+}
+.chordbookHeader {
+	padding: 1rem;
+	flex-direction: column;
+	/* justify-content: center; */
+	align-items: center;
+}
+
 /* select + select,
 select + button {
   margin-left: 0.5rem;
@@ -54,6 +69,8 @@ select + button {
 .keyModeSubmit {
 	display: flex;
 	align-content: flex-end;
+	width: 140px;
+	/* justify-content: center; */
 	/* margin-bottom: 1px; */
 }
 /* .list {

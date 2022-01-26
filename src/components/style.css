@@ -26,7 +26,7 @@
 	--headerBackground: var(--darkBlue);
 	--footerBackground: var(--black);
 	--cardTextColor: var(--white);
-	--cursorOutlineColor: var(--darkBlue);
+	--cursorOutlineColor: var(--green);
 
 	/* Styles */
 	--line: solid 1px var(--lineColor);
@@ -42,6 +42,7 @@
 	--h4: 1.4em;
 	--h5: 1.25em;
 	--smallText: 0.8em;
+	--medText: 1.1em;
 
 	/* Elevation */
 	--level-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
@@ -175,7 +176,7 @@ blockquote {
 
 label {
 	display: block;
-	font-size: var(--smallText);
+	font-size: var(--medText);
 }
 
 input,

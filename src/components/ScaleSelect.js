@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function ScaleSelect() {
+export function ScaleSelect() {
 	const [keyOptionState, setKeyOptionState] = useState(null)
 	const [modeOptionState, setModeOptionState] = useState(null)
 	return (
