@@ -17,22 +17,22 @@ export default function Results({ resultList, searchToggle, token }) {
 
 	return (
 		<React.Fragment>
-			<div className='results card'>
-				<ul>
+			{tracks && (
+				<ul className='results'>
 					{tracks &&
 						tracks.map((track, i) => (
-							<li className='result' key={i}>
-								<Result
-									// key={i}
-									track={track}
-									type='track'
-									search={searchToggle}
-									token={token}
-								/>
-							</li>
+							// <li className='result' key={i}>
+							<Result
+								key={i}
+								index={i}
+								track={track}
+								type='track'
+								search={searchToggle}
+								token={token}
+							/>
 						))}
 				</ul>
-			</div>
+			)}
 		</React.Fragment>
 	)
 }

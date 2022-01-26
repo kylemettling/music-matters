@@ -26,6 +26,7 @@
 	--headerBackground: var(--darkBlue);
 	--footerBackground: var(--black);
 	--cardTextColor: var(--white);
+	--cursorOutlineColor: var(--darkBlue);
 
 	/* Styles */
 	--line: solid 1px var(--lineColor);
@@ -322,6 +323,7 @@ button.small {
 	--headerBackground: var(--darkGrey);
 	--footerBackground: var(--darkGrey);
 	--chordTextColor: var(--white);
+	--cursorOutlineColor: var(--green);
 }
 
 .oled {

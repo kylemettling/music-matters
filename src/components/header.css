@@ -1,25 +1,33 @@
 /* former logo color: #39e991 */
-
+header {
+	/* margin-top: 3rem; */
+}
 .themeSelect {
 	transform: rotate(-30deg);
 	font-size: 2.5rem;
-	/* animation: rotateBackward 0.3s forwards; */
+	position: sticky;
+	top: 0.25rem;
+	left: 0;
+	/* position: absolute; */
 }
 .themeSelectForward {
 	color: var(--green);
 	font-size: 2.5rem;
-	animation: rotateForward 0.3s forwards;
+	animation: rotateForward 0.4s forwards;
 	transform: rotate(30deg);
 }
 .themeSelectBackward {
 	font-size: 2.5rem;
-	animation: rotateBackward 0.3s forwards;
+	animation: rotateBackward 0.5s forwards;
 }
 
 @keyframes rotateForward {
 	0% {
 		/* transform: rotate(-30deg); */
 		transform: rotate(-30deg);
+	}
+	25% {
+		transform: rotate(-50deg);
 	}
 	50% {
 		transform: rotate(0deg);
@@ -31,6 +39,9 @@
 @keyframes rotateBackward {
 	0% {
 		transform: rotate(30deg);
+	}
+	25% {
+		transform: rotate(50deg);
 	}
 	50% {
 		transform: rotate(0deg);

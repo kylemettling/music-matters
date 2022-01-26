@@ -11,7 +11,7 @@ import chordNotes from '../state/scaleNotes'
 export default function Search() {
 	const [artistRequest, setArtistRequest] = useState('synchronicity')
 
-	const [searchResult, setSearchResult] = useState([])
+	const [searchResult, setSearchResult] = useState('')
 	const [searchToggle, setSearchToggle] = useState(false)
 	// const [spotifySearchData, setSpotifySearchData] = useState("no data");
 	// const [spotifyToken, setSpotifyToken] = useState("");

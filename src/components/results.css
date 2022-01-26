@@ -1,15 +1,48 @@
 .results {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 }
 .result {
-	display: flex;
-	/* flex-direction: row; */
+	flex-direction: row-reverse;
 	justify-content: center;
-	/* flex-wrap: wrap; */
-	width: 35rem;
+	align-items: center;
+	justify-items: center;
+	width: 32rem;
+	gap: 2.5rem;
+	margin: 0.25rem;
 }
-.result img {
+.album {
 	height: 175px;
+}
+.releaseTime {
+	flex-direction: column;
+	justify-content: center;
+	/* gap: 5rem; */
+}
+.resultName {
+	flex-direction: column;
+	justify-items: flex-end;
+	/* justify-content: flex-start; */
+	/* text-align: center; */
+}
+.resultName > *:nth-child(2) {
+	/* font-weight: bold; */
+	text-align: center;
+}
+.resultName a {
+	text-decoration: none;
+	color: var(--textColor);
+}
+.text {
+	flex-direction: row;
+	gap: 2rem;
+}
+.artist:hover,
+.title:hover,
+.album:hover {
+	--blurAmount: 3px;
+	box-shadow: var(--level-4);
+	outline: 1px var(--green) solid;
+	border-radius: 2px;
+	position: static;
 }
