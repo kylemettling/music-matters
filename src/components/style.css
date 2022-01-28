@@ -27,6 +27,7 @@
 	--footerBackground: var(--black);
 	--cardTextColor: var(--white);
 	--cursorOutlineColor: var(--green);
+	--chordOutlineColor: var(--green);
 
 	/* Styles */
 	--line: solid 1px var(--lineColor);
@@ -38,11 +39,11 @@
 	--baseFontSize: 100%;
 	--h1: 2.5em;
 	--h2: 2.151em;
-	--h3: 1.65em;
-	--h4: 1.4em;
-	--h5: 1.25em;
+	--h3: 1.75em;
+	--h4: 1.55em;
+	--h5: 1.35em;
 	--smallText: 0.8em;
-	--medText: 1.1em;
+	--medText: 1.2em;
 
 	/* Elevation */
 	--level-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
@@ -297,8 +298,6 @@ button.small {
 }
 
 .card {
-	/* --cardTextColor: var(--white);
-	color: var(--cardTextColor); */
 	padding: 2em;
 	background: var(--cardBg);
 	box-shadow: var(--level-5);
@@ -324,7 +323,8 @@ button.small {
 	--headerBackground: var(--darkGrey);
 	--footerBackground: var(--darkGrey);
 	--chordTextColor: var(--white);
-	--cursorOutlineColor: var(--green);
+	--chordOutlineColor: var(--paleBlue);
+	--cursorOutlineColor: var(--paleBlue);
 }
 
 .oled {

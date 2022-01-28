@@ -17,13 +17,13 @@
 	gap: 0.5rem;
 	padding-top: 0.5rem;
 	outline: none;
-	padding: 1rem 3rem;
+	padding: 1rem 1.25rem;
 	min-height: 14rem;
 }
 .blur {
 	animation: blurIn 0.05s forwards;
 	box-shadow: var(--level-5);
-	transform: scale(0.75);
+	transform: scale(0.88);
 }
 @keyframes blurIn {
 	0% {
@@ -41,7 +41,7 @@
 	color: var(--chordTextColor);
 	font-size: var(--baseFontSize);
 	padding: 1rem;
-	border: 3px var(--green) solid;
+	border: 3px var(--chordOutlineColor) solid;
 	border-radius: var(--borderRadius);
 	background: #282c34;
 }
@@ -53,12 +53,10 @@
 }
 .suggestedScale {
 	text-transform: capitalize;
-	text-align: center;
 }
 .chordbookHeader {
-	padding: 1rem;
+	padding: 1.25rem;
 	flex-direction: column;
-	/* justify-content: center; */
 	align-items: center;
 }
 

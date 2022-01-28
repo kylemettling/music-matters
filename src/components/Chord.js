@@ -73,9 +73,10 @@ function Chord({ id, position, root, chordType, degree }) {
 				<div
 					className='chord-detail card'
 					{...provided.draggableProps}
+					{...provided.dragHandleProps}
 					ref={provided.innerRef}
 				>
-					<div {...provided.dragHandleProps}>
+					<div>
 						{/* <a href='#' {...provided.dragHandleProps}> */}
 						{/* <a href='#' {...provided.dragHandleProps}>
 						Drag Me!
@@ -137,7 +138,7 @@ function Chord({ id, position, root, chordType, degree }) {
 							<ChordImage
 								chordName={chordRoot + handleQuality(chordType) || 'blank'}
 							/>
-							<span>{degree}</span>
+							{degree && <span>{degree}</span>}
 							{/* {image} */}
 							{/* <img
 							src={`img/${root + handleQuality(chordType)}`}

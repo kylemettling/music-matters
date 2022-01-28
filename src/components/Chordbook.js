@@ -193,12 +193,12 @@ export function Chordbook({ type, name, bookId, chords }) {
 			<div className='chordbookHeader flex'>
 				{type === 'starter' ? (
 					<div>
-						<label>
+						<h5>
 							Suggested scale <br />
 							<span className='suggestedScale'>
 								{songKey} {songKeyCenterQuality}
 							</span>
-						</label>
+						</h5>
 					</div>
 				) : (
 					<h3>Chordbook!</h3>
