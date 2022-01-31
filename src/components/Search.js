@@ -2,7 +2,7 @@ import './search.css'
 import './style.css'
 import { Fragment, useEffect, useState } from 'react'
 import axios from 'axios'
-import Results from './results'
+import Results from './Results'
 import { shazam, spotify } from './config/Connection'
 import { useSpotifyToken } from './hooks'
 import { useAppState } from '../state'
@@ -13,8 +13,6 @@ export default function Search() {
 
 	const [searchResult, setSearchResult] = useState('')
 	const [searchToggle, setSearchToggle] = useState(false)
-	// const [spotifySearchData, setSpotifySearchData] = useState("no data");
-	// const [spotifyToken, setSpotifyToken] = useState("");
 	const [optionState, setOptionState] = useState('track')
 	const [searchQuery, setSearchQuery] = useState('Synchronicity II')
 

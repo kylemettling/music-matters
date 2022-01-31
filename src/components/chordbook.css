@@ -3,21 +3,18 @@
 	display: flex;
 	justify-content: center;
 	text-align: center;
-	/* height: 10rem; */
-	/* border: var(--line); */
 }
 .chordbook {
 	padding-top: 1rem;
 }
 .chords {
 	display: flex;
-	position: relative;
 	width: 100%;
+	justify-content: center;
 	text-align: center;
-	gap: 0.5rem;
+	gap: 0.333rem;
 	padding-top: 0.5rem;
 	outline: none;
-	padding: 1rem 1.25rem;
 	min-height: 14rem;
 }
 .blur {
@@ -35,15 +32,6 @@
 	100% {
 		filter: blur(1.2px);
 	}
-}
-.chord-detail {
-	--chordTextColor: var(--lightGrey);
-	color: var(--chordTextColor);
-	font-size: var(--baseFontSize);
-	padding: 1rem;
-	border: 3px var(--chordOutlineColor) solid;
-	border-radius: var(--borderRadius);
-	background: #282c34;
 }
 .keyModeSelect {
 	display: flex;

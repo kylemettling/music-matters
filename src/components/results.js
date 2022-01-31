@@ -18,7 +18,7 @@ export default function Results({ resultList, searchToggle, token }) {
 	return (
 		<React.Fragment>
 			{tracks && (
-				<ul className='results'>
+				<ul className='results grid'>
 					{tracks &&
 						tracks.map((track, i) => (
 							// <li className='result' key={i}>

@@ -1,6 +1,7 @@
 .track {
 	display: flex;
 	flex-direction: column;
+	max-width: 1080px;
 }
 a {
 	cursor: inherit;
@@ -36,11 +37,14 @@ h1 {
 	height: 12rem;
 	border-radius: var(--borderRadius);
 }
-
+.trackTitle {
+	overflow: hidden;
+	max-width: 30ch;
+	white-space: nowrap;
+}
 .artistImage {
 	border-radius: var(--borderRadius);
 }
-
 .artistImage {
 	height: inherit;
 	height: 500px;
@@ -57,8 +61,8 @@ h1 {
 .artistImage:hover {
 	--blurAmount: 3px;
 	box-shadow: var(--level-4);
-	outline: 1px var(--cursorOutlineColor) solid;
-	border-radius: 2px;
+	outline: 2px var(--cursorOutlineColor) solid;
+	border-radius: 3px;
 	/* position: static; */
 	/* animation: testAnimation 0.82s infinite; */
 	/* animation: blurText 0.3s forwards; */

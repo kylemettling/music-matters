@@ -1,13 +1,22 @@
 .chord-name {
-	font-weight: bold;
+	/* font-weight: bold; */
 
-	font-size: 32px;
-	height: 125px;
-	width: 200px;
-	font-family: 'Neuton';
+	/* font-size: 32px;  */
+	/* font-family: 'Neuton'; */
 	text-align: center;
 	justify-self: center;
 	align-content: center;
+}
+.chord-detail {
+	--chordTextColor: var(--lightGrey);
+	color: var(--chordTextColor);
+	font-size: var(--baseFontSize);
+	padding: 0.5rem;
+	border: 3px var(--chordOutlineColor) solid;
+	border-radius: var(--borderRadius);
+	background: #282c34;
+	height: 250px;
+	width: 10rem;
 }
 .dark {
 	/* color: var(--cardTextColor); */

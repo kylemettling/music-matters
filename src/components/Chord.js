@@ -4,7 +4,7 @@ import { useAppState } from '../state'
 import { useScript } from './hooks/useScript'
 import { ChordImage } from './ChordImage'
 import { useState, useRef } from 'react'
-// import './chord.css'
+import './chord.css'
 
 function Chord({ id, position, root, chordType, degree }) {
 	const { startingScaleData } = useAppState()
