@@ -3,15 +3,21 @@
 	justify-content: center;
 	align-items: flex-end;
 	text-align: center;
-	margin: 3em 0;
-	gap: 3rem;
+	margin: 2em auto;
+	gap: 1rem;
+}
+.chordbookHeader h5 {
+	align-self: flex-end;
+	/* justify-items: flex-start; */
+}
+.chordbookHeader {
 }
 .chords {
 	display: flex;
 	/* width: 100%; */
 	justify-content: center;
 	text-align: center;
-	gap: 0.333rem;
+	gap: 0.222rem;
 	/* padding-top: 0.5rem; */
 	outline: none;
 }
@@ -56,8 +62,11 @@
 .chordbookHeader {
 	/* padding: 1.25rem; */
 	/* padding: 0.5rem; */
-	margin-bottom: 0.5rem;
+	/* margin-bottom: 0.5rem; */
+	display: flex;
+	gap: 2rem;
 	flex-direction: column;
+	justify-content: space-between;
 	/* align-content: flex-end; */
 }
 .chordbookHeader h5 {

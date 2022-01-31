@@ -29,7 +29,7 @@ function App() {
 						<Route path='/artist/:id'>
 							<Artist />
 						</Route>
-						<Route path='/'>
+						<Route path='/' exact>
 							{/* <SpotifyToken /> */}
 							<Search />
 							{/* <TestChordbook /> */}

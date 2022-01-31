@@ -4,9 +4,11 @@ import './style.css'
 import React, { useState } from 'react'
 import { MdOutlinePalette } from 'react-icons/md'
 import { useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 
 export default function Header() {
 	const [themeToggle, setThemeToggle] = useState(false)
+	const history = useHistory()
 
 	function handleThemeToggle(e) {
 		!themeToggle
@@ -34,11 +36,13 @@ export default function Header() {
 				className='themeSelect flex'
 				onClick={(e) => handleThemeToggle(e)}
 			/>
-			<header>
-				{/* <div className='leftHeader'></div> */}
-				<img src={logo} className='logo' alt='logo' />
-				{/* <div className='rightHeader'></div> */}
-			</header>
+			<Link to='/'>
+				<header>
+					{/* <div className='leftHeader'></div> */}
+					<img src={logo} className='logo' alt='logo' />
+					{/* <div className='rightHeader'></div> */}
+				</header>
+			</Link>
 		</React.Fragment>
 	)
 }

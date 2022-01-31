@@ -12,6 +12,7 @@ import { Chordbook } from './Chordbook'
 import keyTranslation from '../state/keyTranslation'
 import Chord from './Chord'
 import { orderBy, random, range } from 'lodash'
+import { BackButton } from './BackButton'
 
 export function TrackDetail() {
 	const { id } = useParams()
@@ -240,6 +241,7 @@ export function TrackDetail() {
 					alt={[songAlbum] + ' cover'}
 				></img>
 			</div>
+			<BackButton />
 			<section className='chordbookContainer'>
 				{/* <div className='chordbookHeader'> */}
 				{/* <div className='keyModeSelect'>
@@ -315,9 +317,9 @@ export function TrackDetail() {
 				<span>Key: {songKey}</span>
 				<span>Translated: {keyTranslation[songKey]}</span>
 				<span>Mode: {songKeyCenterQuality}</span>
-				<span>
+				{/* <span>
 					Mode: {songKeyCenterQuality === 1 ? 'mixolydian' : 'aeolian'}
-				</span>
+				</span> */}
 			</section>
 		</div>
 	)
