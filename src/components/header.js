@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { MdOutlinePalette } from 'react-icons/md'
 import { useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
+import { BackButton } from './BackButton'
 
 export default function Header() {
 	const [themeToggle, setThemeToggle] = useState(false)
@@ -32,17 +33,20 @@ export default function Header() {
 
 	return (
 		<React.Fragment>
-			<MdOutlinePalette
-				className='themeSelect flex'
-				onClick={(e) => handleThemeToggle(e)}
-			/>
-			<Link to='/'>
-				<header>
+			<header>
+				<Link to='/'>
 					{/* <div className='leftHeader'></div> */}
 					<img src={logo} className='logo' alt='logo' />
 					{/* <div className='rightHeader'></div> */}
-				</header>
-			</Link>
+				</Link>
+			</header>
+			<div className='settings'>
+				<MdOutlinePalette
+					className='themeSelect flex'
+					onClick={(e) => handleThemeToggle(e)}
+				/>
+				<BackButton />
+			</div>
 		</React.Fragment>
 	)
 }

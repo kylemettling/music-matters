@@ -14,7 +14,7 @@ export default function Search() {
 	const [searchResult, setSearchResult] = useState('')
 	const [searchToggle, setSearchToggle] = useState(false)
 	const [optionState, setOptionState] = useState('track')
-	const [searchQuery, setSearchQuery] = useState('Synchronicity II')
+	const [searchQuery, setSearchQuery] = useState('')
 
 	// token management
 	// const [token, { refreshToken, getStoredToken }] = useSpotifyToken()
@@ -75,7 +75,7 @@ export default function Search() {
 				<div>
 					<input
 						type='text'
-						placeholder='Synchronicity II'
+						placeholder='enter track, artist, or album'
 						value={searchQuery}
 						onChange={(e) => setSearchQuery(e.target.value)}
 					/>

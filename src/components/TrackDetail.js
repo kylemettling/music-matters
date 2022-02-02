@@ -241,8 +241,7 @@ export function TrackDetail() {
 					alt={[songAlbum] + ' cover'}
 				></img>
 			</div>
-			<BackButton />
-			<section className='chordbookContainer'>
+			<section className='chordbookContainer flex'>
 				{/* <div className='chordbookHeader'> */}
 				{/* <div className='keyModeSelect'>
 						<div>
@@ -313,13 +312,15 @@ export function TrackDetail() {
 					})}
 				</DragDropContext>
 				{/* </div> */}
-				<button onClick={createBlankPalette}>+</button>
-				<span>Key: {songKey}</span>
-				<span>Translated: {keyTranslation[songKey]}</span>
-				<span>Mode: {songKeyCenterQuality}</span>
-				{/* <span>
+				<div>
+					<button onClick={createBlankPalette}>+</button>
+					<span>Key: {songKey}</span>
+					<span>Translated: {keyTranslation[songKey]}</span>
+					<span>Mode: {songKeyCenterQuality}</span>
+					{/* <span>
 					Mode: {songKeyCenterQuality === 1 ? 'mixolydian' : 'aeolian'}
 				</span> */}
+				</div>
 			</section>
 		</div>
 	)

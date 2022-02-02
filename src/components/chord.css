@@ -9,7 +9,7 @@
 }
 .chord-detail {
 	--chordTextColor: var(--lightGrey);
-	color: var(--chordTextColor);
+	color: var(--textColor);
 	font-size: var(--baseFontSize);
 	margin: 0.5rem;
 	justify-content: center;

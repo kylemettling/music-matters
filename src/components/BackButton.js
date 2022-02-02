@@ -5,29 +5,36 @@ import { useHistory } from 'react-router-dom'
 export function BackButton() {
 	const history = useHistory()
 	return (
-		<button
+		<div
+			className='backButton flex'
 			style={{
-				width: '85px',
-				height: '35px',
-				// padding: '5px',
-				margin: '0 13%',
-				textAlign: 'center',
-				display: 'flex',
-				flexDirection: 'row',
-				justifyContent: 'center',
-				gap: '4px',
-				alignItems: 'center',
+				top: '0',
+				// padding: '0 .75%',
+				// position: 'sticky',
+				// top: '0.25rem',
+				// left: '0',
 			}}
-			onClick={() => history.goBack()}
 		>
-			<FiArrowLeft
+			<button
 				style={{
-					// height: '40px',
-					padding: '0px',
-					margin: '0px',
+					width: '85px',
+					height: '35px',
+					// margin: '0 13%',
+					display: 'flex',
+					flexDirection: 'row',
+					justifyContent: 'center',
 				}}
-			/>{' '}
-			{/* Back */}
-		</button>
+				onClick={() => history.goBack()}
+			>
+				<FiArrowLeft
+					style={{
+						padding: '0px',
+						marginTop: '1px',
+						margin: '0px',
+					}}
+				/>{' '}
+				{/* Back */}
+			</button>
+		</div>
 	)
 }

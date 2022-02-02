@@ -1,17 +1,30 @@
 /* former logo color: #39e991 */
 header {
 	/* margin-top: 3rem; */
+	padding: 0;
+	margin: 0;
+	/* height: auto; */
 }
 .themeSelect {
 	transform: rotate(-30deg);
 	font-size: 2.5rem;
-	position: sticky;
-	top: 0.25rem;
-	left: 0;
+	/* position: sticky; */
+	/* top: 0.25rem; */
+	/* left: 0; */
 	/* position: absolute; */
 }
+.settings {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	position: fixed;
+
+	/* justify-content: flex-start; */
+	top: 0.5rem;
+	left: 0.25rem;
+}
 .themeSelectForward {
-	color: var(--green);
+	color: var(--buttonColor);
 	font-size: 2.5rem;
 	animation: rotateForward 0.4s forwards;
 	transform: rotate(30deg);
@@ -52,8 +65,12 @@ header {
 }
 
 .logo:hover {
-	filter: drop-shadow(0px 0px 5px #2effee);
+	filter: drop-shadow(0px 0px 5px var(--black));
 }
-header > img {
-	height: 7.5rem;
+.dark .logo:hover {
+	filter: drop-shadow(0px 0px 5px var(--white));
 }
+/* header img {
+	margin: 1rem 0;
+	height: 16rem;
+} */

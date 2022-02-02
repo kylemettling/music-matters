@@ -3,32 +3,37 @@
 :root {
 	/* Define Colors as colors */
 	--green: #00ebc7;
+	--green2: #35c680;
+	--lightGreen: #72daa7;
 	--red: #ff5470;
 	--yellow: #fde24f;
 	--black: #1b2d45;
 	--paleBlue: #4747a1;
 	--darkBlue: #00214d;
 	--darkerBlue: #130f21;
-	--darkGrey: #222;
+	--darkGrey: #282c34;
 	--grey: #bfbfbf;
 	--medGrey: #b3b3b3;
 	--lightGrey: #f2f4f6;
 	--white: #fff;
+	--offGreen: #2f8096;
 
 	/* Define Colors intentions */
-	--primary: var(--green);
+	--primary: var(--green2);
 	--danger: var(--red);
 	--background: var(--paleBlue);
-	--textColor: var(--darkerBlue);
+	--textColor: var(--white);
 	--buttonTextColor: var(--black);
 	--buttonColor: var(--primary);
 	--lineColor: var(--grey);
-	--cardBg: var(--medGrey);
+	--cardBg: var(--darkGrey);
 	--headerBackground: var(--darkBlue);
 	--footerBackground: var(--black);
 	--cardTextColor: var(--white);
-	--cursorOutlineColor: var(--green);
-	--chordOutlineColor: var(--green);
+	--cursorOutlineColor: var(--green2);
+	--chordOutlineColor: var(--green2);
+	--selectBackgroundColor: var(--background);
+	--selectTextColor: var(--darkerBlue);
 
 	/* Styles */
 	--line: solid 1px var(--lineColor);
@@ -86,13 +91,16 @@ body {
 }
 
 header {
-	height: var(--headerHeight);
+	/* height: var(--headerHeight); */
 	/* background: var(--headerBackground); */
 	/* box-shadow: var(--level-2); */
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: var(--containerPadding);
+	/* padding: var(--containerPadding); */
+}
+header img {
+	height: 10rem;
 }
 header nav a {
 	color: white;
@@ -195,8 +203,10 @@ select {
 	/* -moz-appearance: none; */
 	/* appearance: none; */
 	font-size: var(--baseFontSize);
-	background-color: lightblue;
-	padding: 0.25rem;
+	background-color: var(--selectBackgroundColor);
+	font-weight: bold;
+	color: var(--white);
+	padding: 0.15rem;
 }
 textarea {
 	width: 100%;
@@ -208,7 +218,9 @@ textarea {
 }
 
 select {
-	border: var(--line);
+	/* border: var(--line); */
+	border: transparent;
+	/* outline: 1px solid white; */
 }
 
 hr {
@@ -327,6 +339,7 @@ button.small {
 	--chordTextColor: var(--white);
 	--chordOutlineColor: var(--paleBlue);
 	--cursorOutlineColor: var(--paleBlue);
+	--selectBackgroundColor: var(--background);
 }
 
 .oled {

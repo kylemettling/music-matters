@@ -193,7 +193,7 @@ export function Chordbook({ type, name, bookId, chords }) {
 
 	return (
 		<div className='chordbook'>
-			<div className='chordbookHeader flex'>
+			<div className='chordbookHeader flex card'>
 				{type === 'starter' ? (
 					<h5>
 						Suggested scale <br />
@@ -254,11 +254,10 @@ export function Chordbook({ type, name, bookId, chords }) {
 							className='keyModeSubmit'
 							onClick={(e) => handleScaleChange(e)}
 						>
-							Get Scale
+							Change
 						</button>
 					</div>
 				)}
-				<div className='headerSpacer'></div>
 			</div>
 			<DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
 				<Droppable droppableId={bookId.toString()} direction='horizontal'>

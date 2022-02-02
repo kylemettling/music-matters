@@ -3,7 +3,9 @@
 	align-items: center;
 	padding-top: 3rem;
 }
-
+.main.flex select {
+	outline: 1px solid white;
+}
 input + select,
 select + button {
 	margin-left: 0.5rem;
