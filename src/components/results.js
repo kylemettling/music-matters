@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Result } from './Result'
+import './results.css'
 
 export default function Results({ resultList, searchToggle, token }) {
 	const [tracks, setTracks] = useState([])
@@ -16,7 +17,7 @@ export default function Results({ resultList, searchToggle, token }) {
 
 	return (
 		<React.Fragment>
-			<div className='resultCon'>
+			<div className='results'>
 				{tracks &&
 					tracks.map((track, i) => (
 						<Result

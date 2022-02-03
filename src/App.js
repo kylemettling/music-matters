@@ -7,14 +7,16 @@ import { TrackDetail } from './components/TrackDetail.js'
 import { Artist } from './components/Artist.js'
 import { Chordbook } from './components/Chordbook.js'
 import { PageWrapper } from './state'
-import './App.css'
+// import './App.css'
+import './components/style.css'
 import { useScript } from './components/hooks/useScript.js'
 import { TestChordbook } from './components/TestChordbook'
 // import { SpotifyToken } from "./components/SpotifyToken.js";
 
 function App() {
 	useScript('https://www.scales-chords.com/api/scales-chords-api.js')
-	// document.body.classList.add('dark')
+	document.body.classList.add('dark')
+	document.body.classList.add('layout')
 	return (
 		<PageWrapper>
 			<Fragment>

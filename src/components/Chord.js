@@ -5,15 +5,14 @@ import { useScript } from './hooks/useScript'
 import { ChordImage } from './ChordImage'
 import { useState, useRef } from 'react'
 // import './chord.css'
-import './style.css'
 
 function Chord({ id, position, root, chordType }) {
 	const { startingScaleData } = useAppState()
 	const [chordImg, setChordImg] = useState(null) //
 	const [isEditing, setToggleIsEditing] = useState(false)
-	const [chordRoot, setChordRoot] = useState(undefined)
+	const [chordRoot, setChordRoot] = useState(root)
 	const [chordRootType, setChordRootType] = useState(undefined)
-	const [keyOptionState, setKeyOptionState] = useState(root)
+	const [keyOptionState, setKeyOptionState] = useState(undefined)
 	const [modeOptionState, setModeOptionState] = useState(chordRootType)
 	const editRef = useRef()
 	// const [newNoteValue, setNewNoteValue] = useState(
@@ -54,16 +53,7 @@ function Chord({ id, position, root, chordType }) {
 	// }, [input])
 
 	useEffect(() => {
-		// console.log(id, position, root, chordType)
-		// if (chordImg) {
-		// 	setChordImg(image)
-		// }
-		// if (chordRoot && !isEditing) {
-		// 	setChordRoot(root)
-		// }
-		// if (!keyOptionState) {
-		// 	setChordRoot(root)
-		// }
+		setChordRoot(root)
 		const checkIfClickedoutside = (e) => {
 			console.log(e)
 			if (editRef.current && !editRef.current.contains(e.target)) {
@@ -75,13 +65,13 @@ function Chord({ id, position, root, chordType }) {
 		return () => {
 			document.removeEventListener('mousedown', checkIfClickedoutside)
 		}
-	}, [id, position, chordType, chordRootType, chordRoot, editRef])
+	}, [id, position, chordType, chordRootType, editRef])
 	// return null
 	return (
 		<Draggable draggableId={id.toString()} index={position} key={id}>
 			{(provided) => (
 				<div
-					className='chord-detail'
+					className='chord-detail card'
 					{...provided.draggableProps}
 					ref={provided.innerRef}
 				>
@@ -140,13 +130,11 @@ function Chord({ id, position, root, chordType }) {
 									</button> */}
 									</div>
 								)) ||
-									chordRoot ||
-									root + handleQuality(chordType)}
+									// chordRoot ||
+									chordRoot + handleQuality(chordType)}
 								{/* {} */}
 							</span>
-							<ChordImage
-								chordName={chordRoot || root + handleQuality(chordType)}
-							/>
+							<ChordImage chordName={chordRoot + handleQuality(chordType)} />
 							{/* {image} */}
 							{/* <img
 							src={`img/${root + handleQuality(chordType)}`}

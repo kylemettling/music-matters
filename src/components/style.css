@@ -48,7 +48,7 @@
 
 	/* Positioning */
 	--containerPadding: 2.5%;
-	--headerHeight: 3rem;
+	--headerHeight: 4rem;
 	--borderRadius: 10px;
 }
 
@@ -57,7 +57,7 @@
 html {
 	font-size: var(--baseFontSize);
 	box-sizing: border-box;
-} /*18px*/
+}
 
 *,
 *::before,
@@ -74,20 +74,14 @@ body {
 }
 
 header {
-	color: white;
-	position: fixed;
-	left: 0;
-	top: 0;
-	width: 100%;
 	height: var(--headerHeight);
-	background: var(--headerBackground);
-	box-shadow: var(--level-2);
+	/* background: var(--headerBackground); */
+	/* box-shadow: var(--level-2); */
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
-	padding: 0 var(--containerPadding);
+	/* padding: 0 var(--containerPadding); */
 }
-
 header nav a {
 	color: white;
 	text-decoration: none;
@@ -181,9 +175,18 @@ input,
 textarea {
 	padding: 4px 5px;
 	border: var(--line);
-	border-radius: 4px;
+	font-size: var(--baseFontSize);
+	border-radius: var(--borderRadius);
 }
-
+select {
+	border-radius: var(--borderRadius);
+	/* -webkit-appearance: none; */
+	/* -moz-appearance: none; */
+	/* appearance: none; */
+	font-size: var(--baseFontSize);
+	background-color: lightblue;
+	padding: 0.25rem;
+}
 textarea {
 	width: 100%;
 	height: 5rem;
@@ -206,6 +209,7 @@ button {
 	appearance: none;
 	color: var(--buttonTextColor);
 	background-color: var(--buttonColor);
+	font-size: var(--baseFontSize);
 	border: none;
 	border-radius: 10px;
 	padding: 5px 25px;
@@ -233,7 +237,7 @@ button.small {
 
 .layout {
 	/* top padding header height + whatever visual padding we want */
-	padding: calc(3rem + var(--headerHeight)) var(--containerPadding);
+	/* padding: calc(3rem + var(--headerHeight)) var(--containerPadding); */
 }
 
 .grid {

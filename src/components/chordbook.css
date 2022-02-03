@@ -1,4 +1,25 @@
-.list {
+.chordbook,
+.chordbookStarter {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
+.chords {
+	display: flex;
+	text-align: center;
+	gap: 0.5rem;
+	padding-top: 0.5rem;
+	border: 4px solid var(--black);
+}
+.chord-detail {
+	font-size: var(--baseFontSize);
+	padding: 1rem;
+	border: 3px var(--green) solid;
+	border-radius: var(--borderRadius);
+	background: #282c34;
+}
+
+/* .list {
 	height: 200px;
 	width: 200px;
 	color: green;
@@ -11,18 +32,10 @@
 .chordbook-main {
 	display: flex;
 	flex-direction: column;
-	/* border: 2px solid lightblue; */
 	border-radius: 5px;
 	width: 550px;
-	/* justify-content: center; */
 }
-.chord-con {
-	/* display: flex; */
 
-	/* flex-direction: row; */
-	/* justify-content: center; */
-	/* align-items: center; */
-}
 .header {
 	display: flex;
 	font-size: 22px;
@@ -34,15 +47,10 @@
 }
 .chord-detail {
 	display: flex;
-	/* font-size: 24px; */
-	/* height: 125px; */
-	/* width: 200px; */
-	/* font-family: "Neuton"; */
 	padding: 0 1%;
 	text-align: center;
 	flex-direction: column;
 	justify-content: flex-start;
-	/* align-content: space-between; */
 }
 .add-chord {
 	display: flex;
@@ -52,15 +60,12 @@
 	height: 30px;
 	width: 45px;
 	padding-bottom: 4px;
-	/* align-items: center; */
-	/* border: none; */
 	border-color: transparent;
 	border-radius: 5px;
 	font-size: 25px;
 }
 .key-mode-select-con {
 	display: flex;
-	/* flex-direction: row; */
 	justify-content: center;
 }
 #mode_selector,
@@ -91,24 +96,18 @@
 	text-align: center;
 }
 .chord-image-con {
-	/* position: absolute; */
 	align-items: center;
 	justify-content: center;
 }
 .chord-image-con img {
 	display: flex;
-	/* transform: translateX(-87.5px); */
 	justify-content: center;
 	border: 3px solid lightblue;
-	/* align-items: flex-end; */
-	/* position: absolute; */
-	/* width: 225px; */
 	width: 95px;
 	margin-top: 5.5%;
-	/* padding-top: 1.5%; */
 }
 .chords {
 	display: flex;
 	justify-content: center;
 	flex-direction: row;
-}
+} */

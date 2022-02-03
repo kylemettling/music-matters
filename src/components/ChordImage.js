@@ -28,26 +28,14 @@ export function ChordImage({ chordName }) {
 
 	return (
 		<div className='chord-image-con'>
-			{/* <button
-          className="show-chord"
-          style={{
-            // backgroundColor: 'black',
-            border: "transparent",
-            width: "50px",
-            height: "25px",
-            paddingTop: "2px",
-            // color: 'white',
-          }}
-          // onClick={(e) => toggleHidden(e)}
-        >
-          <GiGuitarHead />
-        </button>  */}
-			<div
-				className={`chord-image guitar-icon ${toggle ? 'chord-hidden' : ''}`}
-			>
-				<img src={`/img/${handleImgName(chord)}.svg`} alt={`${chord}-img`} />
-				{/* <span>{chordName}</span> */}
-			</div>
+			{chord && (
+				<div
+					className={`chord-image guitar-icon ${toggle ? 'chord-hidden' : ''}`}
+				>
+					<img src={`/img/${handleImgName(chord)}.svg`} alt={`${chord}-img`} />
+					{/* <span>{chordName}</span> */}
+				</div>
+			)}
 		</div>
 	)
 }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import './trackDetail.css'
+import './trackDetail.css'
 // import './style.css'
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useParams } from 'react-router'
@@ -256,9 +256,9 @@ export function TrackDetail() {
 	// if (!track ) return null
 
 	return (
-		<div>
-			<div className='track-main'>
-				<div className='track-card-cover'>
+		<div className='track'>
+			<div>
+				<div className='track-detail'>
 					<div
 						className='track-card'
 						style={{

@@ -21,14 +21,6 @@ export function Chordbook({ root = 'C', mode = 'lydian', type = 'starting' }) {
 
 	const { songKeyCenterQuality, songKey, chordNotes, getScaleChords } =
 		useAppState()
-
-	// function handleQuality(chordType) {
-	// 	const newType =
-	// 		chordType === 'min' ? 'm' : chordType === 'maj' ? '' : chordType
-	// 	return newType
-	// }
-	// useScript('https://www.scales-chords.com/api/scales-chords-api.js')
-
 	const listRenderer = orderBy(chordList, 'position').map((chord) => (
 		<Chord
 			key={chord.id}
@@ -45,8 +37,9 @@ export function Chordbook({ root = 'C', mode = 'lydian', type = 'starting' }) {
 			keyTranslation[songKey] || root,
 			songKeyCenterQuality === 1 ? 'mixolydian' : 'aeolian' || mode
 		)
-		setKeyOptionState(root)
-		setModeOptionState(mode)
+		console.log(keyTranslation[songKey])
+		setKeyOptionState(keyTranslation[songKey])
+		setModeOptionState(songKeyCenterQuality === 1 ? 'mixolydian' : 'aeolian')
 		setChordList(chords)
 	}
 
@@ -67,9 +60,12 @@ export function Chordbook({ root = 'C', mode = 'lydian', type = 'starting' }) {
 	}
 
 	function handleScaleChange(e) {
-		setChordList([])
+		// setChordList([])
+		console.log('pressed')
 		const newChords = getScaleChords(keyOptionState, modeOptionState)
 		console.log('NEW!', newChords)
+		setKeyOptionState(keyOptionState)
+		setModeOptionState(modeOptionState)
 		setChordList(newChords)
 	}
 
@@ -81,88 +77,74 @@ export function Chordbook({ root = 'C', mode = 'lydian', type = 'starting' }) {
 	}, [])
 	const onDragUpdate = useCallback(() => {}, [])
 	// the only one that is required
-	const onDragEnd = useCallback(
-		(result) => {
-			const { destination, source } = result
+	const onDragEnd = useCallback((result) => {
+		const { destination, source } = result
 
-			// make sure change occurs
-			if (!destination || !source) {
-				return
-			}
-			// access to initial (source) position
-			// access to dropped (destination) position
-			if (
-				destination.droppableId === source.droppableId &&
-				destination.index === source.index
-			) {
-				return
-			}
-			// check the direction (> or <)
-			const directionOfDrag =
-				destination.index > source.index ? 'GREATER' : 'LESS'
+		// make sure change occurs
+		if (!destination || !source) {
+			return
+		}
+		// access to initial (source) position
+		// access to dropped (destination) position
+		if (
+			destination.droppableId === source.droppableId &&
+			destination.index === source.index
+		) {
+			return
+		}
+		// check the direction (> or <)
+		const directionOfDrag =
+			destination.index > source.index ? 'GREATER' : 'LESS'
 
-			// find the affected range
-			let affectedRange
-			if (directionOfDrag === 'GREATER') {
-				affectedRange = range(source.index, destination.index + 1)
-			} else {
-				affectedRange = range(destination.index, source.index)
-			}
-			// console.log('drag result', result)
+		// find the affected range
+		let affectedRange
+		if (directionOfDrag === 'GREATER') {
+			affectedRange = range(source.index, destination.index + 1)
+		} else {
+			affectedRange = range(destination.index, source.index)
+		}
+		// console.log('drag result', result)
 
-			// if songs affected (+ or -) update positions
-			const reorderedChordbook = chordList.map((chord) => {
-				// console.log(chordList)
-				// console.log(chord.id, parseInt(result.draggableId))
-				if (chord.id === parseInt(result.draggableId)) {
-					chord.position = destination.index
-					// console.log('condition 1', chord)
+		// if songs affected (+ or -) update positions
+		const reorderedChordbook = chordList.map((chord) => {
+			// console.log(chordList)
+			// console.log(chord.id, parseInt(result.draggableId))
+			if (chord.id === parseInt(result.draggableId)) {
+				chord.position = destination.index
+				// console.log('condition 1', chord)
+				return chord
+			} else if (affectedRange.includes(chord.position)) {
+				if (directionOfDrag === 'GREATER') {
+					chord.position = chord.position - 1
+					// console.log('condition 2.1', chord)
 					return chord
-				} else if (affectedRange.includes(chord.position)) {
-					if (directionOfDrag === 'GREATER') {
-						chord.position = chord.position - 1
-						// console.log('condition 2.1', chord)
-						return chord
-					} else if (directionOfDrag === 'LESS') {
-						chord.position = chord.position + 1
-						// console.log('condition 2.2', chord)
-						return chord
-					}
-				} else {
-					// console.log('condition 3', chord)
+				} else if (directionOfDrag === 'LESS') {
+					chord.position = chord.position + 1
+					// console.log('condition 2.2', chord)
 					return chord
 				}
-			})
-			// console.log(reorderedChordbook)
-			setChordList(reorderedChordbook)
-			// update the playlist state
-		}
-		// [chordList]
-	)
+			} else {
+				// console.log('condition 3', chord)
+				return chord
+			}
+		})
+		// console.log(reorderedChordbook)
+		setChordList(reorderedChordbook)
+		// update the playlist state
+	})
 	useEffect(() => {
-		// if(type === "blank") {
-		// 	setBlankState({
-
-		// 	})
-		// }
-		// if ((root, mode)) {
-		// if ((root, mode)) {
-		// if (songKey && songKeyCenterQuality) {
-		// console.log(songKeyCenterQuality, keyTranslation[songKey])
 		if (type === 'starting') {
 			createSuggestedChords()
 		} else if (type === 'blank') {
 			createBlankChords()
 		}
-		// }
-		// }
-		// }
-	}, [songKey, songKeyCenterQuality, type])
+	}, [songKey, songKeyCenterQuality, type, root, mode])
 
 	return (
 		<div>
 			{type === 'starting' && (
-				<div className='chordbook-con'>
+				<div className='chordbookStarter'>
+					{/* <div className='chordbook-con'> */}
 					<div className='chordbook-main'>
 						<div className='header'>
 							{type === 'starting' ? (
@@ -220,7 +202,7 @@ export function Chordbook({ root = 'C', mode = 'lydian', type = 'starting' }) {
 					</div>
 				</div>
 			)}
-			<div className='chord-con'>
+			<div className='chordbook'>
 				<DragDropContext onDragEnd={onDragEnd}>
 					<Droppable droppableId='CHORDBOOK' direction='horizontal'>
 						{(provided) => (
