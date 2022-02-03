@@ -1,94 +1,49 @@
-/* .track-album-details {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
+.track {
+  display: flex;
+  flex-direction: column;
 }
-.album-cover {
-	display: flex;
-	background-color: rgba(173, 216, 230, 0.55);
+a {
+  cursor: inherit;
 }
-.track-track-details {
-	display: flex;
-	flex-direction: column;
-	font-size: 22px;
+.track h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  cursor: default;
 }
-
-.track-album-details {
-	justify-content: flex-end;
+.detailCard {
+  /* margin: 0 16rem; */
+  /* display: block; */
+  grid-template-columns: 45% 55%;
+  padding-top: 5rem;
+  grid-gap: 5rem;
+  /* width: 100vw; */
 }
-
-.track-card {
-	display: flex;
-	background-size: cover;
-	justify-content: space-between;
-	padding: 1.25%;
-	opacity: 88%;
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-evenly;
 }
-.track-main {
-	margin-top: 2%;
-	display: flex;
-	justify-content: center;
+/* .details: */
+.details > * {
+  padding: 0;
+  margin: 0;
 }
-.track-album-details h3 {
-	z-index: 1;
-	overflow: hidden;
+/* .title {
+	padding-bottom: ;
+} */
+/* .title,
+.artist,
+.cover,
+.album {
+  transition: transform 2s ease-in;
 }
-.subtitle {
-	padding-top: 6px;
-}
-
-.track-text {
-	color: black;
-	padding: 3.67px;
-	background-color: rgba(173, 216, 230, 0.55);
-	overflow: hidden;
-	border-radius: 5px 5px 5px 5px;
-}
-
-.pad-album-cover {
-	border-radius: 5px 5px 5px 5px;
-	padding: 10px;
-	background-color: rgba(173, 216, 230, 0.55);
-}
-.album-text-con {
-	padding: 5px;
-	background-color: rgba(173, 216, 230, 0.55);
-	color: black;
-	font-weight: bold;
-	border-radius: 5px 5px 5px 5px;
-}
-.audio-feautres {
-	display: flex;
-}
-.track-key,
-.track-mode {
-	display: flex;
-	justify-content: center;
-	padding-top: 15px;
-	font-size: 25px;
-	color: #fff;
-}
-.song-lyrics-con {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	justify-self: center;
-}
-.song-lyrics-text-con {
-	display: flex;
-	justify-content: center;
-}
-.song-lyrics-text {
-	font-size: 24px;
-	text-align: center;
-	width: 600px;
-}
-.song-lyrics-footer {
-	padding-top: 2%;
-	font-size: 16px;
-	text-align: center;
-}
-.album-cover {
-	height: 125px;
-	display: flex;
+.title:hover,
+.artist:hover,
+.cover:hover,
+.album:hover {
+  border: 3px solid var(--green);
 } */
