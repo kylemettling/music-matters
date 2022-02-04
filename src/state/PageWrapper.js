@@ -13,7 +13,7 @@ export const AppContext = createContext({})
 export const PageWrapper = ({ children }) => {
 	const { token, refreshToken, getStoredToken } = useSpotifyToken()
 	const { getScaleChords } = useScaleChords()
-	const { fullChordList, setFullChordList } = useChordList()
+	// const { fullChordList, setFullChordList } = useChordList()
 	const {
 		songTitle,
 		songArtist,
@@ -52,8 +52,8 @@ export const PageWrapper = ({ children }) => {
 				getScaleChords,
 				getTrackFeatures,
 				getArtistCoverURL,
-				fullChordList,
-				setFullChordList,
+				// fullChordList,
+				// setFullChordList,
 				// scaleChordStructure,
 				// notes,
 				// chordStructure,

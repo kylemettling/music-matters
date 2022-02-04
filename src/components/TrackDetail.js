@@ -17,8 +17,7 @@ import { BackButton } from './BackButton'
 export function TrackDetail() {
 	const { id } = useParams()
 	const scrollRef = useRef(null)
-	const [songLyrics, setSongLyrics] = useState({ text: '', footer: '' })
-	const [rootChords, setRootChords] = useState([])
+
 	const {
 		songTitle,
 		songArtist,
@@ -52,6 +51,7 @@ export function TrackDetail() {
 			bookId: 1,
 		},
 	])
+	const [chordLists, setChordLists] = useState([])
 	const [keyOptionState, setKeyOptionState] = useState(undefined)
 	const [modeOptionState, setModeOptionState] = useState(undefined)
 
@@ -157,76 +157,6 @@ export function TrackDetail() {
 	// 		setChordPalettes(result)
 	// 	}
 	// })
-	const CustomHeader = ({ name, type }) => {
-		return (
-			<div className='chordbookHeader flex card'>
-				{type === 'starter' ? (
-					<h5>
-						Suggested scale <br />
-						<span className='suggestedScale'>
-							{songKey} {songKeyCenterQuality}
-						</span>
-					</h5>
-				) : (
-					<h5>{name}</h5>
-				)}
-				{type === 'starter' && (
-					<div className='keyModeSelect'>
-						<div>
-							<label>Root: </label>
-							<select
-								name='KeySelector'
-								id='key_selector'
-								value={keyOptionState}
-								onChange={(e) => setKeyOptionState(e.target.value)}
-							>
-								<option value='C'>C</option>
-								<option value='C#'>C#</option>
-								<option value='Db'>Db</option>
-								<option value='D'>D</option>
-								<option value='D#'>D#</option>
-								<option value='Eb'>Eb</option>
-								<option value='E'>E</option>
-								<option value='F'>F</option>
-								<option value='F#'>F#</option>
-								<option value='Gb'>Gb</option>
-								<option value='G'>G</option>
-								<option value='G#'>G#</option>
-								<option value='Ab'>Ab</option>
-								<option value='A'>A</option>
-								<option value='A#'>A#</option>
-								<option value='Bb'>Bb</option>
-								<option value='B'>B</option>
-							</select>
-						</div>
-						<div>
-							<label>Mode: </label>
-							<select
-								name='ModeSelector'
-								id='mode_selector'
-								value={modeOptionState}
-								onChange={(e) => setModeOptionState(e.target.value)}
-							>
-								<option value='ionian'>Ionian (I) - major</option>
-								<option value='dorian'>Dorain (II) - minor</option>
-								<option value='phrygian'>Phrygian (III) - minor</option>
-								<option value='lydian'>Lydian (IV) - major</option>
-								<option value='mixolydian'>Mixolydian (V) - major</option>
-								<option value='aeolian'>Aeolian (VI) - minor</option>
-								<option value='locrian'>Locrian (VII) - diminished</option>
-							</select>
-						</div>
-						<button
-							className='keyModeSubmit'
-							onClick={(e) => handleScaleChange(e)}
-						>
-							Change
-						</button>
-					</div>
-				)}
-			</div>
-		)
-	}
 
 	function createBlankPalette() {
 		console.log('new palette!')
@@ -386,7 +316,8 @@ export function TrackDetail() {
 				></img>
 			</div>
 			<div className='chordbook-container flex'>
-				<DragDropContext onDragEnd={onDragEnd}>
+				<Chordbook />
+				{/* <DragDropContext onDragEnd={onDragEnd}>
 					{chordPalettes.map((palette, idx) => {
 						console.log(palette)
 						return (
@@ -400,7 +331,7 @@ export function TrackDetail() {
 							</div>
 						)
 					})}
-				</DragDropContext>
+				</DragDropContext> */}
 			</div>
 		</div>
 	)

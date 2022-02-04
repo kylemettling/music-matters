@@ -1,32 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { useParams } from 'react-router'
-import { render } from '@testing-library/react'
 import { Draggable, DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { orderBy, random, range } from 'lodash'
 import { useAppState } from './../state/PageWrapper'
 import Chord from './Chord'
-import data from '../state/chords'
 import './chordbook.css'
-import scaleNotes from '../state/scaleNotes'
-import scaleChordStructure from '../state/scaleChordStructure'
-import { ChordImage } from './ChordImage'
-import { useScript } from './hooks/useScript'
-import axios from 'axios'
-import keyTranslation from '../state/keyTranslation'
+import { useChordbook } from './hooks'
 
 export function Chordbook() {
 	// export function Chordbook({ type, name, bookId, chords }) {
 	// const [chordsList, setChordsList] = useState([])
-	const [chordbooks, setChordbooks] = useState([
-		{
-			id: 1,
-			name: 'suggested scale',
-			root: songKey,
-			mode: songKeyCenterQuality,
-			type: 'starter',
-			bookId: 1,
-		},
-	])
 	const {
 		songKeyCenterQuality,
 		songKey,
@@ -34,30 +16,45 @@ export function Chordbook() {
 		isActiveTrack,
 		setIsActiveTrack,
 		getScaleChords,
-		fullChordList,
-		setFullChordList,
+		// fullChordList,
+		// setFullChordList,
 	} = useAppState()
+	// const [chordbooks, setChordbooks] = useState([
+
+	// ])
+	// const starterScale = {
+	// 	id: 1,
+	// 	name: 'suggested scale',
+	// 	root: songKey,
+	// 	mode: songKeyCenterQuality,
+	// 	type: 'starter',
+	// 	bookId: 1,
+	// 	chords: getScaleChords(songKey, songKeyCenterQuality),
+	// }
+	const { chordbooks, setChordbooks, createStartingBook } = useChordbook()
 	// const [listRenderer, setListRenderer] = useState([])
 	const [keyOptionState, setKeyOptionState] = useState(songKey)
 	const [modeOptionState, setModeOptionState] = useState(songKeyCenterQuality)
 	// const [renderer, setRenderer] = useState([])
 
-	const listRenderer = orderBy(chordsList, 'position').map((chord) => (
-		<Chord
-			key={chord.id}
-			root={chord.root}
-			chordType={chord.type}
-			id={chord.id}
-			position={chord.position}
-			degree={chord.degree}
-		/>
-	))
+	// const listRenderer = orderBy(chordsList, 'position').map((chord) => (
+	// 	<Chord
+	// 		key={chord.id}
+	// 		root={chord.root}
+	// 		chordType={chord.type}
+	// 		id={chord.id}
+	// 		position={chord.position}
+	// 		degree={chord.degree}
+	// 	/>
+	// ))
 
 	function createSuggestedChords() {
 		const chords = getScaleChords(songKey, songKeyCenterQuality)
+		const listCopy = [...fullChordList]
+
 		setKeyOptionState(songKey)
 		setModeOptionState(songKeyCenterQuality)
-		setChordsList(chords)
+		setChordbooks(chords)
 	}
 
 	function createBlankChords() {
@@ -285,19 +282,11 @@ export function Chordbook() {
 	})
 
 	useEffect(() => {
-		if (songKey && songKeyCenterQuality) {
-			setIsActiveTrack(true)
-			createBlankPalette()
-			createBlankPalette()
-			// storeTrack()
+		if (songKey && songKeyCenterQuality && isActiveTrack) {
+			setKeyOptionState(songKey)
+			setModeOptionState(songKeyCenterQuality)
+			createStartingBook(songKey, songKeyCenterQuality)
 			console.log(songKey, songKeyCenterQuality)
-		}
-		if (isActiveTrack && songKey !== '' && songKeyCenterQuality !== '') {
-			if (type !== 'blank') {
-				createSuggestedChords()
-			} else {
-				createBlankChords()
-			}
 		}
 	}, [songKey, songKeyCenterQuality])
 
@@ -316,39 +305,39 @@ export function Chordbook() {
 							// 		bookId={book.bookId}
 							// 	/>
 							// </div> */}
-							<CustomHeader name={book.name} type={book.type} />
-							<Droppable
-								droppableId={book.id.toString()}
-								direction='horizontal'
-							>
-								{(provided, snapshot) => (
-									<div
-										ref={provided.innerRef}
-										style={
-											{
-												// backgroundColor: snapshot.isDraggingOver ? 'var(--black)' : '',
+							<div className='chordbook'>
+								<CustomHeader name={book.name} type={book.type} />
+								<Droppable
+									droppableId={book.id.toString()}
+									direction='horizontal'
+								>
+									{(provided, snapshot) => (
+										<div
+											ref={provided.innerRef}
+											style={
+												{
+													// backgroundColor: snapshot.isDraggingOver ? 'var(--black)' : '',
+												}
 											}
-										}
-										{...provided.droppableProps}
-										className='chords'
-									>
-										{orderBy(fullChordList[`${book.id}`], 'position').map(
-											(chord) => (
+											{...provided.droppableProps}
+											className='chords'
+										>
+											{orderBy(book.chords, 'position').map((chord) => (
 												<Chord
 													key={chord.id}
-													_droppableId={bookId.toString()}
+													_droppableId={book.id.toString()}
 													root={chord.root}
 													chordType={chord.type}
 													id={chord.id}
 													position={chord.position}
 													degree={chord.degree}
 												/>
-											)
-										)}
-										{provided.placeholder}
-									</div>
-								)}
-							</Droppable>
+											))}
+											{provided.placeholder}
+										</div>
+									)}
+								</Droppable>
+							</div>
 						</>
 					)
 				})}
