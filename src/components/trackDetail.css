@@ -13,13 +13,14 @@ h5,
 h6 {
   cursor: default;
 }
+h1 {
+  /* font-size: 2.25rem; */
+}
 .detailCard {
-  /* margin: 0 16rem; */
-  /* display: block; */
   grid-template-columns: 45% 55%;
+  /* grid-template-columns: 37% 63%; */
   padding-top: 5rem;
-  grid-gap: 5rem;
-  /* width: 100vw; */
+  grid-gap: 2.5rem;
 }
 .details {
   display: flex;
@@ -27,23 +28,53 @@ h6 {
   align-items: flex-end;
   justify-content: space-evenly;
 }
-/* .details: */
+@keyframes slideIn {
+  100% {
+    left: 0;
+  }
+}
+/* @keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
+} */
 .details > * {
   padding: 0;
   margin: 0;
 }
-/* .title {
-	padding-bottom: ;
-} */
+.details img {
+  height: 12rem;
+  border-radius: var(--borderRadius);
+}
+
+.artistImage {
+  border-radius: var(--borderRadius);
+}
+
+.artistImage {
+  height: inherit;
+  height: 500px;
+  max-width: 900px;
+}
+.artistImage,
+.cover {
+  box-shadow: var(--level-4);
+}
 /* .title,
 .artist,
 .cover,
-.album {
-  transition: transform 2s ease-in;
-}
+.artistImage {
+  padding: 0 8px 0 6px;
+  margin: 1px;
+} */
 .title:hover,
 .artist:hover,
-.cover:hover,
 .album:hover {
-  border: 3px solid var(--green);
-} */
+  box-shadow: var(--level-4);
+  outline: 1px var(--green) solid;
+  border-radius: 2px;
+  position: static;
+}

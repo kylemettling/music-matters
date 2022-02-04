@@ -275,12 +275,12 @@ export function TrackDetail() {
 
         <img
           className="artistImage"
-          style={{
-            height: `${
-              artistCover.h > 900 ? artistCover.h / 2 : artistCover.h / 1.4
-            }px`,
-            width: `${artistCover.w / 1.4}px`,
-          }}
+          // style={{
+          //   height: `${
+          //     artistCover.h > 900 ? artistCover.h / 2 : artistCover.h / 1.4
+          //   }px`,
+          //   width: `${artistCover.w / 1.4}px`,
+          // }}
           src={artistCover.url}
           alt={[songAlbum] + " cover"}
         ></img>
