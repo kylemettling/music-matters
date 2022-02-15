@@ -1,7 +1,7 @@
 .track {
 	display: flex;
 	flex-direction: column;
-	max-width: 1080px;
+	/* max-width: 1080px; */
 }
 a {
 	cursor: inherit;
@@ -46,7 +46,6 @@ h1 {
 	border-radius: var(--borderRadius);
 }
 .artistImage {
-	height: inherit;
 	height: 500px;
 	max-width: 900px;
 }
@@ -67,6 +66,9 @@ h1 {
 	/* animation: testAnimation 0.82s infinite; */
 	/* animation: blurText 0.3s forwards; */
 	/* filter: blur(1px) 2s ease-in; */
+}
+.trackCover:hover {
+	border-radius: var(--borderRadius);
 }
 /* @keyframes testAnimation {
 	50% {

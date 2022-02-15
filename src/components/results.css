@@ -1,28 +1,42 @@
 .results {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
+	/* display: flex; */
+	/* flex-direction: row; */
+	/* justify-content: center; */
 	/* width: 100%; */
 	/* align-content: center; */
 	/* align-items: center; */
-	flex-wrap: wrap;
+	/* flex-wrap: wrap; */
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 0.333rem;
 	padding: 0;
+	/* margin: 0; */
 }
 .result {
-	/* grid-template-columns: repeat(3, 1fr); */
+	grid-template-columns: 55% 45%;
 
-	padding: 0.5em;
-	flex-direction: row-reverse;
-	justify-content: space-between;
+	padding: 0.25em 0.333em;
+	/* flex-direction: row-reverse; */
+	/* justify-content: space-between; */
 	align-items: center;
 	text-align: center;
 
-	width: 535px;
-	margin: 0.333rem;
+	/* width: 535px; */
+	margin: 0.5em;
+}
+.result:hover {
+	transform: scale(1.03);
+}
+.result {
+	transition: transform 0.15s ease-in-out;
+	transition-timing-function: cubic-bezier(1, -0.01, 0.85, 2.43);
+	/* transition-timing-function: cubic-bezier(1, -0.32, 0.17, 2.13); */
+	/* transition-timing-function: cubic-bezier(0.78, 0.01, 0.37, 1.15); */
 }
 .result a {
 	text-decoration: none;
 	color: var(--textColor);
+}
+.album {
 }
 .albumImage {
 	/* position: relative; */
@@ -30,6 +44,7 @@
 	margin: 0.5rem;
 }
 .releaseTime {
+	/* font-size: var(--medText); */
 	/* flex-direction: column; */
 	/* align-content: flex-end; */
 	justify-content: flex-end;
@@ -41,10 +56,9 @@
 }
 .resultDetails {
 	/* text-overflow: ellipsis; */
-	overflow: hidden;
+	/* overflow: hidden;
 	max-width: 25ch;
-	white-space: nowrap;
-	/* margin: 0.25rem; */
+	white-space: nowrap;  */
 	padding: 0.55rem;
 	flex-direction: column;
 	justify-self: space-between;
@@ -62,6 +76,13 @@
 	outline: 1px var(--chordOutlineColor) solid;
 	border-radius: 2px;
 	position: static;
+}
+.result:hover {
+	border-radius: var(--borderRadius);
+}
+.title:hover,
+.artist:hover,
+.albumImage:hover {
 	cursor: pointer;
 }
 .releaseTime {
@@ -73,5 +94,8 @@
 .artist {
 	font-size: var(--smallText);
 }
-.album {
+.titleCon {
+	overflow: hidden;
+	max-width: 25ch;
+	white-space: nowrap;
 }

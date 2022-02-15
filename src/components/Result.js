@@ -16,7 +16,7 @@ export function Result({ track, type, searchToggle, token, index }) {
 		<li className='result grid card' key={index}>
 			{/* <div className=' flex'> */}
 			<div className='resultDetails flex'>
-				<span>
+				<span className='titleCon'>
 					<Link
 						className='title'
 						to={{

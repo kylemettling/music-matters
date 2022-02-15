@@ -71,7 +71,7 @@ function Chord({ id, position, root, chordType, degree }) {
 		<Draggable draggableId={id.toString()} index={position} key={id}>
 			{(provided) => (
 				<div
-					className='chord-detail card'
+					className='chord-detail flex card'
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}
 					ref={provided.innerRef}
@@ -86,6 +86,7 @@ function Chord({ id, position, root, chordType, degree }) {
 								{(isEditing && (
 									<div className='key-mode-select-con'>
 										<select
+											className='chordRootSelect'
 											name='KeySelector'
 											id='key_selector'
 											value={keyOptionState}

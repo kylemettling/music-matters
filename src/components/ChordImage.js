@@ -4,10 +4,18 @@ import './chordImage.css'
 
 export function ChordImage({ chordName }) {
 	const [toggle, setToggle] = useState(true)
+	const [isImageToggled, setIsImageToggled] = useState(false)
 	const [chord, setChordName] = useState(chordName)
 
 	function toggleHidden(e) {
 		setToggle(!toggle)
+	}
+	function handleImageClick(e) {
+		console.log('ok')
+		isImageToggled
+			? e.target.classList.add('imageZoom')
+			: e.target.classList.remove('imageZoom')
+		setIsImageToggled(!isImageToggled)
 	}
 
 	function handleImgName(name) {
@@ -32,7 +40,11 @@ export function ChordImage({ chordName }) {
 				<div
 					className={`chord-image guitar-icon ${toggle ? 'chord-hidden' : ''}`}
 				>
-					<img src={`/img/${handleImgName(chord)}.svg`} alt={`${chord}-img`} />
+					<img
+						onClick={handleImageClick}
+						src={`/img/${handleImgName(chord)}.svg`}
+						alt={`${chord}-img`}
+					/>
 					{/* <span>{chordName}</span> */}
 				</div>
 			)}

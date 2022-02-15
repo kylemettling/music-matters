@@ -23,6 +23,7 @@ export function Chordbook({ type, name, bookId, chords }) {
 		isActiveTrack,
 		getScaleChords,
 	} = useAppState()
+	// const [listRenderer, setListRenderer] = useState([])
 	const [keyOptionState, setKeyOptionState] = useState(songKey)
 	const [modeOptionState, setModeOptionState] = useState(songKeyCenterQuality)
 
@@ -51,7 +52,9 @@ export function Chordbook({ type, name, bookId, chords }) {
 	}
 
 	function handleScaleChange(e) {
+		console.log(keyOptionState, modeOptionState, e.target.value)
 		const newChords = getScaleChords(keyOptionState, modeOptionState)
+		console.log('NEW CHORDS', newChords)
 		setKeyOptionState(keyOptionState)
 		setModeOptionState(modeOptionState)
 		setChordsList(newChords)
@@ -65,17 +68,17 @@ export function Chordbook({ type, name, bookId, chords }) {
 
 		const result = {}
 		result[droppableSource.droppableId] = sourceClone
-		console.log(
-			'🚀 ~ file: Chordbook.js ~ line 71 ~ move ~ result[droppableSource.droppableId] ',
-			result[droppableSource.droppableId]
-		)
+		// console.log(
+		// 	'🚀 ~ file: Chordbook.js ~ line 71 ~ move ~ result[droppableSource.droppableId] ',
+		// 	result[droppableSource.droppableId]
+		// )
 		result[droppableDestination.droppableId] = destClone
-		console.log(
-			'🚀 ~ file: Chordbook.js ~ line 73 ~ move ~ result[droppableDestination.droppableId]',
-			result[droppableDestination.droppableId]
-		)
+		// console.log(
+		// 	'🚀 ~ file: Chordbook.js ~ line 73 ~ move ~ result[droppableDestination.droppableId]',
+		// 	result[droppableDestination.droppableId]
+		// )
 
-		console.log('MOVE RESULT', result)
+		// console.log('MOVE RESULT', result)
 
 		return result
 	}
@@ -192,21 +195,19 @@ export function Chordbook({ type, name, bookId, chords }) {
 		<div className='chordbook'>
 			<div className='chordbookHeader flex'>
 				{type === 'starter' ? (
-					<div>
-						<h5>
-							Suggested scale <br />
-							<span className='suggestedScale'>
-								{songKey} {songKeyCenterQuality}
-							</span>
-						</h5>
-					</div>
+					<h5>
+						Suggested scale <br />
+						<span className='suggestedScale'>
+							{songKey} {songKeyCenterQuality}
+						</span>
+					</h5>
 				) : (
 					<h3>Chordbook!</h3>
 				)}
 				{type === 'starter' && (
 					<div className='keyModeSelect'>
 						<div>
-							<label>Root</label>
+							<label>Root: </label>
 							<select
 								name='KeySelector'
 								id='key_selector'
@@ -233,7 +234,7 @@ export function Chordbook({ type, name, bookId, chords }) {
 							</select>
 						</div>
 						<div>
-							<label>Mode</label>
+							<label>Mode: </label>
 							<select
 								name='ModeSelector'
 								id='mode_selector'

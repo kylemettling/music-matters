@@ -11,12 +11,21 @@
 	--chordTextColor: var(--lightGrey);
 	color: var(--chordTextColor);
 	font-size: var(--baseFontSize);
-	padding: 0.5rem;
+	margin: 0.5rem;
+	justify-content: center;
+	align-items: center;
 	border: 3px var(--chordOutlineColor) solid;
 	border-radius: var(--borderRadius);
 	background: #282c34;
-	height: 250px;
-	width: 10rem;
+	height: 275px;
+	width: 11rem;
+}
+.chordRootSelect {
+	/* width: ; */
+	font-size: var(--smallText);
+	height: 30px;
+}
+.chordRootSelect option {
 }
 .dark {
 	/* color: var(--cardTextColor); */

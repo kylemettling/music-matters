@@ -1,15 +1,16 @@
 const rawNotes = [
 	'A',
-	['A#', 'Bb'],
+	['Bb', 'A#'],
 	'B',
 	'C',
-	['C#', 'Db'],
+	['Db', 'C#'],
 	'D',
-	['D#', 'Eb'],
+	['Eb', 'D#'],
 	'E',
 	'F',
-	['F#', 'Gb'],
+	['Gb', 'F#'],
 	'G',
+	['Ab', 'G#'],
 ]
 
 export default rawNotes
