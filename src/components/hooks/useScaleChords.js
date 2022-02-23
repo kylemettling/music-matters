@@ -50,8 +50,8 @@ export const useScaleChords = () => {
 			scaleNoteIndexSearch[0]?.notes?.notes.slice() ||
 			scaleNoteIndexSearch[1]?.notes?.notes.slice()
 		console.log(
-			'COPY OF NOTES',
-			copyOfNotes,
+			// 'COPY OF NOTES',
+			// copyOfNotes,
 			'index search: ',
 			scaleNoteIndexSearch
 		)

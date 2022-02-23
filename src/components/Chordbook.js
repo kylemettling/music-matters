@@ -26,6 +26,7 @@ export function Chordbook({ type, name, bookId, chords }) {
 	// const [listRenderer, setListRenderer] = useState([])
 	const [keyOptionState, setKeyOptionState] = useState(songKey)
 	const [modeOptionState, setModeOptionState] = useState(songKeyCenterQuality)
+	// const [renderer, setRenderer] = useState([])
 
 	const listRenderer = orderBy(chordsList, 'position').map((chord) => (
 		<Chord
@@ -46,7 +47,10 @@ export function Chordbook({ type, name, bookId, chords }) {
 	}
 
 	function createBlankChords() {
-		const chords = [{ id: 1, key: '', root: '', type: 'blank', position: 1 }]
+		const chords = [
+			{ id: 1, key: '', root: '', type: 'blank', position: 1 },
+			{ id: 2, key: '', root: '', type: 'blank', position: 2 },
+		]
 		console.log(chords)
 		setChordsList(chords)
 	}
@@ -58,6 +62,7 @@ export function Chordbook({ type, name, bookId, chords }) {
 		setKeyOptionState(keyOptionState)
 		setModeOptionState(modeOptionState)
 		setChordsList(newChords)
+		// setRenderer(chordsList)
 	}
 
 	const move = (source, destination, droppableSource, droppableDestination) => {
@@ -184,16 +189,32 @@ export function Chordbook({ type, name, bookId, chords }) {
 
 	useEffect(() => {
 		if (isActiveTrack && songKey !== '' && songKeyCenterQuality !== '') {
-			createSuggestedChords()
+			if (type !== 'blank') {
+				createSuggestedChords()
+			} else {
+				createBlankChords()
+			}
 		}
 		// if (songKey !== '' && songKeyCenterQuality !== '') {
 		// 	createSuggestedChords()
 		// }
+		// setRenderer(
+		// 	orderBy(chordsList, 'position').map((chord) => (
+		// 		<Chord
+		// 			key={chord.id}
+		// 			root={chord.root}
+		// 			chordType={chord.type}
+		// 			id={chord.id}
+		// 			position={chord.position}
+		// 			degree={chord.degree}
+		// 		/>
+		// 	))
+		// )
 	}, [songKey, songKeyCenterQuality])
 
 	return (
-		<div className='chordbook'>
-			<div className='chordbookHeader flex card'>
+		<>
+			{/* <div className='chordbookHeader flex card'>
 				{type === 'starter' ? (
 					<h5>
 						Suggested scale <br />
@@ -202,7 +223,7 @@ export function Chordbook({ type, name, bookId, chords }) {
 						</span>
 					</h5>
 				) : (
-					<h3>Chordbook!</h3>
+					<h5>{name}</h5>
 				)}
 				{type === 'starter' && (
 					<div className='keyModeSelect'>
@@ -258,7 +279,7 @@ export function Chordbook({ type, name, bookId, chords }) {
 						</button>
 					</div>
 				)}
-			</div>
+			</div> */}
 			<DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
 				<Droppable droppableId={bookId.toString()} direction='horizontal'>
 					{(provided) => (
@@ -267,12 +288,22 @@ export function Chordbook({ type, name, bookId, chords }) {
 							{...provided.droppableProps}
 							className='chords'
 						>
-							{listRenderer}
+							{/* {listRenderer} */}
+							{orderBy(chordsList, 'position').map((chord) => (
+								<Chord
+									key={chord.id}
+									root={chord.root}
+									chordType={chord.type}
+									id={chord.id}
+									position={chord.position}
+									degree={chord.degree}
+								/>
+							))}
 							{provided.placeholder}
 						</div>
 					)}
 				</Droppable>
 			</DragDropContext>
-		</div>
+		</>
 	)
 }

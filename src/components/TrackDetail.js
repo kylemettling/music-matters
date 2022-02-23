@@ -157,19 +157,91 @@ export function TrackDetail() {
 	// 		setChordPalettes(result)
 	// 	}
 	// })
+	const CustomHeader = ({ name, type }) => {
+		return (
+			<div className='chordbookHeader flex card'>
+				{type === 'starter' ? (
+					<h5>
+						Suggested scale <br />
+						<span className='suggestedScale'>
+							{songKey} {songKeyCenterQuality}
+						</span>
+					</h5>
+				) : (
+					<h5>{name}</h5>
+				)}
+				{type === 'starter' && (
+					<div className='keyModeSelect'>
+						<div>
+							<label>Root: </label>
+							<select
+								name='KeySelector'
+								id='key_selector'
+								value={keyOptionState}
+								onChange={(e) => setKeyOptionState(e.target.value)}
+							>
+								<option value='C'>C</option>
+								<option value='C#'>C#</option>
+								<option value='Db'>Db</option>
+								<option value='D'>D</option>
+								<option value='D#'>D#</option>
+								<option value='Eb'>Eb</option>
+								<option value='E'>E</option>
+								<option value='F'>F</option>
+								<option value='F#'>F#</option>
+								<option value='Gb'>Gb</option>
+								<option value='G'>G</option>
+								<option value='G#'>G#</option>
+								<option value='Ab'>Ab</option>
+								<option value='A'>A</option>
+								<option value='A#'>A#</option>
+								<option value='Bb'>Bb</option>
+								<option value='B'>B</option>
+							</select>
+						</div>
+						<div>
+							<label>Mode: </label>
+							<select
+								name='ModeSelector'
+								id='mode_selector'
+								value={modeOptionState}
+								onChange={(e) => setModeOptionState(e.target.value)}
+							>
+								<option value='ionian'>Ionian (I) - major</option>
+								<option value='dorian'>Dorain (II) - minor</option>
+								<option value='phrygian'>Phrygian (III) - minor</option>
+								<option value='lydian'>Lydian (IV) - major</option>
+								<option value='mixolydian'>Mixolydian (V) - major</option>
+								<option value='aeolian'>Aeolian (VI) - minor</option>
+								<option value='locrian'>Locrian (VII) - diminished</option>
+							</select>
+						</div>
+						<button
+							className='keyModeSubmit'
+							onClick={(e) => handleScaleChange(e)}
+						>
+							Change
+						</button>
+					</div>
+				)}
+			</div>
+		)
+	}
 
 	function createBlankPalette() {
 		console.log('new palette!')
 		//  <Chordbook root='F' mode='ionian' type='blank' />
 		const blank = {
-			key: '',
+			id: chordPalettes.length + 1,
+			name: 'Intro',
 			root: '',
-			type: '',
-			id: '',
-			position: chordPalettes.length + 1,
+			mode: '',
+			type: 'blank',
+			bookId: chordPalettes.length + 1,
 		}
-		const newPalette = <Chordbook {...blank} />
-		const palettes = [...chordPalettes, newPalette]
+
+		// const newPalette = <Chordbook id={chordPalettes.length + 1} />
+		const palettes = [...chordPalettes, blank]
 		// const listRenderer = orderBy(palettes, 'position').map((palette) => (
 		// 	<Chordbook
 		// 		key={palette.id}
@@ -191,9 +263,12 @@ export function TrackDetail() {
 		getTrack(id)
 		if (songKey && songKeyCenterQuality) {
 			setIsActiveTrack(true)
+			createBlankPalette()
 			// storeTrack()
 			console.log(songKey, songKeyCenterQuality)
 		}
+		// if (chordPalettes.length) {
+		// }
 		// }
 	}, [
 		songTitle,
@@ -241,87 +316,24 @@ export function TrackDetail() {
 					alt={[songAlbum] + ' cover'}
 				></img>
 			</div>
-			<section className='chordbookContainer flex'>
-				{/* <div className='chordbookHeader'> */}
-				{/* <div className='keyModeSelect'>
-						<div>
-							<label>Root</label>
-							<select
-								name='KeySelector'
-								id='key_selector'
-								value={keyOptionState}
-								onChange={(e) => setKeyOptionState(e.target.value)}
-							>
-								<option value='C'>C</option>
-								<option value='C#'>C#</option>
-								<option value='Db'>Db</option>
-								<option value='D'>D</option>
-								<option value='D#'>D#</option>
-								<option value='Eb'>Eb</option>
-								<option value='E'>E</option>
-								<option value='F'>F</option>
-								<option value='F#'>F#</option>
-								<option value='Gb'>Gb</option>
-								<option value='G'>G</option>
-								<option value='G#'>G#</option>
-								<option value='Ab'>Ab</option>
-								<option value='A'>A</option>
-								<option value='A#'>A#</option>
-								<option value='Bb'>Bb</option>
-								<option value='B'>B</option>
-							</select>
-						</div>
-						<div>
-							<label>Mode</label>
-							<select
-								name='ModeSelector'
-								id='mode_selector'
-								value={modeOptionState}
-								onChange={(e) => setModeOptionState(e.target.value)}
-							>
-								<option value='ionian'>Ionian (I) - major</option>
-								<option value='dorian'>Dorain (II) - minor</option>
-								<option value='phrygian'>Phrygian (III) - minor</option>
-								<option value='lydian'>Lydian (IV) - major</option>
-								<option value='mixolydian'>Mixolydian (V) - major</option>
-								<option value='aeolian'>Aeolian (VI) - minor</option>
-								<option value='locrian'>Locrian (VII) - diminished</option>
-							</select>
-						</div>
-						<button
-							className='keyModeSubmit'
-							onClick={(e) => handleScaleChange(e)}
-						>
-							Get Scale
-						</button>
-					</div> */}
-				{/* )} */}
+			<div className='chordbook-container flex'>
 				<DragDropContext>
 					{chordPalettes.map((palette, idx) => {
 						console.log(palette)
 						return (
-							<Chordbook
-								key={idx}
-								// root={palette.root}
-								// mode={palette.mode}
-								type={palette.type}
-								name={palette.name}
-								bookId={palette.id}
-							/>
+							<div className='chordbook'>
+								<CustomHeader name={palette.name} type={palette.type} />
+								<Chordbook
+									key={idx}
+									type={palette.type}
+									name={palette.name}
+									bookId={palette.bookId}
+								/>
+							</div>
 						)
 					})}
 				</DragDropContext>
-				{/* </div> */}
-				<div>
-					<button onClick={createBlankPalette}>+</button>
-					<span>Key: {songKey}</span>
-					<span>Translated: {keyTranslation[songKey]}</span>
-					<span>Mode: {songKeyCenterQuality}</span>
-					{/* <span>
-					Mode: {songKeyCenterQuality === 1 ? 'mixolydian' : 'aeolian'}
-				</span> */}
-				</div>
-			</section>
+			</div>
 		</div>
 	)
 }

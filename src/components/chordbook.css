@@ -1,9 +1,9 @@
 .chordbook {
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	text-align: center;
-	margin: 2em auto;
-	gap: 0.5rem;
+	margin-bottom: 0;
+	/* gap: 0.25rem; */
 }
 .chordbookHeader {
 	display: flex;
@@ -12,7 +12,9 @@
 	flex-direction: column;
 	justify-content: space-around;
 	align-content: center;
+	align-self: flex-start;
 	padding: 1em 1.25em;
+	flex-grow: 1;
 }
 .chordbookHeader h5 {
 	/* margin: 0;  */
@@ -27,16 +29,17 @@
 	border-right: 8px var(--chordOutlineColor) solid;
 	border-left: 8px var(--chordOutlineColor) solid;
 	color: var(--white);
-	margin: 0.5rem;
+	margin: 0.25rem;
+}
+.chordbookHeader:nth-child(1) {
+	/* color: blue; */
 }
 .chords {
 	display: flex;
-	/* width: 100%; */
 	justify-content: center;
 	text-align: center;
-	gap: 0.222rem;
-	/* padding-top: 0.5rem; */
 	outline: none;
+	flex-grow: 4.667;
 }
 .blur {
 	animation: blurIn 0.05s forwards;
@@ -51,7 +54,7 @@
 		filter: blur(0.5px);
 	}
 	100% {
-		filter: blur(1.2px);
+		filter: blur(1.15px);
 	}
 }
 .keyModeSelect {
@@ -70,95 +73,3 @@
 .keyModeSelect div .suggestedScale {
 	text-transform: capitalize;
 }
-/* .list {
-	height: 200px;
-	width: 200px;
-	color: green;
-}
-.chordbook-con {
-	display: flex;
-	justify-content: center;
-	flex-direction: row;
-}
-.chordbook-main {
-	display: flex;
-	flex-direction: column;
-	border-radius: 5px;
-	width: 550px;
-}
-
-.header {
-	display: flex;
-	font-size: 22px;
-	color: lightblue;
-	padding: 2%;
-}
-.title {
-	font-size: 36px;
-}
-.chord-detail {
-	display: flex;
-	padding: 0 1%;
-	text-align: center;
-	flex-direction: column;
-	justify-content: flex-start;
-}
-.add-chord {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: lightblue;
-	height: 30px;
-	width: 45px;
-	padding-bottom: 4px;
-	border-color: transparent;
-	border-radius: 5px;
-	font-size: 25px;
-}
-.key-mode-select-con {
-	display: flex;
-	justify-content: center;
-}
-#mode_selector,
-#key_selector {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	font-size: 20px;
-	background-color: lightblue;
-}
-#mode_selector,
-#key_selector,
-.key-mode-submit {
-	height: 30px;
-	text-align: center;
-}
-#mode_selector {
-	width: 225px;
-}
-#key_selector {
-	width: 55px;
-}
-.key-mode-submit {
-	background-color: #39e991;
-	font-size: 18px;
-	border: transparent;
-	padding: 3px 3px;
-	text-align: center;
-}
-.chord-image-con {
-	align-items: center;
-	justify-content: center;
-}
-.chord-image-con img {
-	display: flex;
-	justify-content: center;
-	border: 3px solid lightblue;
-	width: 95px;
-	margin-top: 5.5%;
-}
-.chords {
-	display: flex;
-	justify-content: center;
-	flex-direction: row;
-} */
