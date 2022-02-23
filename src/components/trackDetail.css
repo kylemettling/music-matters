@@ -1,10 +1,10 @@
 .track {
-	display: flex;
-	flex-direction: column;
-	/* max-width: 1080px; */
+  display: flex;
+  flex-direction: column;
+  /* max-width: 1080px; */
 }
 a {
-	cursor: inherit;
+  cursor: inherit;
 }
 .track h1,
 h2,
@@ -12,67 +12,69 @@ h3,
 h4,
 h5,
 h6 {
-	cursor: default;
+  cursor: default;
 }
 h1 {
-	/* font-size: 2.25rem; */
+  /* font-size: 2.25rem; */
 }
 .chordbook-container {
 }
 .chordbook-container.flex {
-	/* padding: 0; */
-	margin-top: 2.5em;
-	flex-direction: column;
+  /* padding: 0; */
+  /* margin-top: 2.5em; */
+  flex-direction: column;
+  /* max-width: calc(100% - 2.5em); */
+  /* margin: 0 auto; */
 }
 .detailCard {
-	/* grid-template-columns: 45% 55%; */
-	/* grid-template-columns: 37% 63%; */
-	padding-top: 5rem;
-	grid-gap: 2.5rem;
+  /* grid-template-columns: 45% 55%; */
+  /* grid-template-columns: 37% 63%; */
+  padding-top: 5rem;
+  grid-gap: 2.5rem;
 }
 .details {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 .details > * {
-	padding: 0;
-	margin: 0;
+  padding: 0;
+  margin: 0;
 }
 .details img {
-	height: 12rem;
-	border-radius: var(--borderRadius);
+  height: 12rem;
+  border-radius: var(--borderRadius);
 }
 .trackTitle {
-	overflow: hidden;
-	max-width: 30ch;
-	white-space: nowrap;
+  overflow: hidden;
+  max-width: 30ch;
+  white-space: nowrap;
 }
 .artistImage {
-	border-radius: var(--borderRadius);
+  border-radius: var(--borderRadius);
 }
 .artistImage {
-	height: 500px;
-	max-width: 900px;
+  height: 500px;
+  max-width: 900px;
 }
 .artistImage,
 .cover {
-	box-shadow: var(--level-4);
+  box-shadow: var(--level-4);
 }
 .trackTitle:hover,
 .trackArtist:hover,
 .trackCover:hover,
 .trackAlbum:hover,
 .artistImage:hover {
-	--blurAmount: 3px;
-	box-shadow: var(--level-4);
-	outline: 2px var(--cursorOutlineColor) solid;
-	border-radius: 3px;
-	/* position: static; */
-	/* animation: testAnimation 0.82s infinite; */
-	/* animation: blurText 0.3s forwards; */
-	/* filter: blur(1px) 2s ease-in; */
+  --blurAmount: 3px;
+  box-shadow: var(--level-4);
+  outline: 2px var(--cursorOutlineColor) solid;
+  border-radius: 3px;
+  /* position: static; */
+  /* animation: testAnimation 0.82s infinite; */
+  /* animation: blurText 0.3s forwards; */
+  /* filter: blur(1px) 2s ease-in; */
 }
 /* .trackTitle:hover {
 	max-width: none;
@@ -91,7 +93,7 @@ h1 {
 	}
 } */
 .trackCover:hover {
-	border-radius: var(--borderRadius);
+  border-radius: var(--borderRadius);
 }
 /* @keyframes testAnimation {
 	50% {
@@ -99,13 +101,13 @@ h1 {
 	}
 } */
 @keyframes blurText {
-	0% {
-		filter: blur(0px);
-	}
-	50% {
-		filter: blur(3px);
-	}
-	/* 20% {
+  0% {
+    filter: blur(0px);
+  }
+  50% {
+    filter: blur(3px);
+  }
+  /* 20% {
 		filter: blur(2.5px);
 	}
 	40% {
@@ -117,7 +119,7 @@ h1 {
 	80% {
 		filter: blur(3px);
 	} */
-	100% {
-		filter: blur(2px);
-	}
+  100% {
+    filter: blur(2px);
+  }
 }
