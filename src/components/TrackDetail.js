@@ -326,7 +326,6 @@ export function TrackDetail() {
             console.log(palette);
             return (
               <div className="chordbook">
-                <CustomHeader name={palette.name} type={palette.type} />
                 <Chordbook
                   key={idx}
                   type={palette.type}

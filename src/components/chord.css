@@ -16,12 +16,11 @@
   align-items: center;
   border: 3px var(--chordOutlineColor) solid;
   border-radius: var(--borderRadius);
-  background: #282c34;
-  /* height: 275px; */
+  /* background: #282c34; */
+  height: 275px;
   width: 10rem;
 }
 .chordRootSelect {
-  /* width: ; */
   font-size: var(--smallText);
   height: 30px;
 }

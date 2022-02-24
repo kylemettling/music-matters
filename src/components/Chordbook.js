@@ -89,6 +89,76 @@ export function Chordbook({ type, name, bookId, chords }) {
 
     return result;
   };
+  const CustomHeader = ({ name, type }) => {
+    return (
+      <div className="chordbookHeader flex card">
+        {type === "starter" ? (
+          <h5>
+            Suggested scale <br />
+            <span className="suggestedScale">
+              {songKey} {songKeyCenterQuality}
+            </span>
+          </h5>
+        ) : (
+          <h5>{name}</h5>
+        )}
+        {type === "starter" && (
+          <div className="keyModeSelect">
+            <div>
+              <label>Root: </label>
+              <select
+                name="KeySelector"
+                id="key_selector"
+                value={keyOptionState}
+                onChange={(e) => setKeyOptionState(e.target.value)}
+              >
+                <option value="C">C</option>
+                <option value="C#">C#</option>
+                <option value="Db">Db</option>
+                <option value="D">D</option>
+                <option value="D#">D#</option>
+                <option value="Eb">Eb</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
+                <option value="F#">F#</option>
+                <option value="Gb">Gb</option>
+                <option value="G">G</option>
+                <option value="G#">G#</option>
+                <option value="Ab">Ab</option>
+                <option value="A">A</option>
+                <option value="A#">A#</option>
+                <option value="Bb">Bb</option>
+                <option value="B">B</option>
+              </select>
+            </div>
+            <div>
+              <label>Mode: </label>
+              <select
+                name="ModeSelector"
+                id="mode_selector"
+                value={modeOptionState}
+                onChange={(e) => setModeOptionState(e.target.value)}
+              >
+                <option value="ionian">Ionian (I) - major</option>
+                <option value="dorian">Dorain (II) - minor</option>
+                <option value="phrygian">Phrygian (III) - minor</option>
+                <option value="lydian">Lydian (IV) - major</option>
+                <option value="mixolydian">Mixolydian (V) - major</option>
+                <option value="aeolian">Aeolian (VI) - minor</option>
+                <option value="locrian">Locrian (VII) - diminished</option>
+              </select>
+            </div>
+            <button
+              className="keyModeSubmit"
+              onClick={(e) => handleScaleChange(e)}
+            >
+              Change
+            </button>
+          </div>
+        )}
+      </div>
+    );
+  };
 
   // using useCallback is optional
   const onBeforeCapture = useCallback(() => {
@@ -114,6 +184,7 @@ export function Chordbook({ type, name, bookId, chords }) {
   const onDragEnd = useCallback((result) => {
     const { destination, source } = result;
 
+    // detect
     // adding blur animation to non-dragging chords
     const elements = document.querySelectorAll(".chord-detail");
     for (let i = 0; i < elements.length; i++) {
@@ -201,6 +272,7 @@ export function Chordbook({ type, name, bookId, chords }) {
 
   return (
     <>
+      <CustomHeader name={name} type={type} />
       <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
         <Droppable droppableId={bookId.toString()} direction="horizontal">
           {(provided) => (

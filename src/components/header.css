@@ -13,13 +13,27 @@ header {
   /* left: 0; */
   /* position: absolute; */
 }
+.dark header .logo {
+  filter: drop-shadow(0px 0px 3px var(--green2));
+}
+header .logo {
+  filter: drop-shadow(0px 0px 5px black);
+}
+.dark header .logo:hover {
+  filter: drop-shadow(0px 0px 1px var(--green2));
+}
+header .logo:hover {
+  filter: drop-shadow(0px 0px 3px black);
+}
 .settings {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   position: fixed;
-  top: 1.25rem;
-  left: 1.5rem;
+  /* top: 1.25rem; */
+  top: 2.5rem;
+  /* padding: 0 2em; */
+  left: 2.5em;
 }
 .themeSelectForward {
   color: var(--buttonColor);
@@ -62,12 +76,12 @@ header {
   }
 }
 
-.logo:hover {
-  filter: drop-shadow(0px 0px 5px var(--black));
+/* .logo:hover {
+  filter: drop-shadow(0px 0px 5px black);
 }
 .dark .logo:hover {
-  filter: drop-shadow(0px 0px 5px var(--white));
-}
+  filter: drop-shadow(0px 0px 5px var(--black));
+} */
 /* header img {
 	margin: 1rem 0;
 	height: 16rem;
