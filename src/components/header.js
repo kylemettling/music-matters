@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { BackButton } from './BackButton'
 
-export default function Header() {
+export default function Header({ includeBackButton = true }) {
 	const [themeToggle, setThemeToggle] = useState(false)
 	const history = useHistory()
 
@@ -45,7 +45,7 @@ export default function Header() {
 					className='themeSelect flex'
 					onClick={(e) => handleThemeToggle(e)}
 				/>
-				<BackButton />
+				{includeBackButton && <BackButton />}
 			</div>
 		</React.Fragment>
 	)

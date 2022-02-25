@@ -6,7 +6,7 @@ import { ChordImage } from './ChordImage'
 import { useState, useRef } from 'react'
 import './chord.css'
 
-function Chord({ id, position, root, chordType, degree }) {
+function Chord({ id, position, root, chordType, degree, _droppableId }) {
 	const { startingScaleData } = useAppState()
 	const [chordImg, setChordImg] = useState(null) //
 	const [isEditing, setToggleIsEditing] = useState(false)
@@ -71,7 +71,7 @@ function Chord({ id, position, root, chordType, degree }) {
 		<Draggable draggableId={id.toString()} index={position} key={id}>
 			{(provided) => (
 				<div
-					className='chord-detail flex card'
+					className={`chord-detail droppableId-${_droppableId} flex card`}
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}
 					ref={provided.innerRef}

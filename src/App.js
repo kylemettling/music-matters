@@ -1,39 +1,30 @@
 import Header from './components/header.js'
 import { Fragment, useEffect } from 'react'
-// import Profile from './components/profile'
 import Search from './components/Search'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { TrackDetail } from './components/TrackDetail.js'
 import { Artist } from './components/Artist.js'
-import { Chordbook } from './components/Chordbook.js'
 import { PageWrapper } from './state'
-// import './App.css'
 import './components/style.css'
-import { useScript } from './components/hooks/useScript.js'
-import { TestChordbook } from './components/TestChordbook'
-// import { SpotifyToken } from "./components/SpotifyToken.js";
 
 function App() {
-	useScript('https://www.scales-chords.com/api/scales-chords-api.js')
-	document.body.classList.add('dark')
-	// document.body.classList.add('layout')
+	// document.body.classList.add('dark')
 	return (
 		<PageWrapper>
 			<Fragment>
 				<Router>
-					<Header />
 					<Switch>
 						<Route path='/track/:id'>
+							<Header />
 							<TrackDetail />
 						</Route>
 						<Route path='/artist/:id'>
+							<Header />
 							<Artist />
 						</Route>
 						<Route path='/' exact>
-							{/* <SpotifyToken /> */}
+							<Header includeBackButton={false} />
 							<Search />
-							{/* <TestChordbook /> */}
-							{/* <Chordbook /> */}
 						</Route>
 					</Switch>
 				</Router>

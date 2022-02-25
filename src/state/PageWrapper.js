@@ -1,5 +1,10 @@
 import React, { createContext, useContext } from 'react'
-import { useSpotifyToken, useTrack, useScaleChords } from '../components/hooks'
+import {
+	useSpotifyToken,
+	useTrack,
+	useScaleChords,
+	useChordList,
+} from '../components/hooks'
 // import scaleNotes from './scaleNotes'
 // import scaleChordStructure from './scaleChordStructure'
 
@@ -8,8 +13,7 @@ export const AppContext = createContext({})
 export const PageWrapper = ({ children }) => {
 	const { token, refreshToken, getStoredToken } = useSpotifyToken()
 	const { getScaleChords } = useScaleChords()
-	// const notes = scaleNotes
-	// const chordStructure = scaleChordStructure
+	const { fullChordList, setFullChordList } = useChordList()
 	const {
 		songTitle,
 		songArtist,
@@ -48,6 +52,8 @@ export const PageWrapper = ({ children }) => {
 				getScaleChords,
 				getTrackFeatures,
 				getArtistCoverURL,
+				fullChordList,
+				setFullChordList,
 				// scaleChordStructure,
 				// notes,
 				// chordStructure,
