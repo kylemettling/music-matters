@@ -1,10 +1,5 @@
 import React, { createContext, useContext } from 'react'
-import {
-	useSpotifyToken,
-	useTrack,
-	useScaleChords,
-	useChordbook,
-} from '../components/hooks'
+import { useSpotifyToken, useTrack, useScaleChords } from '../components/hooks'
 
 export const AppContext = createContext({})
 
