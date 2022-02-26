@@ -102,15 +102,15 @@ export function Chordbook() {
 	const CustomHeader = ({ name, type }) => {
 		return (
 			<div className='chordbookHeader flex card'>
-				{type === 'starter' ? (
+				{type && name && (
 					<h5>
-						Suggested scale <br />
+						{' '}
+						{type} {name}
+						<br />
 						<span className='suggestedScale'>
 							{songKey} {songKeyCenterQuality}
 						</span>
 					</h5>
-				) : (
-					<h5>{name}</h5>
 				)}
 				{type === 'starter' && (
 					<div className='keyModeSelect'>
