@@ -7,7 +7,6 @@ import './chordbook.css'
 import { useChordbook } from './hooks'
 
 export function Chordbook() {
-	// export function Chordbook({ type, name, bookId, chords }) {
 	const {
 		songKeyCenterQuality,
 		songKey,
@@ -15,12 +14,7 @@ export function Chordbook() {
 		isActiveTrack,
 		setIsActiveTrack,
 		getScaleChords,
-		// fullChordList,
-		// setFullChordList,
 	} = useAppState()
-	// const [chordbooks, setChordbooks] = useState([
-
-	// ])
 	// const starterScale = {
 	// 	id: 1,
 	// 	name: 'suggested scale',
@@ -270,7 +264,7 @@ export function Chordbook() {
 	// })
 
 	useEffect(() => {
-		if (songKey && songKeyCenterQuality && isActiveTrack) {
+		if (songKey !== '' && songKeyCenterQuality !== '' && isActiveTrack) {
 			setKeyOptionState(songKey)
 			setModeOptionState(songKeyCenterQuality)
 			createStartingBook(songKey, songKeyCenterQuality)
