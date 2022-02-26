@@ -26,5 +26,5 @@ export const useChordbook = () => {
 		setChordbooks(newList)
 	}
 
-	return { chordbooks, setChordbooks, createStartingBook }
+	return { chordbooks, createStartingBook }
 }

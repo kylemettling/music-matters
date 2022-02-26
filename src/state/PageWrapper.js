@@ -5,15 +5,12 @@ import {
 	useScaleChords,
 	useChordbook,
 } from '../components/hooks'
-// import scaleNotes from './scaleNotes'
-// import scaleChordStructure from './scaleChordStructure'
 
 export const AppContext = createContext({})
 
 export const PageWrapper = ({ children }) => {
 	const { token, refreshToken, getStoredToken } = useSpotifyToken()
 	const { getScaleChords } = useScaleChords()
-	// const { fullChordList, setFullChordList } = useChordbook()
 	const {
 		songTitle,
 		songArtist,
@@ -48,17 +45,9 @@ export const PageWrapper = ({ children }) => {
 				isActiveTrack,
 				clearTrackData,
 				setIsActiveTrack,
-				// scaleNotes,
 				getScaleChords,
 				getTrackFeatures,
 				getArtistCoverURL,
-				// fullChordList,
-				// setFullChordList,
-				// scaleChordStructure,
-				// notes,
-				// chordStructure,
-				// setTrackFeatures,
-				// getArtistCoverURL,
 			}}
 		>
 			{children}
