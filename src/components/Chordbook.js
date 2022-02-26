@@ -8,7 +8,6 @@ import { useChordbook } from './hooks'
 
 export function Chordbook() {
 	// export function Chordbook({ type, name, bookId, chords }) {
-	// const [chordsList, setChordsList] = useState([])
 	const {
 		songKeyCenterQuality,
 		songKey,
@@ -36,17 +35,6 @@ export function Chordbook() {
 	const [keyOptionState, setKeyOptionState] = useState(songKey)
 	const [modeOptionState, setModeOptionState] = useState(songKeyCenterQuality)
 	// const [renderer, setRenderer] = useState([])
-
-	// const listRenderer = orderBy(chordsList, 'position').map((chord) => (
-	// 	<Chord
-	// 		key={chord.id}
-	// 		root={chord.root}
-	// 		chordType={chord.type}
-	// 		id={chord.id}
-	// 		position={chord.position}
-	// 		degree={chord.degree}
-	// 	/>
-	// ))
 
 	// function createSuggestedChords() {
 	// 	const chords = getScaleChords(songKey, songKeyCenterQuality)

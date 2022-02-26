@@ -227,7 +227,7 @@ export function TrackDetail() {
 		// 	// console.log('drag result', result)
 
 		// 	// if songs affected (+ or -) update positions
-		// 	const reorderedChordbook = chordsList.map((chord) => {
+		// 	const reorderedChordbook = chordList.map((chord) => {
 		// 		if (chord.id === parseInt(result.draggableId)) {
 		// 			chord.position = destination.index
 		// 			// console.log('condition 1', chord)
