@@ -3,7 +3,7 @@ import {
 	useSpotifyToken,
 	useTrack,
 	useScaleChords,
-	useChordList,
+	useChordbook,
 } from '../components/hooks'
 // import scaleNotes from './scaleNotes'
 // import scaleChordStructure from './scaleChordStructure'
@@ -13,7 +13,7 @@ export const AppContext = createContext({})
 export const PageWrapper = ({ children }) => {
 	const { token, refreshToken, getStoredToken } = useSpotifyToken()
 	const { getScaleChords } = useScaleChords()
-	// const { fullChordList, setFullChordList } = useChordList()
+	// const { fullChordList, setFullChordList } = useChordbook()
 	const {
 		songTitle,
 		songArtist,

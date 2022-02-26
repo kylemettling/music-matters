@@ -105,7 +105,7 @@ export function Chordbook() {
 				{type && name && (
 					<h5>
 						{' '}
-						{type} {name}
+						{name}
 						<br />
 						<span className='suggestedScale'>
 							{songKey} {songKeyCenterQuality}

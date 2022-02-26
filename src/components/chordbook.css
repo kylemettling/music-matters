@@ -7,6 +7,9 @@
 	/* padding-top: 2.5em; */
 	/* justify-content: ; */
 }
+.chordbook h5 {
+	text-transform: capitalize;
+}
 .chordbook:first-child {
 	padding-top: 2.5em;
 }

@@ -6,11 +6,10 @@ export const useChordbook = () => {
 	const { getScaleChords } = useAppState()
 	const [chordbooks, setChordbooks] = useState([])
 	// chord list
-	const updateChordList = (chordList, chords) => {
-		const prev = chordList.slice()
-		// const selectedList = fullChordList.find(list => list.id === chords.id)
-		setChordbooks((prevState) => [...prevState, ...chordList])
-	}
+	// const updateChordList = (chordList, chords) => {
+	// 	const prev = chordList.slice()
+	// 	setChordbooks((prevState) => [...prevState, ...chordList])
+	// }
 	const createStartingBook = (key, quality) => {
 		console.log('KEY/QUALITY', key, quality)
 		const copy = chordbooks.slice()
