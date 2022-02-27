@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Draggable, DragDropContext, Droppable } from 'react-beautiful-dnd'
-import { orderBy, random, range } from 'lodash'
+import { orderBy, random, range, update } from 'lodash'
 import { useAppState } from './../state/PageWrapper'
 import Chord from './Chord'
 import './chordbook.css'
@@ -24,8 +24,9 @@ export function Chordbook() {
 	// 	bookId: 1,
 	// 	chords: getScaleChords(songKey, songKeyCenterQuality),
 	// }
-	const { chordbooks, createStartingBook } = useChordbook()
+	const { createStartingBook, chordbooks, setChordbooks } = useChordbook()
 	// const [listRenderer, setListRenderer] = useState([])
+	const [isLoaded, setIsLoaded] = useState(false)
 	const [keyOptionState, setKeyOptionState] = useState(songKey)
 	const [modeOptionState, setModeOptionState] = useState(songKeyCenterQuality)
 	// const [renderer, setRenderer] = useState([])
@@ -59,28 +60,6 @@ export function Chordbook() {
 	// 	setChordsList(newChords)
 	// }
 
-	const move = (source, destination, droppableSource, droppableDestination) => {
-		const sourceClone = Array.from(source)
-		const destClone = Array.from(destination)
-		const [removed] = sourceClone.splice(source.index, 1)
-		destClone.splice(destination.index, 0, removed)
-
-		const result = {}
-		result[droppableSource.droppableId] = sourceClone
-		// console.log(
-		// 	'🚀 ~ file: Chordbook.js ~ line 71 ~ move ~ result[droppableSource.droppableId] ',
-		// 	result[droppableSource.droppableId]
-		// )
-		result[droppableDestination.droppableId] = destClone
-		// console.log(
-		// 	'🚀 ~ file: Chordbook.js ~ line 73 ~ move ~ result[droppableDestination.droppableId]',
-		// 	result[droppableDestination.droppableId]
-		// )
-
-		// console.log('MOVE RESULT', result)
-
-		return result
-	}
 	const CustomHeader = ({ name, type }) => {
 		return (
 			<div className='chordbookHeader flex card'>
@@ -89,9 +68,11 @@ export function Chordbook() {
 						{' '}
 						{name}
 						<br />
-						<span className='suggestedScale'>
-							{songKey} {songKeyCenterQuality}
-						</span>
+						{type === 'starter' && (
+							<span className='suggestedScale'>
+								{songKey} {songKeyCenterQuality}
+							</span>
+						)}
 					</h5>
 				)}
 				{type === 'starter' && (
@@ -172,160 +153,212 @@ export function Chordbook() {
 				elements[i].classList.add('blur')
 			}
 		}
+		// console.log(elements)
 	}, [])
 	const onDragUpdate = useCallback(() => {}, [])
 	// the only one that is required
-	// const onDragEnd = useCallback((result) => {
-	// 	const { destination, source, droppableId } = result
-	// 	console.log(destination, source)
-	// 	const copyOfChordsList = [...fullChordList]
-	// 	// detect
-	// 	// adding blur animation to non-dragging chords
-	// 	const elements = document.querySelectorAll(
-	// 		`.chord-detail.droppableId-${source.droppableId}`
-	// 	)
-	// 	for (let i = 0; i < elements.length; i++) {
-	// 		elements[i].classList.remove('blur')
-	// 	}
-	// 	// make sure change occurs
-	// 	if (!destination || !source) {
-	// 		return
-	// 	}
-	// 	// access to initial (source) position
-	// 	// access to dropped (destination) position
-	// 	if (
-	// 		destination.droppableId === source.droppableId &&
-	// 		destination.index === source.index
-	// 	) {
-	// 		return
-	// 	} else if (destination.droppableId !== source.droppableId) {
-	// 		console.log(destination, source)
-	// 	}
+	const onDragEnd = useCallback((result) => {
+		const { destination, source, droppableId } = result
+		// console.log(destination, source)
+		// console.log(chordbooks)
+		// detect
+		// adding blur animation to non-dragging chords
+		const elements = document.querySelectorAll(
+			`.chord-detail.droppableId-${source.droppableId}`
+		)
+		// console.log(elements);
+		for (let i = 0; i < elements.length; i++) {
+			elements[i].classList.remove('blur')
+		}
+		// make sure change occurs
+		if (!destination || !source) {
+			return
+		}
+		// access to initial (source) position
+		// access to dropped (destination) position
+		if (
+			destination.droppableId === source.droppableId &&
+			destination.index === source.index
+		) {
+			return
+		}
 
-	// 	// checking if the source droppableId is the same as the destination droppableId
-	// 	if (destination.droppableId === source.droppableId) {
-	// 		// check the direction (> or <)
-	// 		const directionOfDrag =
-	// 			destination.index > source.index ? 'GREATER' : 'LESS'
+		// checking if the source droppableId is the same as the destination droppableId
+		if (destination.droppableId === source.droppableId) {
+			// check the direction (> or <)
+			const directionOfDrag =
+				destination.index > source.index ? 'GREATER' : 'LESS'
 
-	// 		// find the affected range
-	// 		let affectedRange
-	// 		if (directionOfDrag === 'GREATER') {
-	// 			affectedRange = range(source.index, destination.index + 1)
-	// 		} else {
-	// 			affectedRange = range(destination.index, source.index)
-	// 		}
-	// 		// console.log('drag result', result)
+			// find the affected range
+			let affectedRange
+			if (directionOfDrag === 'GREATER') {
+				affectedRange = range(source.index, destination.index + 1)
+			} else {
+				affectedRange = range(destination.index, source.index)
+			}
+			// console.log('drag result', result)
 
-	// 		// if songs affected (+ or -) update positions
-	// 		const reorderedChordbook = fullChordList[`${source.index}`].map(
-	// 			(chord) => {
-	// 				if (chord.id === parseInt(result.draggableId)) {
-	// 					chord.position = destination.index
-	// 					// console.log('condition 1', chord)
-	// 					return chord
-	// 				} else if (affectedRange.includes(chord.position)) {
-	// 					if (directionOfDrag === 'GREATER') {
-	// 						chord.position = chord.position - 1
-	// 						// console.log('condition 2.1', chord)
-	// 						return chord
-	// 					} else if (directionOfDrag === 'LESS') {
-	// 						chord.position = chord.position + 1
-	// 						// console.log('condition 2.2', chord)
-	// 						return chord
-	// 					}
-	// 				} else {
-	// 					// console.log('condition 3', chord)
-	// 					return chord
-	// 				}
-	// 			}
-	// 		)
-	// 		// console.log(reorderedChordbook)
-	// 		// update the playlist state
-	// 		// const newChords = [...fullChordList, reorderedChordbook]
-	// 		// setFullChordList(newChords)
-	// 		setChordsList(reorderedChordbook)
-	// 	}
-	// 	console.log(
-	// 		source.droppableId,
-	// 		destination.droppableId,
-	// 		source,
-	// 		destination
-	// 	)
-	// 	// else {
-	// 	// 	const result = move(
-	// 	// 		source.droppableId,
-	// 	// 		destination.droppableId,
-	// 	// 		source,
-	// 	// 		destination
-	// 	// 	)
-	// 	// 	setChordsList(result)
-	// 	// }
-	// })
+			// if songs affected (+ or -) update positions
+			const currentBookIndex = chordbooks.findIndex((book) =>
+				book.id === parseInt(source.droppableId) ? book : null
+			)
+			const currentBook = chordbooks[currentBookIndex]
+			const reorderedChordbook = chordbooks[currentBookIndex].chords.map(
+				(chord) => {
+					if (chord.id === parseInt(result.draggableId)) {
+						chord.position = destination.index
+						// console.log('condition 1', chord)
+						return chord
+					} else if (affectedRange.includes(chord.position)) {
+						if (directionOfDrag === 'GREATER') {
+							chord.position = chord.position - 1
+							// console.log('condition 2.1', chord)
+							return chord
+						} else if (directionOfDrag === 'LESS') {
+							chord.position = chord.position + 1
+							// console.log('condition 2.2', chord)
+							return chord
+						}
+					} else {
+						// console.log('condition 3', chord)
+						return chord
+					}
+				}
+			)
+			// console.log(reorderedChordbook)
+			currentBook.chords = reorderedChordbook
+			// console.log(copyOfCurrentBook)
+			chordbooks[currentBookIndex] = currentBook
+			// update the chordbooks state
+			// const updatedChordbook = [...chordbooks, copyOfCurrentBook]
+			// console.log(chordbooks)
+			// console.log(updatedChordbook)
+			// setFullChordList(newChords)
+			setChordbooks(chordbooks)
+		}
+
+		const move = (
+			source,
+			destination,
+			droppableSource,
+			droppableDestination
+		) => {
+			const sourceClone = [...source]
+			const destClone = [...destination]
+			console.log(source, destination, droppableSource, droppableDestination)
+			const [removed] = sourceClone.splice(droppableSource.index - 1, 1)
+			console.log(removed)
+			destClone.splice(droppableDestination.index, 0, removed)
+
+			const result = {}
+			result[droppableSource.droppableId] = sourceClone
+			// console.log(
+			// 	'🚀 ~ file: Chordbook.js ~ line 71 ~ move ~ result[droppableSource.droppableId] ',
+			// 	result[droppableSource.droppableId]
+			// )
+			result[droppableDestination.droppableId] = destClone
+			// console.log(
+			// 	'🚀 ~ file: Chordbook.js ~ line 73 ~ move ~ result[droppableDestination.droppableId]',
+			// 	result[droppableDestination.droppableId]
+			// )
+
+			// console.log('MOVE RESULT', result)
+
+			return result
+		}
+
+		if (destination.droppableId !== source.droppableId) {
+			// console.log('DING DING DING!!! Time to move books!')
+			console.log(
+				chordbooks[parseInt(source.droppableId)],
+				chordbooks[parseInt(destination.droppableId)],
+				chordbooks[parseInt(source.droppableId)].chords,
+				chordbooks[parseInt(destination.droppableId)].chords
+			)
+			const result = move(
+				chordbooks[parseInt(source.droppableId)].chords,
+				chordbooks[parseInt(destination.droppableId)].chords,
+				source,
+				destination
+			)
+			chordbooks[parseInt(source.droppableId)].chords = result[0]
+			chordbooks[parseInt(destination.droppableId)].chords = result[1]
+			chordbooks.filter((book) => book.length)
+			console.log(chordbooks)
+			setChordbooks(chordbooks)
+			// console.log(result)
+		}
+		console.log(
+			source.droppableId,
+			destination.droppableId,
+			source,
+			destination
+		)
+		// else {
+		// 	const result = move(
+		// 		source.droppableId,
+		// 		destination.droppableId,
+		// 		source,
+		// 		destination
+		// 	)
+		// 	setChordsList(result)
+		// }
+	})
 
 	useEffect(() => {
-		if (songKey !== '' && songKeyCenterQuality !== '' && isActiveTrack) {
+		if (
+			songKey !== '' &&
+			songKeyCenterQuality !== '' &&
+			isActiveTrack &&
+			!isLoaded
+		) {
 			setKeyOptionState(songKey)
 			setModeOptionState(songKeyCenterQuality)
 			createStartingBook(songKey, songKeyCenterQuality)
-			console.log(songKey, songKeyCenterQuality)
+			setIsLoaded(true)
 		}
 	}, [songKey, songKeyCenterQuality])
 
 	return (
-		<>
-			<DragDropContext
-			// onDragEnd={onDragEnd}
-			>
-				{chordbooks.map((book, idx) => {
-					console.log(book)
+		<DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
+			{chordbooks &&
+				chordbooks.map((book, idx) => {
 					return (
-						<>
-							{/* // <div className='chordbook'>
-							// 	<Chordbook
-							// 		key={idx}
-							// 		type={book.type}
-							// 		name={book.name}
-							// 		bookId={book.bookId}
-							// 	/>
-							// </div> */}
-							<div className='chordbook'>
-								<CustomHeader name={book.name} type={book.type} />
-								<Droppable
-									droppableId={book.id.toString()}
-									direction='horizontal'
-								>
-									{(provided, snapshot) => (
-										<div
-											ref={provided.innerRef}
-											style={
-												{
-													// backgroundColor: snapshot.isDraggingOver ? 'var(--black)' : '',
-												}
+						<div key={idx} className='chordbook'>
+							<CustomHeader name={book.name} type={book.type} />
+							<Droppable
+								droppableId={book.id.toString()}
+								direction='horizontal'
+							>
+								{(provided, snapshot) => (
+									<div
+										ref={provided.innerRef}
+										style={
+											{
+												// backgroundColor: snapshot.isDraggingOver ? 'var(--black)' : '',
 											}
-											{...provided.droppableProps}
-											className='chords'
-										>
-											{orderBy(book.chords, 'position').map((chord) => (
-												<Chord
-													key={chord.id}
-													_droppableId={book.id.toString()}
-													root={chord.root}
-													chordType={chord.type}
-													id={chord.id}
-													position={chord.position}
-													degree={chord.degree}
-												/>
-											))}
-											{provided.placeholder}
-										</div>
-									)}
-								</Droppable>
-							</div>
-						</>
+										}
+										{...provided.droppableProps}
+										className='chords'
+									>
+										{orderBy(book.chords, 'position').map((chord) => (
+											<Chord
+												key={chord.id}
+												_droppableId={book.id.toString()}
+												root={chord.root || 'blank'}
+												chordType={chord.type}
+												id={chord.id}
+												position={chord.position}
+												degree={chord.degree}
+											/>
+										))}
+										{provided.placeholder}
+									</div>
+								)}
+							</Droppable>
+						</div>
 					)
 				})}
-			</DragDropContext>
-		</>
+		</DragDropContext>
 	)
 }

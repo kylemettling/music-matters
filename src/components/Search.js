@@ -79,6 +79,7 @@ export default function Search() {
 						type='text'
 						placeholder='enter track, artist, or album'
 						value={searchQuery}
+						onKeyDown={(e) => e.key === 'Enter' && getSpotifySearchData(e)}
 						onChange={(e) => setSearchQuery(e.target.value)}
 					/>
 					<select

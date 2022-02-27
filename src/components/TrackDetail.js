@@ -261,8 +261,8 @@ export function TrackDetail() {
 		getTrack(id)
 		if (songKey && songKeyCenterQuality) {
 			setIsActiveTrack(true)
-			createBlankPalette()
-			createBlankPalette()
+			// createBlankPalette()
+			// createBlankPalette()
 			// storeTrack()
 			console.log(songKey, songKeyCenterQuality)
 		}

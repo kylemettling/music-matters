@@ -13,23 +13,23 @@ const nums = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII']
 const dim = '°'
 export const useScaleChords = () => {
 	function getScaleChords(root, mode) {
-		console.log(root, mode)
+		// console.log(root, mode)
 		const notes = scaleNotes[root]?.notes
 		const structure = scaleChordStructure[`${mode.toLowerCase()}`].notes
-		console.log(
-			'🚀 ~ file: useScaleChords.js ~ line 17 ~ getScaleChords ~ structure',
-			structure
-		)
+		// console.log(
+		// 	'🚀 ~ file: useScaleChords.js ~ line 17 ~ getScaleChords ~ structure',
+		// 	structure
+		// )
 		// index of current scale
 		const degreeOfScale = scaleChordStructure[`${mode.toLowerCase()}`].degree
 		const indexOfRootNote = rawNotes.indexOf(root)
 
 		// find major scale relative to
 		const relativeScaleIndex = (indexOfRootNote - degreeOfScale) % 7
-		console.log(
-			'🚀 ~ file: useScaleChords.js ~ line 41 ~ getScaleChords ~ relativeScaleIndex',
-			relativeScaleIndex
-		)
+		// console.log(
+		// 	'🚀 ~ file: useScaleChords.js ~ line 41 ~ getScaleChords ~ relativeScaleIndex',
+		// 	relativeScaleIndex
+		// )
 		// const scaleNotesLength = Object.keys(scaleNotes).length
 		const testArr = []
 		for (let noteSet of Object.keys(scaleNotes)) {
@@ -44,21 +44,18 @@ export const useScaleChords = () => {
 				: null
 		})
 
-		console.log('TEST ARR', testArr)
+		// console.log('TEST ARR', testArr)
 
 		const copyOfNotes =
 			scaleNoteIndexSearch[0]?.notes?.notes.slice() ||
 			scaleNoteIndexSearch[1]?.notes?.notes.slice()
-		console.log(
-			// 'COPY OF NOTES',
-			// copyOfNotes,
-			'index search: ',
-			scaleNoteIndexSearch
-		)
+		// console.log(
+		// 	'index search: ',
+		// 	scaleNoteIndexSearch
+		// )
 		const first = copyOfNotes.slice(degreeOfScale - 1)
 		const last = copyOfNotes.slice(0, degreeOfScale - 1)
 		const correctNotes = [...first, ...last]
-		console.log(correctNotes)
 		const getDegree = (type, idx) => {
 			const numeral = nums[idx]
 			const degree =
@@ -78,7 +75,7 @@ export const useScaleChords = () => {
 				degree: getDegree(structure[idx], idx),
 			}
 		})
-		console.log(scaleChords)
+		// console.log(scaleChords)
 		return scaleChords
 	}
 

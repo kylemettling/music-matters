@@ -12,19 +12,14 @@ export const useTrack = () => {
 	const [songAlbum, setSongAlbum] = useState('')
 	const [songKey, setSongKey] = useState('')
 	const [songKeyCenterQuality, setKeyCenterQuality] = useState('')
-
 	const [spotifySongId, setSpotifySongId] = useState('')
 	const [albumCoverURL, setAlbumCoverURL] = useState('')
-	// const [artistURL, setArtistURL] = useState('')
 	const [isStoredTrack, setIsStoredTrack] = useState(false)
-	const { token, refreshToken, getStoredToken } = useAppState()
-
 	const [artistCover, setArtistCover] = useState({
 		url: '',
 		h: '',
 		w: '',
 	})
-	// const history = useHistory()
 
 	async function getTrackFeatures(id, token) {
 		if (id !== '' && token !== '') {
@@ -41,21 +36,9 @@ export const useTrack = () => {
 					.request(options)
 					.catch((err) => console.log(err))
 
-				// if (!search) {
-				// 	refreshToken()
-				// 	getTrackFeatures(id, token)
-				// }
-
 				const featureData = await search.data
-				// setTrackFeatures(featureData)
-
-				console.log('IN FEATURES', featureData.key, featureData.mode)
-				setSongKey(keyTranslation[featureData.key])
 				const keyCenter = featureData.mode === 1 ? 'mixolydian' : 'aeolian'
-				console.log(
-					'🚀 ~ file: useTrack.js ~ line 55 ~ fetchTrackFeatures ~ keyCenter',
-					keyCenter
-				)
+				setSongKey(keyTranslation[featureData.key])
 				setKeyCenterQuality(keyCenter)
 			}
 			fetchTrackFeatures()

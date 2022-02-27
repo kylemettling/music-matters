@@ -25,9 +25,8 @@ function Chord({ id, position, root, chordType, degree, _droppableId }) {
 	// console.log(item)
 
 	// useScript('https://www.scales-chords.com/api/scales-chords-api.js')
-	function handleQuality() {
-		const newType =
-			chordType === 'min' ? 'm' : chordType === 'maj' ? '' : chordType
+	function handleQuality(type) {
+		const newType = type === 'min' ? 'm' : type === 'maj' ? '' : type
 		return newType
 	}
 	function handleEditToggle(e) {
