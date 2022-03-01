@@ -24,7 +24,8 @@ export function Chordbook() {
 	// 	bookId: 1,
 	// 	chords: getScaleChords(songKey, songKeyCenterQuality),
 	// }
-	const { createStartingBook, chordbooks, setChordbooks } = useChordbook()
+	const { createStartingBook, chordbooks, setChordbooks, sanitizeIds } =
+		useChordbook()
 	// const [listRenderer, setListRenderer] = useState([])
 	const [isLoaded, setIsLoaded] = useState(false)
 	const [keyOptionState, setKeyOptionState] = useState(songKey)
@@ -155,6 +156,44 @@ export function Chordbook() {
 		}
 		// console.log(elements)
 	}, [])
+
+	const move = (source, destination, droppableSource, droppableDestination) => {
+		const sourceClone = [...source]
+		const destClone = [...destination]
+		console.log(source, destination, droppableSource, droppableDestination)
+		const [removed] = sourceClone.splice(droppableSource.index - 1, 1)
+		console.log('removed!', removed)
+		destClone.splice(droppableDestination.index, 0, removed)
+		// console.log(destClone)
+
+		const result = {}
+		result[droppableSource.droppableId] = sourceClone
+		// console.log(
+		// 	'🚀 ~ file: Chordbook.js ~ line 71 ~ move ~ result[droppableSource.droppableId] ',
+		// 	result[droppableSource.droppableId]
+		// )
+		result[droppableDestination.droppableId] = destClone
+		// console.log(result)
+		// const drop1 = result[0].map((chord, idx) => {
+		// 	chord.position = idx + 1
+		// 	return chord
+		// })
+		// const drop2 = result[1].map((chord, idx) => {
+		// 	chord.position = idx + 1
+		// 	return chord
+		// })
+		// const res = result.map((chord, idx) => (chord.position = idx))
+		// console.log(drop1, drop2)
+		// console.log(
+		// 	'🚀 ~ file: Chordbook.js ~ line 73 ~ move ~ result[droppableDestination.droppableId]',
+		// 	result[droppableDestination.droppableId]
+		// )
+
+		// console.log('MOVE RESULT', result)
+
+		return result
+	}
+
 	const onDragUpdate = useCallback(() => {}, [])
 	// the only one that is required
 	const onDragEnd = useCallback((result) => {
@@ -237,44 +276,15 @@ export function Chordbook() {
 			setChordbooks(chordbooks)
 		}
 
-		const move = (
-			source,
-			destination,
-			droppableSource,
-			droppableDestination
-		) => {
-			const sourceClone = [...source]
-			const destClone = [...destination]
-			console.log(source, destination, droppableSource, droppableDestination)
-			const [removed] = sourceClone.splice(droppableSource.index - 1, 1)
-			console.log(removed)
-			destClone.splice(droppableDestination.index, 0, removed)
-
-			const result = {}
-			result[droppableSource.droppableId] = sourceClone
-			// console.log(
-			// 	'🚀 ~ file: Chordbook.js ~ line 71 ~ move ~ result[droppableSource.droppableId] ',
-			// 	result[droppableSource.droppableId]
-			// )
-			result[droppableDestination.droppableId] = destClone
-			// console.log(
-			// 	'🚀 ~ file: Chordbook.js ~ line 73 ~ move ~ result[droppableDestination.droppableId]',
-			// 	result[droppableDestination.droppableId]
-			// )
-
-			// console.log('MOVE RESULT', result)
-
-			return result
-		}
-
 		if (destination.droppableId !== source.droppableId) {
+			console.log(destination, source)
 			// console.log('DING DING DING!!! Time to move books!')
-			console.log(
-				chordbooks[parseInt(source.droppableId)],
-				chordbooks[parseInt(destination.droppableId)],
-				chordbooks[parseInt(source.droppableId)].chords,
-				chordbooks[parseInt(destination.droppableId)].chords
-			)
+			// console.log(
+			// 	chordbooks[parseInt(source.droppableId)],
+			// 	chordbooks[parseInt(destination.droppableId)],
+			// 	chordbooks[parseInt(source.droppableId)].chords,
+			// 	chordbooks[parseInt(destination.droppableId)].chords
+			// )
 			const result = move(
 				chordbooks[parseInt(source.droppableId)].chords,
 				chordbooks[parseInt(destination.droppableId)].chords,
@@ -284,16 +294,17 @@ export function Chordbook() {
 			chordbooks[parseInt(source.droppableId)].chords = result[0]
 			chordbooks[parseInt(destination.droppableId)].chords = result[1]
 			chordbooks.filter((book) => book.length)
-			console.log(chordbooks)
+			// console.log(chordbooks)
+			sanitizeIds()
 			setChordbooks(chordbooks)
 			// console.log(result)
 		}
-		console.log(
-			source.droppableId,
-			destination.droppableId,
-			source,
-			destination
-		)
+		// console.log(
+		// 	source.droppableId,
+		// 	destination.droppableId,
+		// 	source,
+		// 	destination
+		// )
 		// else {
 		// 	const result = move(
 		// 		source.droppableId,

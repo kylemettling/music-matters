@@ -24,7 +24,7 @@ export const useChordbook = () => {
 			chords: getScaleChords(key, quality),
 		}
 		const blankChord = {
-			id: 8,
+			id: 7,
 			root: 'blank',
 			type: '',
 			position: 1,
@@ -52,6 +52,9 @@ export const useChordbook = () => {
 		setChordbooks(newList)
 		setChordCount(newChordCount)
 	}
+	// 	const sanitizeIds = () => {
+	// 		// console.log(chordCount)
+	// for	}
 
-	return { chordbooks, createStartingBook, setChordbooks }
+	return { chordbooks, createStartingBook, setChordbooks, sanitizeIds }
 }
