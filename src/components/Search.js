@@ -63,6 +63,7 @@ export default function Search() {
 	}
 
 	useEffect(() => {
+		getStoredToken()
 		if (!token) {
 			refreshToken()
 		}

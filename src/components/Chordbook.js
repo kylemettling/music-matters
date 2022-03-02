@@ -291,8 +291,10 @@ export function Chordbook() {
 				source,
 				destination
 			)
-			chordbooks[parseInt(source.droppableId)].chords = result[0]
-			chordbooks[parseInt(destination.droppableId)].chords = result[1]
+			chordbooks[parseInt(source.droppableId)].chords =
+				result[source.droppableId]
+			chordbooks[parseInt(destination.droppableId)].chords =
+				result[destination.droppableId]
 			chordbooks.filter((book) => book.length)
 			// console.log(chordbooks)
 			sanitizeIds()

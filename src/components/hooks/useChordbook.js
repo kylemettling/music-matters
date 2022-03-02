@@ -52,9 +52,9 @@ export const useChordbook = () => {
 		setChordbooks(newList)
 		setChordCount(newChordCount)
 	}
-	// 	const sanitizeIds = () => {
-	// 		// console.log(chordCount)
-	// for	}
+	const sanitizeIds = () => {
+		// console.log(chordCount)
+	}
 
 	return { chordbooks, createStartingBook, setChordbooks, sanitizeIds }
 }
