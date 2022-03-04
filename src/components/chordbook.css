@@ -1,84 +1,88 @@
 .chordbook {
-	display: flex;
-	text-align: center;
-	margin-bottom: 0.25em;
-	/* max-height: 275px; */
-	padding: 0 2em;
-	/* padding-top: 2.5em; */
-	/* justify-content: ; */
+  display: flex;
+  text-align: center;
+  margin-bottom: 0.25em;
+  /* max-height: 275px; */
+  padding: 0 2em;
+  /* padding-top: 2.5em; */
+  /* justify-content: ; */
 }
 .chordbook h5 {
-	text-transform: capitalize;
+  text-transform: capitalize;
 }
 .chordbook:first-child {
-	padding-top: 2.5em;
+  padding-top: 2.5em;
 }
 .chordbook:first-child .chordbookHeader:first-of-type {
-	/* color: red; */
-	height: 275px;
+  /* color: red; */
+  height: 275px;
 }
 .chordbookHeader {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	/* justify-self: flex-end; */
-	align-self: flex-start;
-	flex: 2 1 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* justify-self: flex-end; */
+  align-self: flex-start;
+  flex: 2 1 0;
 }
 .chordbook select {
-	--selectBackgroundColor: var(--green2);
-	color: var(--selectTextColor);
-	background: var(--selectBackgroundColor);
+  --selectBackgroundColor: var(--green2);
+  color: var(--selectTextColor);
+  background: var(--selectBackgroundColor);
 }
 .chordbookHeader.card {
-	background: var(--darkGrey);
-	border-right: 8px var(--chordOutlineColor) solid;
-	border-left: 8px var(--chordOutlineColor) solid;
-	color: var(--white);
-	margin: 0.25rem;
+  background: var(--darkGrey);
+  border-right: 8px var(--chordOutlineColor) solid;
+  border-left: 8px var(--chordOutlineColor) solid;
+  color: var(--white);
+  margin: 0.25rem;
 }
 .chordbookHeader:nth-child(1) {
-	/* color: blue; */
+  /* color: blue; */
 }
 .chords {
-	display: flex;
-	justify-content: space-evenly;
-	/* align-items: center; */
-	text-align: center;
-	flex: 7 1 0;
-	/* outline: none; */
+  display: flex;
+  justify-content: space-evenly;
+  /* align-items: center; */
+  text-align: center;
+  flex: 7 1 0;
+  /* outline: none; */
 }
 .blur {
-	animation: blurIn 0.05s forwards;
-	box-shadow: var(--level-5);
-	transform: scale(0.88);
+  animation: blurIn 0.05s forwards;
+  box-shadow: var(--level-5);
+  transform: scale(0.88);
 }
 @keyframes blurIn {
-	0% {
-		filter: blur(0px);
-	}
-	50% {
-		filter: blur(0.5px);
-	}
-	100% {
-		filter: blur(1.15px);
-	}
+  0% {
+    filter: blur(0px);
+  }
+  50% {
+    filter: blur(0.5px);
+  }
+  100% {
+    filter: blur(1.15px);
+  }
 }
 .keyModeSelect {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: 0.55rem;
-	/* width: 50%; */
-	/* padding-left: 50%; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+  /* width: 50%; */
+  /* padding-left: 50%; */
 }
 .keyModeSelect div {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	gap: 0.45em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.45em;
 }
 .keyModeSelect div .suggestedScale {
-	text-transform: capitalize;
+  text-transform: capitalize;
+}
+.keyModeSubmit {
+  color: var(--selectTextColor);
+  font-weight: bold;
 }
