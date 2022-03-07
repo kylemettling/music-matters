@@ -9,12 +9,21 @@
 .chord-image img {
 	transition: transform 0.01s ease-in;
 }
-.imageZoom {
+/* .imageZoom {
 	justify-content: center;
-	transform: scale(1.5);
+	transform: scale(4);
+	position: absolute;
+	top: 0;
+} */
+.chord-image-zoom {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	transform: scale(4);
 }
 .show-chord {
-	/* position: absolute; */
+	position: absolute;
 	z-index: 1;
 }
 .show-chord:hover {

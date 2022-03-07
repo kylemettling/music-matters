@@ -1,21 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { GiGuitarHead } from 'react-icons/gi'
+import { useOutsideClick } from './hooks/'
 import './chordImage.css'
 
 export function ChordImage({ chordName }) {
-	const [toggle, setToggle] = useState(true)
-	const [isImageToggled, setIsImageToggled] = useState(false)
+	const [isZoomed, setIsZoomed] = useState(false)
 	const [chord, setChordName] = useState(chordName)
+	const imageRef = useRef(null)
+	// const {}
 
-	function toggleHidden(e) {
-		setToggle(!toggle)
-	}
 	function handleImageClick(e) {
-		console.log('ok')
-		isImageToggled
-			? e.target.classList.add('imageZoom')
-			: e.target.classList.remove('imageZoom')
-		setIsImageToggled(!isImageToggled)
+		// const
+		setIsZoomed(!isZoomed)
+		// console.log(isImageToggled)
 	}
 
 	function handleImgName(name) {
@@ -25,27 +22,34 @@ export function ChordImage({ chordName }) {
 	}
 
 	useEffect(() => {
-		if (!toggle) {
-			//   console.log(toggle);
-		}
-		if (toggle) {
-			//   console.log(toggle);
-		}
+		// if (!toggle) {
+		// 	console.log(toggle)
+		// }
+		// if (toggle) {
+		// 	console.log(toggle)
+		// }
 		setChordName(chordName)
-	}, [toggle, chordName, chord])
+	}, [chordName, chord])
 
 	return (
 		<div className='chord-image-con'>
 			{chord && (
-				<div
-					className={`chord-image guitar-icon ${toggle ? 'chord-hidden' : ''}`}
-				>
+				<div className={`chord-image`}>
 					<img
+						ref={imageRef}
 						onClick={handleImageClick}
 						src={`/img/${handleImgName(chord)}.svg`}
 						alt={`${chord}-img`}
 					/>
-					{/* <span>{chordName}</span> */}
+					{isZoomed && (
+						<div className={`chord-image${isZoomed ? '-zoom' : ''}`}>
+							<img
+								onClick={handleImageClick}
+								src={`/img/${handleImgName(chord)}.svg`}
+								alt={`${chord}-img-zoom`}
+							/>
+						</div>
+					)}
 				</div>
 			)}
 		</div>

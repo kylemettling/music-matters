@@ -14,7 +14,7 @@ export default function Search() {
 	const [searchResult, setSearchResult] = useState('')
 	const [searchToggle, setSearchToggle] = useState(false)
 	const [optionState, setOptionState] = useState('track')
-	const [searchQuery, setSearchQuery] = useState('')
+	const [searchQuery, setSearchQuery] = useState('synchronicity II')
 
 	// token management
 	// const [token, { refreshToken, getStoredToken }] = useSpotifyToken()

@@ -22,7 +22,7 @@ const scaleNotes = {
 		notes: ['E', 'F#', 'G#', 'A', 'B', 'C#', 'D#'],
 	},
 	F: {
-		notes: ['F', 'G', 'A', 'A#', 'C', 'D', 'E'],
+		notes: ['F', 'G', 'A', 'Bb', 'C', 'D', 'E'],
 	},
 	'F#': {
 		notes: ['F#', 'G#', 'A#', 'B', 'C#', 'D#', 'F'],
