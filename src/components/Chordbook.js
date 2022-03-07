@@ -341,7 +341,7 @@ export function Chordbook() {
 			// createIntroBook()
 			setIsLoaded(true)
 		}
-	}, [songKey, songKeyCenterQuality, chordbooks])
+	}, [songKey, songKeyCenterQuality, handleScaleChange, chordbooks])
 
 	return (
 		<DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
