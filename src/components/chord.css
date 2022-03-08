@@ -1,11 +1,12 @@
-.chord-name {
-  /* font-weight: bold; */
-
-  /* font-size: 32px;  */
-  /* font-family: 'Neuton'; */
+.chord-header {
   text-align: center;
   justify-self: center;
   align-content: center;
+  color: var(--cardTextColor);
+}
+.chord-name {
+  padding: 0.25rem 1rem;
+  /* background: darkred; */
 }
 .chord-detail {
   --chordTextColor: var(--lightGrey);
@@ -16,19 +17,19 @@
   align-items: center;
   border: 3px var(--chordOutlineColor) solid;
   border-radius: var(--borderRadius);
-  /* background: #282c34; */
   height: 275px;
   width: 10rem;
 }
 .chordRootSelect {
   font-size: var(--smallText);
-  height: 30px;
+  height: 25px;
+  padding: 0;
+  text-align: center;
 }
-.chordRootSelect option {
-}
-.dark {
-  /* color: var(--cardTextColor); */
-}
-.chord-name {
-  color: var(--cardTextColor);
+.chord-header .key-mode-select-con {
+  display: flex;
+  flex-direction: row;
+  padding: 0.25rem 1rem;
+  gap: 0.1rem;
+  /* max-width: 100px; */
 }

@@ -6,31 +6,18 @@ import { ChordImage } from "./ChordImage";
 import { useState, useRef } from "react";
 import "./chord.css";
 
-function Chord({ id, position, root, chordType, degree, _droppableId }) {
-  const { startingScaleData } = useAppState();
-  const [chordImg, setChordImg] = useState(null); //
+function Chord({ id, position, root, type, degree, _droppableId }) {
   const [isEditing, setToggleIsEditing] = useState(false);
   const [chordRoot, setChordRoot] = useState(root);
-  const [chordRootType, setChordRootType] = useState(undefined);
-  const [keyOptionState, setKeyOptionState] = useState(undefined);
-  const [modeOptionState, setModeOptionState] = useState(chordRootType);
+  const [chordType, setChordType] = useState(type);
+  const [keyOptionState, setKeyOptionState] = useState(root);
+  const [typeOptionState, setTypeOptionState] = useState(type);
   const editRef = useRef();
-  // const [newNoteValue, setNewNoteValue] = useState(
-  // 	root + handleQuality(chordType)
-  // )
-  // console.log('chord', item.id)
-  // const setChordQuality = (quality) => {
-  // 	quality === 1 ? "minor" :
-  // }
-  // console.log(item)
-
-  // useScript('https://www.scales-chords.com/api/scales-chords-api.js')
   function handleQuality(type) {
     const newType = type === "min" ? "m" : type === "maj" ? "" : type;
     return newType;
   }
   function handleEditToggle(e) {
-    // e.preventDefault()
     console.log(e.target);
 
     if (!isEditing) {
@@ -38,23 +25,22 @@ function Chord({ id, position, root, chordType, degree, _droppableId }) {
     }
   }
   function handleChordChange(e) {
-    console.log("handleChordChange", e.target.value, chordRoot);
-    // return
+    // console.log("handleChordChange", e.target.value, chordRoot);
     setKeyOptionState(e.target.value);
     setChordRoot(e.target.value);
     setToggleIsEditing(!isEditing);
   }
-  // useLayoutEffect(() => {
-  // 	effect
-  // 	return () => {
-  // 		cleanup
-  // 	};
-  // }, [input])
+  function handleTypeChange(e) {
+    // console.log("handleTypeChange", e.target.value, chordType);
+    setTypeOptionState(e.target.value);
+    setChordType(e.target.value);
+    setToggleIsEditing(!isEditing);
+  }
 
   useEffect(() => {
     setChordRoot(root);
+    setChordType(type);
     const checkIfClickedoutside = (e) => {
-      // console.log(e)
       if (editRef.current && !editRef.current.contains(e.target)) {
         setToggleIsEditing(false);
       }
@@ -64,8 +50,7 @@ function Chord({ id, position, root, chordType, degree, _droppableId }) {
     return () => {
       document.removeEventListener("mousedown", checkIfClickedoutside);
     };
-  }, [id, position, chordType, chordRootType, editRef, root]);
-  // return null
+  }, [id, position, chordType, editRef, root]);
   return (
     <Draggable draggableId={id.toString()} index={position} key={id}>
       {(provided) => (
@@ -76,12 +61,11 @@ function Chord({ id, position, root, chordType, degree, _droppableId }) {
           ref={provided.innerRef}
         >
           <div>
-            {/* <a href='#' {...provided.dragHandleProps}> */}
-            {/* <a href='#' {...provided.dragHandleProps}>
-						Drag Me!
-					</a> */}
             <div className={`chord-name-edit`} ref={editRef}>
-              <span className="chord-name" onClick={(e) => handleEditToggle(e)}>
+              <span
+                className="chord-header"
+                onClick={(e) => handleEditToggle(e)}
+              >
                 {(isEditing && (
                   <div className="key-mode-select-con">
                     <select
@@ -109,34 +93,26 @@ function Chord({ id, position, root, chordType, degree, _droppableId }) {
                       <option value="Bb">Bb</option>
                       <option value="B">B</option>
                     </select>
-                    {/* <select
-										name='ModeSelector'
-										id='mode_selector'
-										value={modeOptionState}
-										onChange={(e) => setModeOptionState(e.target.value)}
-									>
-										<option value='ionian'>Ionian (I) - major</option>
-										<option value='dorian'>Dorain (II) - minor</option>
-										<option value='phrygian'>Phrygian (III) - minor</option>
-										<option value='lydian'>Lydian (IV) - major</option>
-										<option value='mixolydian'>Mixolydian (V) - major</option>
-										<option value='aeolian'>Aeolian (VI) - minor</option>
-										<option value='locrian'>Locrian (VII) - diminished</option>
-									</select> */}
-                    {/* <button
-										className='key-mode-submit'
-										onClick={(e) => handleScaleChange(e)}
-									>
-										Get Scale
-									</button> */}
+                    <select
+                      className="chordRootSelect"
+                      name="KeySelector"
+                      id="key_selector"
+                      value={typeOptionState}
+                      onChange={(e) => handleTypeChange(e)}
+                    >
+                      <option value="maj">maj</option>
+                      <option value="maj7">maj7</option>
+                      <option value="min">min</option>
+                      <option value="min7">min7</option>
+                      <option value="7">7</option>
+                      <option value="dim">dim</option>
+                    </select>
                   </div>
-                )) ||
-                // chordRoot ||
-                chordType !== "blank"
-                  ? chordRoot + handleQuality(chordType)
-                  : "blank"}
-                {/* chordRoot + handleQuality(chordType)} */}
-                {/* {} */}
+                )) || (
+                  <span className="chord-name">
+                    {chordRoot + handleQuality(chordType)}
+                  </span>
+                )}
               </span>
               <ChordImage
                 chordName={
@@ -146,13 +122,7 @@ function Chord({ id, position, root, chordType, degree, _droppableId }) {
                 }
               />
               {degree && <span>{degree}</span>}
-              {/* {image} */}
-              {/* <img
-							src={`img/${root + handleQuality(chordType)}`}
-							alt={`${root + handleQuality(chordType)}`}
-						/> */}
             </div>
-            {/* </a> */}
           </div>
         </div>
       )}

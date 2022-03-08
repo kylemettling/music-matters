@@ -37,6 +37,11 @@
   color: var(--white);
   margin: 0.25rem;
 }
+.chordbookHeader input {
+  max-width: calc(100% - 5rem);
+  padding: 0;
+  text-align: center;
+}
 .chordbookHeader:nth-child(1) {
   /* color: blue; */
 }

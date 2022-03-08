@@ -8,140 +8,28 @@ import { useChordbook } from "./hooks";
 import { ChordbookHeader } from "./ChordbookHeader";
 
 export function Chordbook() {
-  const {
-    songKeyCenterQuality,
-    songKey,
-    chordNotes,
-    isActiveTrack,
-    setIsActiveTrack,
-    getScaleChords,
-  } = useAppState();
-  // const starterScale = {
-  // 	id: 1,
-  // 	name: 'suggested scale',
-  // 	root: songKey,
-  // 	mode: songKeyCenterQuality,
-  // 	type: 'starter',
-  // 	bookId: 1,
-  // 	chords: getScaleChords(songKey, songKeyCenterQuality),
-  // }
+  const { songKeyCenterQuality, songKey, isActiveTrack, getScaleChords } =
+    useAppState();
   const {
     createStartingBook,
-    // createIntroBook,
     chordbooks,
     updateStarterChordbook,
     setChordbooks,
     sanitizeIds,
   } = useChordbook();
-  // const [listRenderer, setListRenderer] = useState([])
   const [isLoaded, setIsLoaded] = useState(false);
   const [keyOptionState, setKeyOptionState] = useState(songKey);
   const [modeOptionState, setModeOptionState] = useState(songKeyCenterQuality);
-  // const [renderer, setRenderer] = useState([])
-
-  // function createSuggestedChords() {
-  // 	const chords = getScaleChords(songKey, songKeyCenterQuality)
-  // 	const listCopy = [...fullChordList]
-
-  // 	setKeyOptionState(songKey)
-  // 	setModeOptionState(songKeyCenterQuality)
-  // 	setChordbooks(chords)
-  // }
-
-  // function createBlankChords() {
-  // 	const chords = [
-  // 		{ id: 1, key: '', root: '', type: 'blank', position: 1 },
-  // 		{ id: 2, key: '', root: '', type: 'blank', position: 3 },
-  // 		{ id: 3, key: '', root: '', type: 'blank', position: 4 },
-  // 		{ id: 4, key: '', root: 'C', type: 'min', position: 2 },
-  // 	]
-  // 	console.log(chords)
-  // 	setChordsList(chords)
-  // }
 
   function handleScaleChange(newKey, newMode, bookId) {
-    console.log(keyOptionState, newKey, newMode);
+    // console.log(keyOptionState, newKey, newMode);
     const newChords = getScaleChords(newKey, newMode);
     setKeyOptionState(newKey);
     setModeOptionState(newMode);
     updateStarterChordbook(newChords, bookId);
+    // sanitizeIds();
     // setChordsList(newChords);
   }
-
-  // const CustomHeader = ({ name, type }) => {
-  // 	// const
-
-  // 	return (
-  // 		<div className='chordbookHeader flex card'>
-  // 			{type && name && (
-  // 				<h5>
-  // 					{' '}
-  // 					{name}
-  // 					<br />
-  // 					{type === 'starter' && (
-  // 						<span className='suggestedScale'>
-  // 							{songKey} {songKeyCenterQuality}
-  // 						</span>
-  // 					)}
-  // 				</h5>
-  // 			)}
-  // 			{type === 'starter' && (
-  // 				<div className='keyModeSelect'>
-  // 					<div>
-  // 						<label>Root: </label>
-  // 						<select
-  // 							name='KeySelector'
-  // 							id='key_selector'
-  // 							value={keyOptionState}
-  // 							onChange={(e) => setKeyOptionState(e.target.value)}
-  // 						>
-  // 							<option value='C'>C</option>
-  // 							<option value='C#'>C#</option>
-  // 							<option value='Db'>Db</option>
-  // 							<option value='D'>D</option>
-  // 							<option value='D#'>D#</option>
-  // 							<option value='Eb'>Eb</option>
-  // 							<option value='E'>E</option>
-  // 							<option value='F'>F</option>
-  // 							<option value='F#'>F#</option>
-  // 							<option value='Gb'>Gb</option>
-  // 							<option value='G'>G</option>
-  // 							<option value='G#'>G#</option>
-  // 							<option value='Ab'>Ab</option>
-  // 							<option value='A'>A</option>
-  // 							<option value='A#'>A#</option>
-  // 							<option value='Bb'>Bb</option>
-  // 							<option value='B'>B</option>
-  // 						</select>
-  // 					</div>
-  // 					<div>
-  // 						<label>Mode: </label>
-  // 						<select
-  // 							name='ModeSelector'
-  // 							id='mode_selector'
-  // 							value={modeOptionState}
-  // 							onChange={(e) => setModeOptionState(e.target.value)}
-  // 						>
-  // 							<option value='ionian'>Ionian (I) - major</option>
-  // 							<option value='dorian'>Dorain (II) - minor</option>
-  // 							<option value='phrygian'>Phrygian (III) - minor</option>
-  // 							<option value='lydian'>Lydian (IV) - major</option>
-  // 							<option value='mixolydian'>Mixolydian (V) - major</option>
-  // 							<option value='aeolian'>Aeolian (VI) - minor</option>
-  // 							<option value='locrian'>Locrian (VII) - diminished</option>
-  // 						</select>
-  // 					</div>
-  // 					<button
-  // 						className='keyModeSubmit'
-  // 						onClick={(e) => handleScaleChange(e)}
-  // 					>
-  // 						Change
-  // 					</button>
-  // 				</div>
-  // 			)}
-  // 		</div>
-  // 	)
-  // }
 
   // using useCallback is optional
   const onBeforeCapture = useCallback(() => {
@@ -309,8 +197,8 @@ export function Chordbook() {
       isActiveTrack &&
       !isLoaded
     ) {
-      setKeyOptionState(songKey);
-      setModeOptionState(songKeyCenterQuality);
+      //   setKeyOptionState(songKey);
+      //   setModeOptionState(songKeyCenterQuality);
       createStartingBook(songKey, songKeyCenterQuality);
       // createIntroBook()
       setIsLoaded(true);
@@ -357,7 +245,7 @@ export function Chordbook() {
                         key={chord.id}
                         _droppableId={book.id.toString()}
                         root={chord.root || "blank"}
-                        chordType={chord.type}
+                        type={chord.type}
                         id={chord.id}
                         position={chord.position}
                         degree={chord.degree}
