@@ -50,6 +50,7 @@
 	--h5: 1.35em;
 	--smallText: 1em;
 	--medText: 1.2em;
+	--larText: 1.35em;
 
 	/* Elevation */
 	--level-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);

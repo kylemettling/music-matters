@@ -8,7 +8,7 @@ import { PageWrapper } from './state'
 import './components/style.css'
 
 function App() {
-	// document.body.classList.add('dark')
+	document.body.classList.add('dark')
 	return (
 		<PageWrapper>
 			<Fragment>

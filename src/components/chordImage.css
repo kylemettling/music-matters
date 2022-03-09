@@ -2,6 +2,10 @@
 	/* visibility: hidden; */
 	/* display: none; */
 }
+.chord-image {
+	/* z-index: -99999; */
+	/* padding-top: -25px; */
+}
 .chord-image img {
 	height: 8.5rem;
 	border-radius: var(--borderRadius);
@@ -24,12 +28,17 @@
 	transition: transform 1s ease-in;
 	border: 1px solid var(--chordOutlineColor);
 	border-radius: var(--borderRadius);
+	z-index: 99999;
 }
 
 .show-chord {
-	position: absolute;
-	z-index: 1;
+	/* position: absolute; */
+	/* z-index: 1; */
 }
 .show-chord:hover {
 	cursor: grab;
 }
+/* .chord-image-con {
+	margin-top: -25px;
+	z-index: -99999;
+} */

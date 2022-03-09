@@ -1,35 +1,65 @@
 .chord-header {
-  text-align: center;
-  justify-self: center;
-  align-content: center;
-  color: var(--cardTextColor);
+	text-align: center;
+	justify-self: center;
+	align-content: center;
+	color: var(--cardTextColor);
+	/* font-size: var(--baseFontSize); */
+	margin-bottom: -14px;
+	position: relative;
+	z-index: 99998;
+	/* background: var(--green2); */
+	/* color: var(--cardTextColor); */
 }
 .chord-name {
-  padding: 0.25rem 1rem;
-  /* background: darkred; */
+	z-index: 99999;
+	padding: 0.25rem 0.5rem;
+	background: var(--green2);
+	color: var(--selectTextColor);
+	/* font-size: var(--baseFontSize); */
+	font-weight: bold;
+	/* background: var(--chordOutlineColor); */
+	border-radius: var(--borderRadius);
+	cursor: pointer;
 }
 .chord-detail {
-  --chordTextColor: var(--lightGrey);
-  color: var(--textColor);
-  font-size: var(--baseFontSize);
-  margin: 0.25rem;
-  justify-content: center;
-  align-items: center;
-  border: 3px var(--chordOutlineColor) solid;
-  border-radius: var(--borderRadius);
-  height: 275px;
-  width: 10rem;
+	--chordTextColor: var(--lightGrey);
+	color: var(--textColor);
+	/* font-size: var(--smallText); */
+	margin: 0.25rem;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	justify-self: center;
+	align-content: center;
+	border: 3px var(--chordOutlineColor) solid;
+	border-radius: var(--borderRadius);
+	height: 275px;
+	width: 10rem;
 }
 .chordRootSelect {
-  font-size: var(--smallText);
-  height: 25px;
-  padding: 0;
-  text-align: center;
+	font-size: var(--smallText);
+	/* height: 25px; */
+	padding: 0;
+	font-size: var(--baseFontSize);
+	text-align: center;
+	cursor: pointer;
+	/* margin: 1rem 0.25rem; */
+}
+.chord-header .key-mode-select-con::before {
+	transform: translateY(-150px);
 }
 .chord-header .key-mode-select-con {
-  display: flex;
-  flex-direction: row;
-  padding: 0.25rem 1rem;
-  gap: 0.1rem;
-  /* max-width: 100px; */
+	display: flex;
+	flex-direction: row;
+	padding: -0.25rem 1rem;
+	justify-content: center;
+	gap: 0.1rem;
+	margin: 0;
+	/* cursor: pointer; */
+	transition: transform 0.4s ease-in-out;
+	/* max-width: 100px; */
+}
+.chordRootSelectOption {
+	/* background: darkcyan; */
+	height: 30px;
 }
