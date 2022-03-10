@@ -1,17 +1,20 @@
 .chord-hidden {
-	/* visibility: hidden; */
-	/* display: none; */
+  /* visibility: hidden; */
+  /* display: none; */
 }
 .chord-image {
-	/* z-index: -99999; */
-	/* padding-top: -25px; */
+  /* z-index: -99999; */
+  /* padding-top: -25px; */
 }
 .chord-image img {
-	height: 8.5rem;
-	border-radius: var(--borderRadius);
+  cursor: pointer;
+  height: 8.5rem;
+  border-radius: var(--borderRadius);
+}
+.chord-image img:hover {
 }
 .chord-image img {
-	transition: transform 0.01s ease-in;
+  transition: transform 0.01s ease-in;
 }
 /* .imageZoom {
 	justify-content: center;
@@ -20,24 +23,25 @@
 	top: 0;
 } */
 .chord-image-zoom img {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	transform: scale(2.8);
-	transition: transform 1s ease-in;
-	border: 1px solid var(--chordOutlineColor);
-	border-radius: var(--borderRadius);
-	z-index: 99999;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform: scale(3.8);
+  transition: transform 1s ease-in;
+  border: 1px dotted var(--chordOutlineColor);
+  border-radius: var(--borderRadius);
+  z-index: 99999;
+  cursor: pointer;
 }
 
 .show-chord {
-	/* position: absolute; */
-	/* z-index: 1; */
+  /* position: absolute; */
+  /* z-index: 1; */
 }
-.show-chord:hover {
-	cursor: grab;
-}
+/* .show-chord:hover {
+	cursor: pointer;
+} */
 /* .chord-image-con {
 	margin-top: -25px;
 	z-index: -99999;

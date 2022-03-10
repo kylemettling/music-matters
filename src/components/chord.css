@@ -1,65 +1,87 @@
 .chord-header {
-	text-align: center;
-	justify-self: center;
-	align-content: center;
-	color: var(--cardTextColor);
-	/* font-size: var(--baseFontSize); */
-	margin-bottom: -14px;
-	position: relative;
-	z-index: 99998;
-	/* background: var(--green2); */
-	/* color: var(--cardTextColor); */
+  text-align: center;
+  justify-self: center;
+  align-content: center;
+  color: var(--cardTextColor);
+  /* font-size: var(--baseFontSize); */
+  margin-bottom: -14px;
+  position: relative;
+  z-index: 99998;
+  /* background: var(--green2); */
+  /* color: var(--cardTextColor); */
 }
 .chord-name {
-	z-index: 99999;
-	padding: 0.25rem 0.5rem;
-	background: var(--green2);
-	color: var(--selectTextColor);
-	/* font-size: var(--baseFontSize); */
-	font-weight: bold;
-	/* background: var(--chordOutlineColor); */
-	border-radius: var(--borderRadius);
-	cursor: pointer;
+  z-index: 99999;
+  /* background: var(--green2); */
+  background: var(--chordNameColor);
+  color: var(--chordTextColor);
+  border-radius: var(--borderRadius);
+  /* border: 2px var(--chordOutlineColor) solid; */
+  outline: 2px var(--chordNameOutlineColor) solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  height: 1.75rem;
+  margin: 0 auto;
+  max-width: calc(100% - 1.5rem);
 }
 .chord-detail {
-	--chordTextColor: var(--lightGrey);
-	color: var(--textColor);
-	/* font-size: var(--smallText); */
-	margin: 0.25rem;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	justify-self: center;
-	align-content: center;
-	border: 3px var(--chordOutlineColor) solid;
-	border-radius: var(--borderRadius);
-	height: 275px;
-	width: 10rem;
+  --chordTextColor: var(--lightGrey);
+  color: var(--textColor);
+  /* font-size: var(--smallText); */
+  /* margin: 0.25rem; */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  justify-self: center;
+  align-content: center;
+  border: 3px var(--chordOutlineColor) solid;
+  border-radius: var(--borderRadius);
+  height: 275px;
+  width: 10rem;
 }
 .chordRootSelect {
-	font-size: var(--smallText);
-	/* height: 25px; */
-	padding: 0;
-	font-size: var(--baseFontSize);
-	text-align: center;
-	cursor: pointer;
-	/* margin: 1rem 0.25rem; */
+  --selectBackgroundColor: var(--green2);
+  font-size: var(--smallText);
+  font-weight: initial;
+  /* height: 25px; */
+  /* padding: 0; */
+  /* margin: 0; */
+  /* font-size: var(--baseFontSize); */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; /* Remove default arrow */
+  /* background-image: url(...);   Add custom arrow */
+  text-align: center;
+  cursor: pointer;
+  /* color: var(--selectTextColor); */
+  /* background: var(--selectBackgroundColor); */
+  outline: 2px var(--chordTextColor) solid;
+  background: var(--chordNameColor);
+  color: var(--chordTextColor);
+  /* margin: 1rem 0.25rem; */
 }
 .chord-header .key-mode-select-con::before {
-	transform: translateY(-150px);
+  transform: translateY(-150px);
 }
 .chord-header .key-mode-select-con {
-	display: flex;
-	flex-direction: row;
-	padding: -0.25rem 1rem;
-	justify-content: center;
-	gap: 0.1rem;
-	margin: 0;
-	/* cursor: pointer; */
-	transition: transform 0.4s ease-in-out;
-	/* max-width: 100px; */
+  display: flex;
+  gap: 0.2rem;
+  flex-direction: row;
+  /* padding: -0.35rem 1rem; */
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+
+  transition: transform 0.4s ease-in-out;
+}
+.chordRootSelect {
 }
 .chordRootSelectOption {
-	/* background: darkcyan; */
-	height: 30px;
+  /* background: darkcyan; */
+
+  /* clip-path: polygon(80% 0%, 0 0%, 50% 80%); */
+  height: 30px;
 }
