@@ -144,28 +144,33 @@ select {
 	align-items: center;
 	/* flex: 1 1 0; */
 }
-input.innerTitleInput {
+.innerTitleInput {
+	display: flex;
 	background: var(--darkGrey);
 	color: var(--cardTextColor);
 	font-family: var(--headingFont);
 	font-size: var(--h5);
 	outline: 2px var(--cardTextColor) solid;
+	text-transform: capitalize;
+	margin: 0;
+	/* justify-content: center;
+	align-content: center;
+	text-align: center; */
+	height: 2.5rem;
 }
 .innerTitle {
-	margin: 0;
+	display: flex;
+	align-self: center;
 	font-size: var(--h5);
 	font-family: var(--headingFont);
 	text-transform: capitalize;
-}
-.chordbook h5 {
+	text-align: center;
 }
 .bookTitle {
-	margin: 0;
 	display: flex;
 	justify-content: center;
 	align-content: center;
 	text-align: center;
-	height: 2rem;
 }
 .bookTitle:hover {
 	cursor: text;

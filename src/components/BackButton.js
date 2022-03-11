@@ -16,6 +16,7 @@ export function BackButton() {
 			}}
 		>
 			<button
+			name='back'
 				style={{
 					width: '85px',
 					height: '35px',
