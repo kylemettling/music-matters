@@ -1,78 +1,83 @@
 /* former logo color: #39e991 */
 header {
-	/* margin-top: 3rem; */
-	padding: 0;
-	margin: 0;
-	/* height: auto; */
+  /* margin-top: 3rem; */
+  padding: 0;
+  margin: 0;
+  /* height: auto; */
 }
 .themeSelect {
-	transform: rotate(-30deg);
-	font-size: 2.5rem;
-	/* position: sticky; */
-	/* top: 0.25rem; */
-	/* left: 0; */
-	/* position: absolute; */
+  transform: rotate(-30deg);
+  font-size: 2.5rem;
+  /* position: sticky; */
+  /* top: 0.25rem; */
+  /* left: 0; */
+  /* position: absolute; */
 }
 .dark header .logo {
-	filter: drop-shadow(0px 0px 3px var(--green2));
+  filter: drop-shadow(0px 0px 3px var(--green2));
 }
 header .logo {
-	filter: drop-shadow(0px 0px 5px black);
+  filter: drop-shadow(0px 0px 5px black);
 }
 .dark header .logo:hover {
-	filter: drop-shadow(0px 0px 1px var(--green2));
+  filter: drop-shadow(0px 0px 1px var(--green2));
 }
 header .logo:hover {
-	filter: drop-shadow(0px 0px 3px black);
+  filter: drop-shadow(0px 0px 3px black);
 }
 .settings {
-	display: flex;
-	flex-direction: column;
-	gap: 0.75rem;
-	position: fixed;
-	align-items: center;
-	top: 2.5rem;
-	left: 2.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: fixed;
+  align-items: center;
+  top: 2.5rem;
+  left: 2.5em;
+  background: var(--background);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  /* border: solid 1px var(--chordOutlineColor); */
+  transition: all 0.4s ease-in;
 }
 .themeSelectForward {
-	color: var(--buttonColor);
-	font-size: 2.5rem;
-	animation: rotateForward 0.4s forwards;
-	transform: rotate(30deg);
+  color: var(--buttonColor);
+  font-size: 2.5rem;
+  animation: rotateForward 0.4s forwards;
+  transform: rotate(30deg);
 }
 .themeSelectBackward {
-	font-size: 2.5rem;
-	animation: rotateBackward 0.5s forwards;
+  font-size: 2.5rem;
+  animation: rotateBackward 0.5s forwards;
 }
 
 @keyframes rotateForward {
-	0% {
-		/* transform: rotate(-30deg); */
-		transform: rotate(-30deg);
-	}
-	25% {
-		transform: rotate(-50deg);
-	}
-	50% {
-		transform: rotate(0deg);
-	}
-	100% {
-		transform: rotate(30deg);
-	}
+  0% {
+    /* transform: rotate(-30deg); */
+    transform: rotate(-30deg);
+  }
+  25% {
+    transform: rotate(-50deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(30deg);
+  }
 }
 @keyframes rotateBackward {
-	0% {
-		transform: rotate(30deg);
-	}
-	25% {
-		transform: rotate(50deg);
-	}
-	50% {
-		transform: rotate(0deg);
-	}
-	100% {
-		transform: rotate(-30deg);
-	}
+  0% {
+    transform: rotate(30deg);
+  }
+  25% {
+    transform: rotate(50deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-30deg);
+  }
 }
 
 /* .logo:hover {
