@@ -1,7 +1,13 @@
 import axios from 'axios'
 import './trackDetail.css'
 // import './style.css'
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, {
+	useState,
+	useEffect,
+	useRef,
+	useCallback,
+	useLayoutEffect,
+} from 'react'
 import { Draggable, DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { useParams } from 'react-router'
 import { shazam, spotify, pianoChords } from './config/Connection'
@@ -76,13 +82,19 @@ export function TrackDetail() {
 			getTrack(currentTrackId)
 		}
 	}
-
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (scrollRef.current) {
 			scrollRef.current.scrollIntoView({
 				behavior: 'smooth',
 			})
 		}
+	}, [scrollRef])
+	useEffect(() => {
+		// if (scrollRef.current) {
+		// 	scrollRef.current.scrollIntoView({
+		// 		behavior: 'smooth',
+		// 	})
+		// }
 		getTrack(id)
 		if (songKey && songKeyCenterQuality) {
 			setIsActiveTrack(true)
@@ -101,7 +113,10 @@ export function TrackDetail() {
 	return (
 		<div className='track'>
 			<div className='detailCard grid'>
-				<div className='details ' ref={scrollRef}>
+				<div
+					className='details '
+					// ref={scrollRef}
+				>
 					<h1 className='trackTitle'>
 						{/* <a href="#"> */}
 						{songTitle}
@@ -124,7 +139,7 @@ export function TrackDetail() {
 				></img>
 			</div>
 			<div className='chordbook-container flex'>
-				<Chordbook />
+				<Chordbook scrollIntoViewRef={scrollRef} />
 			</div>
 		</div>
 	)

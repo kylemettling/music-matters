@@ -5,10 +5,18 @@ import { useState, useRef } from 'react'
 import rawNotes from './../state/rawNotes'
 import './chord.css'
 
-function Chord({ id, position, root, type, degree, _droppableId }) {
+function Chord({
+	id,
+	position,
+	root,
+	type,
+	degree,
+	_droppableId,
+	updateChord,
+}) {
 	const [isEditing, setToggleIsEditing] = useState(false)
-	const [chordRoot, setChordRoot] = useState(null)
-	const [chordType, setChordType] = useState(null)
+	const [chordRoot, setChordRoot] = useState(root)
+	const [chordType, setChordType] = useState(type)
 	const [keyOptionState, setKeyOptionState] = useState(root)
 	const [typeOptionState, setTypeOptionState] = useState(type)
 	const editRef = useRef()
@@ -30,12 +38,16 @@ function Chord({ id, position, root, type, degree, _droppableId }) {
 	}
 	function handleChordChange(e) {
 		// console.log("handleChordChange", e.target.value, chordRoot);
+		console.log(e.target.value)
+		updateChord(_droppableId, id, 'root', e.target.value)
 		setKeyOptionState(e.target.value)
 		setChordRoot(e.target.value)
 		setToggleIsEditing(!isEditing)
 	}
 	function handleTypeChange(e) {
 		// console.log("handleTypeChange", e.target.value, chordType);
+		console.log(e.target.value)
+		updateChord(_droppableId, id, 'type', e.target.value)
 		setTypeOptionState(e.target.value)
 		setChordType(e.target.value)
 		setToggleIsEditing(!isEditing)
