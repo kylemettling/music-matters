@@ -53,7 +53,7 @@ export default function Search() {
 			}
 			console.log('Error!!', err)
 		})
-		console.log('After request!!', res)
+		// console.log('After request!!', res)
 		if (!res) {
 			refreshToken()
 			getSpotifySearchData()

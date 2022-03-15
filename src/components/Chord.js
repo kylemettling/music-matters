@@ -30,23 +30,17 @@ function Chord({
 		return `${root}${newType === 'blank' ? '' : newType}`
 	}
 	function handleEditToggle(e) {
-		console.log(e.target)
-
 		if (!isEditing) {
 			setToggleIsEditing(!isEditing)
 		}
 	}
 	function handleChordChange(e) {
-		// console.log("handleChordChange", e.target.value, chordRoot);
-		console.log(e.target.value)
 		updateChord(_droppableId, id, 'root', e.target.value)
 		setKeyOptionState(e.target.value)
 		setChordRoot(e.target.value)
 		setToggleIsEditing(!isEditing)
 	}
 	function handleTypeChange(e) {
-		// console.log("handleTypeChange", e.target.value, chordType);
-		console.log(e.target.value)
 		updateChord(_droppableId, id, 'type', e.target.value)
 		setTypeOptionState(e.target.value)
 		setChordType(e.target.value)

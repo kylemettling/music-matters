@@ -142,6 +142,7 @@ export const useChordbook = () => {
 		)
 		setChordCount(count)
 		sanitizeChordbookIds(newList)
+		// storeChordbooks()
 	}
 
 	const updateChordbook = (id, property, value) => {
@@ -155,6 +156,7 @@ export const useChordbook = () => {
 			}
 		})
 		setChordbooks(update, value)
+		// storeChordbooks()
 	}
 	// update chord from passing ids of book and chord and the property to update with the new value
 	const updateChord = (bookId, id, property, value) => {
@@ -175,6 +177,15 @@ export const useChordbook = () => {
 			}
 		})
 		setChordbooks(update)
+		// storeChordbooks()
+	}
+	const storeChordbooks = () => {
+		localStorage.setItem('chordbooks', JSON.stringify(chordbooks))
+	}
+	const loadChordbooks = () => {
+		const stored = localStorage.getItem('chordbooks')
+		console.log(stored)
+		return stored
 	}
 
 	return {
@@ -188,5 +199,7 @@ export const useChordbook = () => {
 		setChordbooks,
 		updateStarterChordbook,
 		sanitizeIds,
+		storeChordbooks,
+		loadChordbooks,
 	}
 }

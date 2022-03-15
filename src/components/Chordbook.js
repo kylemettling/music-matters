@@ -20,6 +20,8 @@ export function Chordbook(scrollRef) {
 		deleteBook,
 		setChordbooks,
 		sanitizeIds,
+		storeChordbooks,
+		loadChordbooks,
 	} = useChordbook()
 	const [isLoaded, setIsLoaded] = useState(false)
 	const [keyOptionState, setKeyOptionState] = useState(songKey)
@@ -231,6 +233,22 @@ export function Chordbook(scrollRef) {
 			createStartingBook(songKey, songKeyCenterQuality)
 			setIsLoaded(true)
 		}
+		// if (
+		// 	songKey !== '' &&
+		// 	songKeyCenterQuality !== '' &&
+		// 	isActiveTrack &&
+		// 	!isLoaded
+		// ) {
+		// 	if (!chordbooks.length) {
+		// 		const books = loadChordbooks()
+		// 		console.log('loading chordbooks!!!', books)
+		// 		books
+		// 			? setChordbooks(books)
+		// 			: createStartingBook(songKey, songKeyCenterQuality)
+		// 		setIsLoaded(true)
+		// 		// storeChordbooks()
+		// 	}
+		// }
 	}, [
 		songKey,
 		songKeyCenterQuality,
