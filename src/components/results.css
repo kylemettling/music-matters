@@ -61,8 +61,7 @@
 	white-space: nowrap;  */
 	padding: 0.55rem;
 	flex-direction: column;
-	justify-self: space-between;
-	/* align-items: space-around; */
+	/* justify-self: space-between; */
 	/* max-width: 280px; */
 	text-align: right;
 	gap: 1em;
@@ -99,4 +98,5 @@
 	overflow: hidden;
 	max-width: 25ch;
 	white-space: nowrap;
+	align-self: flex-end;
 }

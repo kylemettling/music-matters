@@ -57,8 +57,8 @@ export const useTrack = () => {
 		setAlbumCoverURL(albumCover)
 		// setArtistURL(url);
 		// console.log('Arist URL:', url)
-		getArtistCoverURL(url, token)
-		getTrackFeatures(data.id, token)
+		// getArtistCoverURL(url, token)
+		// getTrackFeatures(data.id, token)
 		setIsActiveTrack(true)
 		// if (artistCover !== '' && songKeyCenterQuality !== '') {
 		// setIsActiveTrack(true)
@@ -79,11 +79,13 @@ export const useTrack = () => {
 					.request(options)
 					.catch((err) => console.log(err))
 				const artistData = await search.data
-				const artistCover = artistData.images[0]
+				console.log(artistData)
+				const coverData = artistData.images[0]
+				console.log(coverData.url)
 				setArtistCover({
-					url: artistCover.url,
-					h: artistCover.height,
-					w: artistCover.width,
+					url: coverData.url,
+					h: coverData.height,
+					w: coverData.width,
 				})
 			}
 			fetchArtistDetails()

@@ -8,6 +8,8 @@ import { useSpotifyToken } from './hooks'
 import { useAppState } from '../state'
 import chordNotes from '../state/scaleNotes'
 import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 export default function Search() {
 	const [artistRequest, setArtistRequest] = useState('synchronicity')
@@ -16,7 +18,7 @@ export default function Search() {
 	const [searchToggle, setSearchToggle] = useState(false)
 	const [optionState, setOptionState] = useState('track')
 	const [searchQuery, setSearchQuery] = useState('synchronicity II')
-
+	const history = useHistory()
 	// token management
 	// const [token, { refreshToken, getStoredToken }] = useSpotifyToken()
 	const {
@@ -81,7 +83,11 @@ export default function Search() {
 						type='text'
 						placeholder='enter track, artist, or album'
 						value={searchQuery}
-						onKeyDown={(e) => e.key === 'Enter' && getSpotifySearchData(e)}
+						onKeyDown={(e) =>
+							e.key === 'Enter'
+								? history.push(`/search?q=${searchQuery}`)
+								: null
+						}
 						onChange={(e) => setSearchQuery(e.target.value)}
 					/>
 					<select
