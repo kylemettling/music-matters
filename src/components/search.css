@@ -8,5 +8,9 @@
 }
 input + select,
 select + button {
-	margin-left: 0.5rem;
+	/* margin-left: 0.5rem; */
+}
+select,
+button {
+	margin-left: 0.75rem;
 }

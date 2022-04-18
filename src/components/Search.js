@@ -7,6 +7,7 @@ import { shazam, spotify } from './config/Connection'
 import { useSpotifyToken } from './hooks'
 import { useAppState } from '../state'
 import chordNotes from '../state/scaleNotes'
+import { Link } from 'react-router-dom'
 
 export default function Search() {
 	const [artistRequest, setArtistRequest] = useState('synchronicity')
@@ -93,15 +94,20 @@ export default function Search() {
 						<option value='artist'>Artist</option>
 						<option value='album'>Album</option>
 					</select>
-					<button type='submit' onClick={(e) => getSpotifySearchData(e)}>
-						Fetch!
-					</button>
+					<Link
+						className='submit'
+						to={`/search?q=${searchQuery}`}
+						onClick={(e) => getSpotifySearchData(e)}
+					>
+						<button type='submit'>Fetch!</button>
+					</Link>
 				</div>
-				<Results
+				{/* <Link to={`/search?q=${searchResult}`}>Huh</Link> */}
+				{/* <Results
 					resultList={searchResult}
 					searchToggle={searchToggle}
 					token={token}
-				/>
+				/> */}
 			</div>
 		</Fragment>
 	)

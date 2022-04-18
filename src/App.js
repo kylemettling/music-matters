@@ -1,6 +1,7 @@
 import Header from './components/header.js'
 import { Fragment, useEffect } from 'react'
 import Search from './components/Search'
+import Results from './components/Results'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { TrackDetail } from './components/TrackDetail.js'
 import { Artist } from './components/Artist.js'
@@ -22,6 +23,15 @@ function App() {
 							<Header />
 							<Artist />
 						</Route>
+						<Route path='/search'>
+							<Header />
+							<Search />
+							<Results />
+						</Route>
+						{/* <Route path='/search/?q=searchValue'>
+							<Header includeBackButton={false} />
+							<Search />
+						</Route> */}
 						<Route path='/' exact>
 							<Header includeBackButton={false} />
 							<Search />

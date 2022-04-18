@@ -40,6 +40,7 @@ export function TrackDetail() {
 		setIsActiveTrack,
 	} = useAppState()
 	async function getTrack(storedId) {
+		console.log('id', id, storedId)
 		const options = {
 			method: 'GET',
 			url: spotify.urls.getTrack + (id || storedId),
