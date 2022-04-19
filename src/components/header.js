@@ -33,13 +33,23 @@ export default function Header({ includeBackButton = true }) {
       <header>
         <Link to="/">
           {/* <div className='leftHeader'></div> */}
-          <img src={logo} className="logo" alt="logo" />
+          <img
+            aria-label="logo"
+            name="logo"
+            src={logo}
+            className="logo"
+            alt="logo"
+          />
           {/* <div className='rightHeader'></div> */}
         </Link>
       </header>
       <div className="settings">
         <MdOutlinePalette
+          tabIndex="0"
+          aria-label="theme select"
           className="themeSelect flex"
+          onKeyDown={(e) => (e.key === "Enter" ? handleThemeToggle(e) : null)}
+          onKeyUp={() => null}
           onClick={(e) => handleThemeToggle(e)}
         />
         {includeBackButton && <BackButton />}

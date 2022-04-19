@@ -13,6 +13,9 @@ header {
   /* left: 0; */
   /* position: absolute; */
 }
+.themeSelect:focus {
+  outline: 2px var(--cursorOutlineColor) solid;
+}
 .dark header .logo {
   filter: drop-shadow(0px 0px 3px var(--green2));
 }
