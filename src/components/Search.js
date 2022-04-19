@@ -77,7 +77,7 @@ export default function Search() {
 	return (
 		<Fragment>
 			<div className='main flex'>
-				<h2>What song is playing?</h2>
+				<h2>Do you have something playing?</h2>
 				<div>
 					<input
 						type='text'

@@ -179,12 +179,14 @@ export const useChordbook = () => {
 		setChordbooks(update)
 		// storeChordbooks()
 	}
-	const storeChordbooks = () => {
-		localStorage.setItem('chordbooks', JSON.stringify(chordbooks))
+	const storeChordbooks = (songId) => {
+		localStorage.setItem(songId, JSON.stringify(chordbooks))
 	}
-	const loadChordbooks = () => {
-		const stored = localStorage.getItem('chordbooks')
-		console.log(stored)
+	const loadChordbooks = (id) => {
+		const stored = localStorage.getItem(`${id}`)
+		// console.log(localStorage)
+		console.log('Loading stored chordbooks', stored)
+		// setChordbooks(JSON.parse(stored))
 		return stored
 	}
 

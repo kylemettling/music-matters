@@ -6,8 +6,9 @@ import Chord from './Chord'
 import './chordbook.css'
 import { useChordbook } from './hooks'
 import { ChordbookHeader } from './ChordbookHeader'
+import { useParams } from 'react-router-dom'
 
-export function Chordbook(scrollRef) {
+export function Chordbook() {
 	const { songKeyCenterQuality, songKey, isActiveTrack, getScaleChords } =
 		useAppState()
 	const {
@@ -23,54 +24,35 @@ export function Chordbook(scrollRef) {
 		storeChordbooks,
 		loadChordbooks,
 	} = useChordbook()
+	const { id } = useParams()
 	const [isLoaded, setIsLoaded] = useState(false)
+	const [isStorageChecked, setIsStorageChecked] = useState(false)
 	const [keyOptionState, setKeyOptionState] = useState(songKey)
 	const [modeOptionState, setModeOptionState] = useState(songKeyCenterQuality)
 
 	function handleScaleChange(newKey, newMode, bookId) {
-		// console.log(keyOptionState, newKey, newMode);
 		const newChords = getScaleChords(newKey, newMode)
 		setKeyOptionState(newKey)
 		setModeOptionState(newMode)
 		updateStarterChordbook(newChords, bookId)
-		// sanitizeIds();
-		// setChordsList(newChords);
 	}
 	function handleResetScale(bookId) {
-		// console.log(keyOptionState, newKey, newMode);
 		const newChords = getScaleChords(songKey, songKeyCenterQuality)
 		setKeyOptionState(songKey)
 		setModeOptionState(songKeyCenterQuality)
 		updateStarterChordbook(newChords, bookId)
-		// sanitizeIds();
-		// setChordsList(newChords);
 	}
-
-	//   function handleCreateBook() {
-
-	//   }
-
-	// using useCallback is optional
-	const onBeforeCapture = useCallback(() => {
-		// console.log('ok')
-	}, [])
-	const onBeforeDragStart = useCallback(() => {
-		// console.log('ok')
-	}, [])
 	const onDragStart = useCallback((result) => {
 		// add blur animation to non-dragging chords
 		const { destination, source } = result
 		const elements = document.querySelectorAll(
 			`.droppableId-${source.droppableId.toString()}`
 		)
-		// .map((el, i) => (i !== source.index ? el.classList.add('blur') : null))
 		for (let i = 0; i < elements.length; i++) {
-			// console.log(i, source.index)
 			if (i !== source.index - 1) {
 				elements[i].classList.add('blur')
 			}
 		}
-		// console.log(elements)
 	}, [])
 
 	const move = (
@@ -85,7 +67,6 @@ export function Chordbook(scrollRef) {
 		if (copyChord) {
 			const [removed] = sourceClone.splice(droppableSource.index - 1, 1)
 			const copy = { ...removed }
-			//   console.log("removed!", removed, copy);
 			sourceClone.splice(droppableSource.index - 1, 0, removed)
 			if (!destClone[0]) {
 				// if destination chord list is empty push copy to it
@@ -108,8 +89,8 @@ export function Chordbook(scrollRef) {
 			destClone.splice(droppableDestination.index - 1, 0, removed)
 		}
 		// console.log("new removed", removed);
-		console.log('new source', sourceClone)
-		console.log('new dest', destClone)
+		// console.log('new source', sourceClone)
+		// console.log('new dest', destClone)
 		const result = {}
 		result[droppableSource.droppableId] = sourceClone
 		result[droppableDestination.droppableId] = destClone
@@ -121,14 +102,10 @@ export function Chordbook(scrollRef) {
 	// the only one that is required
 	const onDragEnd = useCallback((result) => {
 		const { destination, source, droppableId } = result
-		// console.log(destination, source)
-		// console.log(chordbooks)
-		// detect
 		// adding blur animation to non-dragging chords
 		const elements = document.querySelectorAll(
 			`.chord-detail.droppableId-${source.droppableId}`
 		)
-		// console.log(elements);
 		for (let i = 0; i < elements.length; i++) {
 			elements[i].classList.remove('blur')
 		}
@@ -187,25 +164,17 @@ export function Chordbook(scrollRef) {
 					}
 				}
 			)
-			// console.log(reorderedChordbook)
 			currentBook.chords = reorderedChordbook
-			// console.log(copyOfCurrentBook)
 			chordbooks[currentBookIndex] = currentBook
-			// update the chordbooks state
-			// const updatedChordbook = [...chordbooks, copyOfCurrentBook]
-			// console.log(chordbooks)
-			// console.log(updatedChordbook)
-			// setFullChordList(newChords)
 			setChordbooks(chordbooks)
 		}
 		if (destination.droppableId !== source.droppableId) {
-			//   console.log(destination, source);
 			let copyChord = false
 			// if songs are moved between books and the source book is starter type copy the chord instead of moving it
 			if (chordbooks[parseInt(source.droppableId)].type === 'starter') {
 				copyChord = true
 			}
-			console.log(source, destination, chordbooks)
+			// console.log(source, destination, chordbooks)
 			const result = move(
 				chordbooks[parseInt(source.droppableId)].chords,
 				chordbooks[parseInt(destination.droppableId)].chords,
@@ -224,43 +193,33 @@ export function Chordbook(scrollRef) {
 	})
 
 	useEffect(() => {
+		// console.log(chordbooks)
+		console.log(JSON.parse(localStorage.getItem(id)))
+
+		// console.log(loadedBooks.length)
+		if (!chordbooks && isActiveTrack && !isLoaded) {
+			const loadedBooks = JSON.parse(localStorage.getItem(id)) || []
+			setChordbooks(loadedBooks)
+			setIsLoaded(true)
+		}
 		if (
 			songKey !== '' &&
 			songKeyCenterQuality !== '' &&
 			isActiveTrack &&
-			!isLoaded
+			!isLoaded &&
+			id
 		) {
 			createStartingBook(songKey, songKeyCenterQuality)
 			setIsLoaded(true)
+			console.log('track set')
 		}
-		// if (
-		// 	songKey !== '' &&
-		// 	songKeyCenterQuality !== '' &&
-		// 	isActiveTrack &&
-		// 	!isLoaded
-		// ) {
-		// 	if (!chordbooks.length) {
-		// 		const books = loadChordbooks()
-		// 		console.log('loading chordbooks!!!', books)
-		// 		books
-		// 			? setChordbooks(books)
-		// 			: createStartingBook(songKey, songKeyCenterQuality)
-		// 		setIsLoaded(true)
-		// 		// storeChordbooks()
-		// 	}
-		// }
-	}, [
-		songKey,
-		songKeyCenterQuality,
-		handleScaleChange,
-		chordbooks,
-		updateStarterChordbook,
-	])
+		storeChordbooks(id)
+		console.log(JSON.parse(localStorage.getItem(id)))
+	}, [songKey, songKeyCenterQuality, chordbooks, id])
 
 	return (
 		<DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
 			{chordbooks &&
-				// chordbooks.map((book, idx) => {
 				orderBy(chordbooks, 'id').map((book, idx) => {
 					return (
 						<div key={idx} className='chordbook'>
@@ -270,7 +229,6 @@ export function Chordbook(scrollRef) {
 								handleCreateBook={createBook}
 								handleUpdateBook={updateChordbook}
 								handleDeleteBook={deleteBook}
-								// includeScrollRef={chordbooks.length === idx ? scrollRef : null}
 								includeControls={
 									chordbooks.length === idx + 1 || book.isErasable
 										? true
@@ -290,11 +248,6 @@ export function Chordbook(scrollRef) {
 								{(provided, snapshot) => (
 									<div
 										ref={provided.innerRef}
-										style={
-											{
-												// backgroundColor: snapshot.isDraggingOver ? 'var(--black)' : '',
-											}
-										}
 										{...provided.droppableProps}
 										className='chords'
 									>
