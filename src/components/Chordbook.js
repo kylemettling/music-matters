@@ -30,6 +30,8 @@ export function Chordbook() {
 	const [keyOptionState, setKeyOptionState] = useState(songKey)
 	const [modeOptionState, setModeOptionState] = useState(songKeyCenterQuality)
 
+	let loadedBooks = JSON.parse(localStorage.getItem(id))
+
 	function handleScaleChange(newKey, newMode, bookId) {
 		const newChords = getScaleChords(newKey, newMode)
 		setKeyOptionState(newKey)
@@ -194,15 +196,19 @@ export function Chordbook() {
 
 	useEffect(() => {
 		// console.log(chordbooks)
-		console.log(JSON.parse(localStorage.getItem(id)))
+		// console.log(JSON.parse(localStorage.getItem(id)))
 
 		// console.log(loadedBooks.length)
-		if (!chordbooks && isActiveTrack && !isLoaded) {
-			const loadedBooks = JSON.parse(localStorage.getItem(id)) || []
+		// if (!chordbooks && isActiveTrack && !isLoaded) {
+		// 	const loadedBooks = JSON.parse(localStorage.getItem(id)) || []
+		// 	setChordbooks(loadedBooks)
+		// 	setIsLoaded(true)
+		// }
+		// console.log(loadedBooks)
+		if (loadedBooks.length && !isLoaded) {
 			setChordbooks(loadedBooks)
 			setIsLoaded(true)
-		}
-		if (
+		} else if (
 			songKey !== '' &&
 			songKeyCenterQuality !== '' &&
 			isActiveTrack &&
@@ -214,8 +220,8 @@ export function Chordbook() {
 			console.log('track set')
 		}
 		storeChordbooks(id)
-		console.log(JSON.parse(localStorage.getItem(id)))
-	}, [songKey, songKeyCenterQuality, chordbooks, id])
+		// console.log(JSON.parse(localStorage.getItem(id)))
+	}, [songKey, songKeyCenterQuality, chordbooks, id, loadedBooks])
 
 	return (
 		<DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
