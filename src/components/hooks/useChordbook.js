@@ -184,9 +184,6 @@ export const useChordbook = () => {
 	}
 	const loadChordbooks = (id) => {
 		const stored = localStorage.getItem(`${id}`)
-		// console.log(localStorage)
-		// console.log('Loading stored chordbooks', stored)
-		// setChordbooks(JSON.parse(stored))
 		return stored
 	}
 
