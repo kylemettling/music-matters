@@ -194,6 +194,7 @@ export function Chordbook() {
 	})
 
 	useEffect(() => {
+		console.log('chordbook!')
 		if (loadedBooks.length && !isLoaded) {
 			setChordbooks(loadedBooks)
 			setIsLoaded(true)
