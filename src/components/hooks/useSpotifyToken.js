@@ -22,7 +22,7 @@ export const useSpotifyToken = () => {
 	}
 
 	const getStoredToken = () => {
-		const storedToken = localStorage.getItem('spotifyToken')
+		const storedToken = localStorage.getItem('spotifyToken') || ''
 		if (!storedToken) {
 			refreshToken()
 		}
