@@ -17,7 +17,7 @@ export const useSpotifyToken = () => {
 			method: 'POST',
 		}
 		const search = await axios.request(options).catch((err) => console.log(err))
-		const newToken = await search.data.access_token
+		const newToken = await search?.data?.access_token
 		setToken(newToken)
 	}
 
