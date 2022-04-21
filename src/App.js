@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { TrackDetail } from './components/TrackDetail.js'
 import { Artist } from './components/Artist.js'
 import { PageWrapper } from './state'
+import { Helmet } from 'react-helmet'
 import './components/style.css'
 
 function App() {
@@ -13,6 +14,11 @@ function App() {
 	return (
 		<PageWrapper>
 			<Fragment>
+				<Helmet>
+					<meta charSet='utf-8' />
+					<title>Music Matters - Audio Arranged</title>
+					<meta name='description' content='Music Matters - Audio Arranged' />
+				</Helmet>
 				<Router>
 					<Switch>
 						<Route path='/track/:id'>

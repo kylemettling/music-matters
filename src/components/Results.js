@@ -6,6 +6,7 @@ import { useAppState } from '../state'
 import axios from 'axios'
 import { Result } from './Result'
 import './results.css'
+import { Helmet } from 'react-helmet'
 
 function useQuery() {
 	const { search } = useLocation()
@@ -64,6 +65,11 @@ export default function Results() {
 
 	return (
 		<React.Fragment>
+			<Helmet>
+				<meta charSet='utf-8' />
+				<title>Results for {`"${query.get('q')}"`}</title>
+				<meta name='description' content='Music Matters - Audio Arranged' />
+			</Helmet>
 			{results && (
 				<ul className='results grid'>
 					{results &&
