@@ -67,9 +67,9 @@ export default function Search() {
 
 	useEffect(() => {
 		getStoredToken()
-		// if (!token) {
-		// 	refreshToken()
-		// }
+		if (!token) {
+			refreshToken()
+		}
 		clearTrackData()
 		setOptionState(optionState)
 	}, [optionState])

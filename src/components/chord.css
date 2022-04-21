@@ -71,3 +71,19 @@
 .chord-degree.blank {
   cursor: grab;
 }
+.delete-chord {
+  background-color: blue;
+}
+.chord-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.chord-control {
+  opacity: 0;
+}
+.chord-control.active {
+  transition: opacity 0.3s ease-in-out;
+  cursor: pointer;
+  opacity: 1;
+}
