@@ -24,7 +24,6 @@ function Chord({
 	const [typeOptionState, setTypeOptionState] = useState(type)
 	const [chordHover, setChordHover] = useState(false)
 	const editRef = useRef()
-	const zoomRef = useRef()
 	function handleQuality(type) {
 		const newType = type === 'min' ? 'm' : type === 'maj' ? '' : type
 		return newType
@@ -72,7 +71,7 @@ function Chord({
 		return () => {
 			document.removeEventListener('mousedown', checkIfEditClickedOutside)
 		}
-	}, [id, position, editRef, zoomRef, root, type])
+	}, [id, position, editRef, root, type])
 	return (
 		<Draggable draggableId={id.toString()} index={position} key={id}>
 			{(provided) => (
@@ -82,7 +81,7 @@ function Chord({
 					{...provided.dragHandleProps}
 					ref={provided.innerRef}
 				>
-					<div ref={zoomRef}>
+					<div>
 						<div className={`chord-name-edit`} ref={editRef}>
 							<div
 								className='chord-header'
