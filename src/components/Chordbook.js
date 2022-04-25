@@ -215,6 +215,7 @@ export function Chordbook() {
         setIsLoaded(true);
       }
     }
+    return storeChordbooks(id);
   }, [songKey, songKeyCenterQuality, chordbooks, id, loadedBooks]);
 
   return (
