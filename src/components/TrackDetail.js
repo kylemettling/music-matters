@@ -20,6 +20,7 @@ import Chord from "./Chord";
 import { orderBy, random, range } from "lodash";
 import { BackButton } from "./BackButton";
 import { useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function useQuery() {
   const { search } = useLocation();
@@ -84,36 +85,43 @@ export function TrackDetail() {
   if (!songTitle && !songKey) return null;
 
   return (
-    <div className="track">
-      <div className="detailCard grid">
-        <div className="details ">
-          <h1 tabIndex={0} className="trackTitle">
-            {songTitle}
-          </h1>
-          <h2 tabIndex={0} className="trackArtist">
-            {songArtist}
-          </h2>
+    <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{`${songTitle} - ${songArtist}`}</title>
+        <meta name="description" content="Music Matters - Audio Arranged" />
+      </Helmet>
+      <div className="track">
+        <div className="detailCard grid">
+          <div className="details ">
+            <h1 tabIndex={0} className="trackTitle">
+              {songTitle}
+            </h1>
+            <h2 tabIndex={0} className="trackArtist">
+              {songArtist}
+            </h2>
+            <img
+              tabIndex={0}
+              className="trackCover"
+              src={albumCoverURL}
+              alt={songAlbum + " cover"}
+            ></img>
+            <h3 tabIndex={0} className="trackAlbum">
+              {songAlbum}
+            </h3>
+          </div>
+
           <img
             tabIndex={0}
-            className="trackCover"
-            src={albumCoverURL}
+            className="artistImage"
+            src={artistCover.url}
             alt={songAlbum + " cover"}
           ></img>
-          <h3 tabIndex={0} className="trackAlbum">
-            {songAlbum}
-          </h3>
         </div>
-
-        <img
-          tabIndex={0}
-          className="artistImage"
-          src={artistCover.url}
-          alt={songAlbum + " cover"}
-        ></img>
+        <div className="chordbook-container flex">
+          <Chordbook />
+        </div>
       </div>
-      <div className="chordbook-container flex">
-        <Chordbook />
-      </div>
-    </div>
+    </>
   );
 }
