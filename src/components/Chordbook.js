@@ -29,7 +29,11 @@ export function Chordbook() {
 	const [isStorageChecked, setIsStorageChecked] = useState(false)
 	const [keyOptionState, setKeyOptionState] = useState(songKey)
 	const [modeOptionState, setModeOptionState] = useState(songKeyCenterQuality)
+	// const loadedBooks = localStorage.getItem(id)
+	// 	? JSON.parse(localStorage.getItem(id))
+	// 	: { loadedBooks: [] }
 
+	// const loadedBooks = JSON.parse(localStorage.getItem(id))
 	function handleScaleChange(newKey, newMode, bookId) {
 		const newChords = getScaleChords(newKey, newMode)
 		setKeyOptionState(newKey)
@@ -189,32 +193,31 @@ export function Chordbook() {
 			chordbooks.filter((book) => book.length)
 			setChordbooks(chordbooks)
 			sanitizeIds()
+			storeChordbooks(id)
 		}
 	})
 
 	useEffect(() => {
-		// console.log(chordbooks)
-		console.log(JSON.parse(localStorage.getItem(id)))
-
-		// console.log(loadedBooks.length)
-		if (!chordbooks && isActiveTrack && !isLoaded) {
-			const loadedBooks = JSON.parse(localStorage.getItem(id)) || []
-			setChordbooks(loadedBooks)
-			setIsLoaded(true)
-		}
+		let loadedBooks = JSON.parse(localStorage.getItem(id) || '[]')
 		if (
 			songKey !== '' &&
 			songKeyCenterQuality !== '' &&
 			isActiveTrack &&
-			!isLoaded &&
-			id
+			!isLoaded
 		) {
-			createStartingBook(songKey, songKeyCenterQuality)
-			setIsLoaded(true)
+			// console.log(loadedBooks.length, loadedBooks)
+			if (loadedBooks.length) {
+				setChordbooks(loadedBooks)
+				storeChordbooks(id)
+				setIsLoaded(true)
+			} else {
+				createStartingBook(songKey, songKeyCenterQuality)
+				storeChordbooks(id)
+				setIsLoaded(true)
+			}
+			storeChordbooks(id)
 			console.log('track set')
 		}
-		storeChordbooks(id)
-		console.log(JSON.parse(localStorage.getItem(id)))
 	}, [songKey, songKeyCenterQuality, chordbooks, id])
 
 	return (
