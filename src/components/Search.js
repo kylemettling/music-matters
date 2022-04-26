@@ -78,6 +78,7 @@ export default function Search() {
 		<Fragment>
 			<div className='main flex'>
 				<h2>Do you have something playing?</h2>
+				<h3>LIVE</h3>
 				<div>
 					<input
 						type='text'
