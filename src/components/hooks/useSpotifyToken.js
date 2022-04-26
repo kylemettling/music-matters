@@ -16,8 +16,10 @@ export const useSpotifyToken = () => {
 			data: 'grant_type=client_credentials',
 			method: 'POST',
 		}
+		console.log('Options:', options)
 		const search = await axios.request(options).catch((err) => console.log(err))
-		const newToken = await search.data.access_token
+		console.log('Search:', search)
+		const newToken = await search?.data?.access_token
 		setToken(newToken)
 	}
 
