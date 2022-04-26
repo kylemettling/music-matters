@@ -62,7 +62,7 @@ export default function Search() {
 			getSpotifySearchData()
 		}
 		setSearchToggle(true)
-		setSearchResult(res.data)
+		setSearchResult(res?.data)
 	}
 
 	useEffect(() => {
