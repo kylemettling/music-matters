@@ -13,8 +13,12 @@ function Chord({
 	root,
 	type,
 	degree,
+	bookType,
+	bookId,
 	_droppableId,
 	updateChord,
+	handleDelete,
+	handleCopy,
 }) {
 	const [isEditing, setToggleIsEditing] = useState(false)
 	const [isZoomed, setIsZoomed] = useState(false)
@@ -50,13 +54,12 @@ function Chord({
 		setToggleIsEditing(!isEditing)
 	}
 
-	//   function handleChordHover(e) {
-	//     console.log(e.target.classList);
-	//     if (chordHover) {
-	// 		setChordHover(!chordHover);
-	//       e.target.classList.remove(".hover");
-	//     }
-	//   }
+	// function handleDelete(e) {
+	// 	console.log('delete', id, e)
+	// }
+	// function handleCopy(e) {
+	// 	console.log('copy', id, e)
+	// }
 
 	useEffect(() => {
 		setChordRoot(root)
@@ -80,6 +83,8 @@ function Chord({
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}
 					ref={provided.innerRef}
+					onMouseEnter={() => setChordHover(!chordHover)}
+					onMouseLeave={() => setChordHover(!chordHover)}
 				>
 					<div>
 						<div className={`chord-name-edit`} ref={editRef}>
@@ -148,12 +153,15 @@ function Chord({
 							/>{' '}
 							<div className='chord-footer flex'>
 								<div>
-									{type !== 'blank' ? (
-										<FaTrashAlt
-											className={`chord-control ${chordHover ? 'active' : ''}`}
-											style={{ color: 'var(--red)' }}
-										/>
-									) : null}
+									<FaTrashAlt
+										className={`chord-control ${
+											chordHover && !['blank', 'starter'].includes(bookType)
+												? 'active'
+												: ''
+										}`}
+										style={{ color: 'var(--red)' }}
+										onClick={(e) => handleDelete(id, bookId, e)}
+									/>
 								</div>
 								<div>
 									{degree && (
@@ -167,11 +175,14 @@ function Chord({
 									)}
 								</div>
 								<div>
-									{type !== 'blank' ? (
-										<MdContentCopy
-											className={`chord-control ${chordHover ? 'active' : ''}`}
-										/>
-									) : null}
+									<MdContentCopy
+										className={`chord-control ${
+											chordHover && !['blank', 'starter'].includes(bookType)
+												? 'active'
+												: ''
+										}`}
+										onClick={(e) => handleCopy(id, bookId, e)}
+									/>
 								</div>
 							</div>
 						</div>

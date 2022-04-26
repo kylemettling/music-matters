@@ -23,6 +23,8 @@ export function Chordbook() {
 		sanitizeIds,
 		storeChordbooks,
 		loadChordbooks,
+		deleteChord,
+		copyChord,
 	} = useChordbook()
 	const { id } = useParams()
 	const [isLoaded, setIsLoaded] = useState(false)
@@ -40,6 +42,15 @@ export function Chordbook() {
 
 	//   loadChordbooks(id);
 	//   const loadedBooks = JSON.parse(localStorage.getItem(id));
+
+	function handleCopy(id, book, e) {
+		console.log(id, book, e)
+		copyChord(id, book)
+	}
+	function handleDelete(id, book, e) {
+		console.log(id, book, e)
+		deleteChord(id, book)
+	}
 	function handleScaleChange(newKey, newMode, bookId) {
 		const newChords = getScaleChords(newKey, newMode)
 		setKeyOptionState(newKey)
@@ -81,7 +92,7 @@ export function Chordbook() {
 			if (!destClone[0]) {
 				// if destination chord list is empty push copy to it
 				destClone.push(copy)
-				console.log('empty chords', destClone)
+				// console.log('empty chords', destClone)
 			} else if (destClone[0].type === 'blank') {
 				// if destination chord list is not empty and first chord is blank splice copy into it and remove blank
 				// remove the blank first card
@@ -199,7 +210,6 @@ export function Chordbook() {
 	})
 
 	useEffect(() => {
-		// console.log('chordbooks', chordbooks)
 		if (
 			songKey !== '' &&
 			songKeyCenterQuality !== '' &&
@@ -263,6 +273,10 @@ export function Chordbook() {
 												position={chord.position}
 												degree={chord.degree}
 												updateChord={updateChord}
+												bookType={book.type}
+												bookId={book.id}
+												handleCopy={handleCopy}
+												handleDelete={handleDelete}
 											/>
 										))}
 										{provided.placeholder}

@@ -16,7 +16,7 @@ function App() {
 			<Fragment>
 				<Helmet>
 					<meta charSet='utf-8' />
-					<title>Music Matters - Audio Arranged</title>
+					<title>Music Matters | Audio Arranged</title>
 					<meta name='description' content='Music Matters - Audio Arranged' />
 				</Helmet>
 				<Router>
@@ -34,10 +34,6 @@ function App() {
 							<Search />
 							<Results />
 						</Route>
-						{/* <Route path='/search/?q=searchValue'>
-							<Header includeBackButton={false} />
-							<Search />
-						</Route> */}
 						<Route path='/' exact>
 							<Header includeBackButton={false} />
 							<Search />

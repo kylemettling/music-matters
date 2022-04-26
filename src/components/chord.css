@@ -1,89 +1,89 @@
 .chord-header {
-  text-align: center;
-  justify-self: center;
-  align-content: center;
-  color: var(--cardTextColor);
-  margin-bottom: -18px;
-  position: relative;
-  z-index: 99998;
+	text-align: center;
+	justify-self: center;
+	align-content: center;
+	color: var(--cardTextColor);
+	margin-bottom: -18px;
+	position: relative;
+	z-index: 99998;
 }
 .chord-name,
 .chord-degree.blank {
-  z-index: 99999;
-  color: var(--chordTextColor);
-  background: var(--selectBackgroundColor);
-  border-radius: var(--borderRadius);
-  outline: 2px var(--chordOutlineColor) solid;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-  height: 1.75rem;
-  margin: 0 auto;
-  max-width: calc(100% - 1.5rem);
+	z-index: 99999;
+	color: var(--chordTextColor);
+	background: var(--selectBackgroundColor);
+	border-radius: var(--borderRadius);
+	outline: 2px var(--chordOutlineColor) solid;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	cursor: pointer;
+	height: 1.75rem;
+	margin: 0 auto;
+	max-width: calc(100% - 1.5rem);
 }
 .chord-detail {
-  --chordTextColor: var(--lightGrey);
-  color: var(--textColor);
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  justify-self: center;
-  align-content: center;
-  border: 3px var(--chordOutlineColor) solid;
-  border-radius: var(--borderRadius);
-  height: 275px;
-  width: 10rem;
+	--chordTextColor: var(--lightGrey);
+	color: var(--textColor);
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	justify-self: center;
+	align-content: center;
+	border: 3px var(--chordOutlineColor) solid;
+	border-radius: var(--borderRadius);
+	height: 275px;
+	width: 10rem;
 }
 .chord-detail:focus {
-  outline: 2px var(--white) solid;
+	outline: 2px var(--white) solid;
 }
 .chordRootSelect {
-  --selectBackgroundColor: var(--green2);
-  font-size: var(--smallText);
-  font-weight: initial;
-  font-size: var(--baseFontSize);
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none; /* Remove default arrow */
-  /* background-image: url(...);   Add custom arrow */
-  text-align: center;
-  cursor: pointer;
-  background: var(--background);
-  color: var(--chordTextColor);
+	--selectBackgroundColor: var(--green2);
+	font-size: var(--smallText);
+	font-weight: initial;
+	font-size: var(--baseFontSize);
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none; /* Remove default arrow */
+	/* background-image: url(...);   Add custom arrow */
+	text-align: center;
+	cursor: pointer;
+	background: var(--background);
+	color: var(--chordTextColor);
 }
 .chord-header .key-mode-select-con::before {
-  transform: translateY(-150px);
+	transform: translateY(-150px);
 }
 .chord-header .key-mode-select-con {
-  display: flex;
-  gap: 0.2rem;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  transition: transform 0.4s ease-in-out;
+	display: flex;
+	gap: 0.2rem;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+	transition: transform 0.4s ease-in-out;
 }
 .chordRootSelectOption {
-  height: 30px;
+	height: 30px;
 }
 .chord-degree.blank {
-  cursor: grab;
+	cursor: grab;
 }
 .delete-chord {
-  background-color: blue;
+	background-color: blue;
 }
 .chord-footer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 .chord-control {
-  opacity: 0;
+	opacity: 0;
 }
 .chord-control.active {
-  transition: opacity 0.3s ease-in-out;
-  cursor: pointer;
-  opacity: 1;
+	transition: opacity 0.3s ease-in-out;
+	cursor: pointer;
+	opacity: 1;
 }
