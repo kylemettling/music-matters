@@ -46,10 +46,12 @@ export function Chordbook() {
 	function handleCopy(id, book, e) {
 		console.log(id, book, e)
 		copyChord(id, book)
+		sanitizeIds()
 	}
 	function handleDelete(id, book, e) {
 		console.log(id, book, e)
 		deleteChord(id, book)
+		sanitizeIds()
 	}
 	function handleScaleChange(newKey, newMode, bookId) {
 		const newChords = getScaleChords(newKey, newMode)

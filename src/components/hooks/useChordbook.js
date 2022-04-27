@@ -142,7 +142,7 @@ export const useChordbook = () => {
 			chordCount
 		)
 		setChordCount(count)
-		sanitizeChordbookIds(newList)
+		// sanitizeIds()
 		// storeChordbooks()
 	}
 
@@ -156,7 +156,7 @@ export const useChordbook = () => {
 				return book
 			}
 		})
-		setChordbooks(update, value)
+		setChordbooks(update)
 		// storeChordbooks()
 	}
 	// update chord from passing ids of book and chord and the property to update with the new value
@@ -189,25 +189,30 @@ export const useChordbook = () => {
 		// return stored;
 	}
 	const deleteChord = (id, bookId) => {
-		// const copy = chordbooks.slice()
-		// console.log('deleteChord', copy)
-		// const update = copy[bookId].chords.map((chord) => {
-		// 	const filter = copy[bookId].chords.filter((chord) => chord.id !== id)
-		// 	return filter
-		// })
-		// console.log(update)
-		// // setChordbooks(update)
-		// // storeChordbooks()
+		const copy = chordbooks.slice()
+		console.log('deleteChord', copy)
+		const update = copy[bookId].chords.map((chord) => {
+			const filter = copy[bookId].chords.filter((chord) => chord.id !== id)
+			return filter
+		})
+		copy[bookId].chords = update
+		console.log(update)
+		setChordbooks(copy)
+		sanitizeIds()
+		// storeChordbooks()
 	}
 	const copyChord = (id, bookId) => {
-		// const copy = chordbooks.slice()
-		// console.log('copyChord', copy, id, bookId)
-		// const chordCopy = copy[bookId].chords.filter((chord) => chord.id === id)
-		// // console.log(copyChord)
-		// const update = copy[bookId].chords.concat(chordCopy)
-		// copy[bookId].chords = update
-		// setChordbooks(copy)
-		// // storeChordbooks()
+		const copy = chordbooks.slice()
+		console.log('copyChord', copy, id, bookId)
+		const chordCopy = copy[bookId].chords.filter((chord) => chord.id === id)
+		chordCopy.id = copy[bookId].chords.length + 1
+		// console.log(copyChord)
+		const update = copy[bookId].chords.concat(chordCopy)
+		copy[bookId].chords = [...update]
+		console.log(copy)
+		setChordbooks(copy)
+		sanitizeIds()
+		// storeChordbooks()
 	}
 
 	return {
