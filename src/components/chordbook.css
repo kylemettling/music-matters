@@ -1,5 +1,29 @@
 .list {
-  height: 200px;
-  width: 200px;
-  color: green;
+	height: 200px;
+	width: 200px;
+	color: green;
+}
+.chordbook-main {
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
+}
+.chord-con {
+	display: flex;
+	justify-content: center;
+	/* flex-direction: row; */
+}
+.header {
+	display: flex;
+	font-size: 42px;
+	color: lightblue;
+}
+.title {
+	font-size: 36px;
+}
+.chord-detail {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* align-content: center; */
 }

@@ -47,7 +47,13 @@ export const useSpotifyToken = () => {
 	}
 
 	const getStoredToken = () => {
-		setToken(localStorage.getItem('spotifyToken')) || refreshToken()
+		const storedToken = localStorage.getItem('spotifyToken')
+
+		if (!storedToken) {
+			refreshToken()
+		}
+		setToken(storedToken)
+		console.log(storedToken)
 	}
 
 	return { token, refreshToken, getStoredToken }

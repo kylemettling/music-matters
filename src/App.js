@@ -19,6 +19,7 @@ function App() {
 					<Switch>
 						<Route path='/track/:id'>
 							<TrackDetail />
+							<Chordbook />
 						</Route>
 						<Route path='/artist/:id'>
 							<Artist />
@@ -26,8 +27,8 @@ function App() {
 						<Route path='/'>
 							{/* <SpotifyToken /> */}
 							<Search />
-							{/* <Chordbook /> */}
 						</Route>
+						<Route></Route>
 					</Switch>
 				</Router>
 				<style>

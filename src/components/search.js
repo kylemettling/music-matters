@@ -18,18 +18,13 @@ export default function Search() {
 
 	// token management
 	// const [token, { refreshToken, getStoredToken }] = useSpotifyToken()
-	const { token, refreshToken, getStoredToken } = useAppState()
+	const { token, refreshToken, getStoredToken, isTrackActive, clearTrackData } =
+		useAppState()
 
 	// const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID
 	// const clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET
 
 	async function getSpotifySearchData() {
-		// if (!spotifyToken) {
-		//   getSpotifyToken();
-		// }
-		// console.log(spotifyToken, searchQuery, optionState);
-		// console.log(token);
-		console.log(searchQuery, optionState)
 		const res = await axios(
 			`https://api.spotify.com/v1/search?q=${searchQuery}&type=${optionState}`,
 			{
@@ -51,6 +46,12 @@ export default function Search() {
 	}
 
 	useEffect(() => {
+		// setTrack({})
+		clearTrackData()
+		// console.log('Is track active?', isTrackActive)
+		// if (isTrackActive) {
+		// 	console.log('Active?', isTrackActive)
+		// }
 		getStoredToken()
 		setOptionState(optionState)
 	}, [optionState])

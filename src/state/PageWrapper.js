@@ -9,10 +9,15 @@ export const PageWrapper = ({ children }) => {
 		songTitle,
 		songArtist,
 		songAlbum,
+		songKey,
+		songMode,
+		spotifySongId,
 		albumCoverURL,
 		artistCover,
-		getTrackDetails,
-		// getArtistCoverURL,
+		setTrack,
+		isActiveTrack,
+		clearTrackData,
+		getStoredTrack,
 	} = useTrack()
 	return (
 		<AppContext.Provider
@@ -23,9 +28,16 @@ export const PageWrapper = ({ children }) => {
 				songTitle,
 				songArtist,
 				songAlbum,
+				songKey,
+				songMode,
+				spotifySongId,
 				albumCoverURL,
 				artistCover,
-				getTrackDetails,
+				setTrack,
+				isActiveTrack,
+				clearTrackData,
+				getStoredTrack,
+				// setTrackFeatures,
 				// getArtistCoverURL,
 			}}
 		>
